@@ -7,6 +7,8 @@ This chapter describes used hardware for project and its configuration.
 ### Raspberry PI 3
 Raspberry PI is running Ubuntu MATE. Computer name and login name are *rpi3-2* the password is *rpi*. RPI is configured to automatically connect to wifi named *rpi3-2* with password *tatranky111*. Because the wifi is provided by Windows 10 hotspot, RPI can't use static IP and must requests DHCP server. Network adress is *192.168.137.0/24*.
 
+[Backup of RPI3 from 29/09/2018](https://1drv.ms/f/s!AvqSf0K9YS3I8R9ceqbFbVfGaDds "One Drive") with updated OS and installed necessary stuffs.
+
 ## FAQ
 ### Unable to use apt-get on RPI3
 ```
@@ -22,7 +24,7 @@ It is possible that auto update is running. You can check it by *ps -e | grep  u
 * For attaching dettached screen use command *screen -r*
 
 ### How to enable remote GUI application
-1. Download vcxsrv from https://sourceforge.net/projects/vcxsrv/
+1. Download [vcxsrv](https://sourceforge.net/projects/vcxsrv/)
 2. To allow connection your XServer you must add IP address of RPI to file X0.hosts in directory where vcxsrv was installed.
 
    If you want to allow everyone to connect your XServer, then instead of IP type *xhost*.
