@@ -17,8 +17,19 @@ E: Unable to lock the administration directory (/var/lib/dpkg/), is another proc
 It is possible that auto update is running. You can check it by *ps -e | grep  unattended-upgr*. If you find any process with that name running then that it is. You must to wait for end of that process. You can also check udpates log */var/log/dpkg.log*, or the files in */var/log/unattended-upgrades/*.
 
 ### Usage of application: screen
-For starting new screen session type *screen*
+* For starting new screen session type *screen*
+* For detaching screen use key combination ctrl+a+d
+* For attaching dettached screen use command *screen -r*
 
-For detaching screen use key combination ctrl+a+d
-
-For attaching dettached screen use command *screen -r*
+### How to enable remote GUI application
+1. Download vcxsrv from https://sourceforge.net/projects/vcxsrv/
+2. Add IP address of RPI to file X0.hosts in directory where vcxsrv was installed. (Probably must be sometimes changed)
+..* If you want to allow everyone to connect your XServer, then instead of IP type *xhost*.
+```
+localhost
+inet6:localhost
+192.168.137.168
+```
+3. Start XLaunch, set display number to 0.
+4. ~~Type in RPI terminal (via SSH) *export DISPLAY=<YOUR_IP>:0.0* with <YOUR_IP> substitued for your IP address.~~ *Automatized for user rpi3-2 in .bashrc*
+5. Try to start via SSH application *xeyes* to see if everything is working.
