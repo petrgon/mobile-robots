@@ -25,7 +25,7 @@ It is possible that auto update is running. You can check it by *ps -e | grep  u
 
 ### How to enable remote GUI application
 1. Download [vcxsrv](https://sourceforge.net/projects/vcxsrv/)
-2. To allow connection your XServer you must add IP address of RPI to file X0.hosts in directory where vcxsrv was installed.
+2. To allow connection to your XServer, you must add IP address of RPI to file X0.hosts in directory where vcxsrv is installed.
 
    If you want to allow everyone to connect your XServer, then instead of IP type *xhost*.
 ```
@@ -34,6 +34,7 @@ inet6:localhost
 192.168.137.168
 ```
 3. Start XLaunch, set display number to 0.
+
    If there is not running XServer then -1 will be substitued as 0 automatically.
 4. ~~Type in RPI terminal (via SSH) *export DISPLAY=<YOUR_IP>:0.0* with <YOUR_IP> substitued for your IP address.~~ *Automatized for user rpi3-2 in .bashrc*
 5. Try to start via SSH application *xeyes* to see if everything is working.
