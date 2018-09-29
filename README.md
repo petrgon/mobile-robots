@@ -1,6 +1,9 @@
 # mobile_robots
 Project for Mobile_Robots
 
+## Repository structure
+Each one catkin package is in its own package-master branch. For each package-master branche exists developing branch with suffix *\_dev*.
+
 ## HW and its Configuration
 This chapter describes used hardware for project and its configuration.
 
