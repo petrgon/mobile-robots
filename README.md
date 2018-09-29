@@ -37,4 +37,4 @@ inet6:localhost
 
    If there is not running XServer then -1 will be substitued as 0 automatically.
 4. ~~Type in RPI terminal (via SSH) *export DISPLAY=<YOUR_IP>:0.0* with <YOUR_IP> substitued for your IP address.~~ *Automatized for user rpi3-2 in .bashrc*
-5. Try to start via SSH application *xeyes* to see if everything is working.
+5. Try to start application *xeyes* via SSH to see if everything is working.
