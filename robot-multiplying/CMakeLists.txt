@@ -72,7 +72,7 @@ find_package(catkin REQUIRED COMPONENTS
 #   std_msgs
 # )
 
-################################################
+##############################################a
 ## Declare ROS dynamic reconfigure parameters ##
 ################################################
 
@@ -115,8 +115,9 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+  include
   ${catkin_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -133,6 +134,8 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/robot-multiplying_node.cpp)
+add_executable(multiplying_publisher src/multiplying_publisher.cpp)  
+add_executable(multiplying_subscriber src/multiplying_subscriber.cpp)    
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -142,12 +145,17 @@ include_directories(
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS)
+  
+add_dependencies(multiplying_publisher robot-multiplying_generate_messages_cpp)  
+add_dependencies(multiplying_subscriber robot-multiplying_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+target_link_libraries(multiplying_publisher ${catkin_LIBRARIES})
+target_link_libraries(multiplying_subscriber ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -196,20 +204,3 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-include_directories(
-    include
-    ${catkin_INCLUDE_DIRS}
-    ${Boost_INCLUDE_DIRS}
-)
-
-# This will create executables of the nodes
-    add_executable(multiplying_publisher src/multiplying_publisher.cpp)  
-    add_executable(multiplying_subscriber src/multiplying_subscriber.cpp)    
-
-# This will generate message header file before building the target
-    add_dependencies(multiplying_publisher ${catkin_EXPORTED_TARGETS})  
-    add_dependencies(multiplying_subscriber ${catkin_EXPORTED_TARGETS})
-
-# This will link executables to the appropriate libraries
-    target_link_libraries(multiplying_publisher ${catkin_LIBRARIES})
-    target_link_libraries(multiplying_subscriber ${catkin_LIBRARIES})
