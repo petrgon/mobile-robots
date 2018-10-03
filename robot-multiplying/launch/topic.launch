@@ -1,4 +1,0 @@
-<launch>
- <node name="multiplying_publisher" pkg="robot-multiplying" type="multiplying_publisher" output="screen" />
- <node name="multiplying_subscriber" pkg="robot-multiplying" type="multiplying_subscriber" output="screen" />
-</launch>
