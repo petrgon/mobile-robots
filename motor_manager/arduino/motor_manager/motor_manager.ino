@@ -1,6 +1,8 @@
 #include <ros.h>
 #include <std_msgs/Int32.h>
 
+#define abs(x) ((x)>0?(x):-(x))
+
 #define enA 3
 #define in1 4
 #define in2 5
@@ -54,23 +56,23 @@ void setup()
 void loop()
 {       
   if (both_speeds_avalable){  
-    if (right_motor_speed < 0){  
-      digitalWrite(in3, LOW);
-      digitalWrite(in4, HIGH);
-    } else {    
+    if (right_motor_speed < 0){ 
       digitalWrite(in3, HIGH);
       digitalWrite(in4, LOW);
+    } else {    
+      digitalWrite(in3, LOW);
+      digitalWrite(in4, HIGH);
     }
     
-    if (left_motor_speed < 0){  
+    if (left_motor_speed < 0){ 
+      digitalWrite(in1, LOW);
+      digitalWrite(in2, HIGH); 
+    } else { 
       digitalWrite(in1, HIGH);
       digitalWrite(in2, LOW);
-    } else { 
-      digitalWrite(in1, LOW);
-      digitalWrite(in2, HIGH);
     }  
-    analogWrite(enA, left_motor_speed);
-    analogWrite(enB, right_motor_speed); 
+    analogWrite(enA, abs(left_motor_speed));
+    analogWrite(enB, abs(right_motor_speed)); 
   }
   
   nh.spinOnce();
