@@ -10,6 +10,11 @@
 #define in3 6
 #define in4 7
 
+#define RIGHT_WHEEL_CALIBRATION 1.045
+#define LEFT_WHEEL_CALIBRATION 0.955
+#define MAX_VELOCITY 244
+#define MAX(x,y) x > y ? x : y
+
 ros::NodeHandle nh;
 
 int left_motor_speed = 0;
@@ -18,12 +23,12 @@ int right_motor_speed = 0;
 bool both_speeds_avalable = false;
 
 void moveLeftMotor(const std_msgs::Int32 &number){
-  left_motor_speed = number.data;
+  left_motor_speed = MAX(MAX_VELOCITY, number.data);
   both_speeds_avalable = false;
 }  
 
 void moveRightMotor(const std_msgs::Int32 &number){
-  right_motor_speed = number.data;
+  right_motor_speed = MAX(MAX_VELOCITY, number.data);
   both_speeds_avalable = true;
 }
 
@@ -71,8 +76,8 @@ void loop()
       digitalWrite(in1, HIGH);
       digitalWrite(in2, LOW);
     }  
-    analogWrite(enA, abs(left_motor_speed));
-    analogWrite(enB, abs(right_motor_speed)); 
+    analogWrite(enA, abs(left_motor_speed) * LEFT_WHEEL_CALIBRATION);
+    analogWrite(enB, abs(right_motor_speed) * RIGHT_WHEEL_CALIBRATION); 
   }
   
   nh.spinOnce();
