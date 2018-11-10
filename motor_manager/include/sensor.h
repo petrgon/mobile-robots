@@ -8,7 +8,7 @@ class Sensor
 {
   public:
     Sensor(int pinNumber, int mode) : this->pinNumber = pinNumber {};
-    virtual ~Sensor = 0;
+    virtual ~Sensor() = 0;
 
   protected:    
     int pinNumber;
