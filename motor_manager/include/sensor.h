@@ -7,7 +7,7 @@
 class Sensor
 {
   public:
-    Sensor(int pinNumber, int mode) : pinNumber(pinNumber);
+    Sensor(int pinNumber, int mode) : pinNumber(pinNumber){};
     virtual ~Sensor() = 0;
 
   protected:    

@@ -1,5 +1,5 @@
-#ifndef MOTOR_PUBLISHER_H
-#define MOTOR_PUBLISHER_H
+#ifndef MOTOR_MANAGER_H
+#define MOTOR_MANAGER_H
 
 #include "ros/ros.h"
 #include "std_msgs/Int32MultiArray.h"
@@ -7,7 +7,7 @@
 class MotorManager
 {
   public:
-    MotorManager(int argc, char **argv);
+    MotorManager();
 
     void publishCoords(int left, int right);
 
@@ -20,4 +20,4 @@ class MotorManager
         int right;
     };
 };
-#endif /*MOTOR_PUBLISHER_H*/
+#endif /*MOTOR_MANAGER_H*/
