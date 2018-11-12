@@ -38,7 +38,7 @@ class SensorManager
     void callCollisionHandlers(CollisionEvent e);
     void callPuckAquiredHandlers();
 
-    void run();
+    static void run(SensorManager & manager);
 
     std::vector<void (*)(LightEvent)> lightEventHandler;
     std::vector<void (*)(CollisionEvent)> collisionEventHandler;

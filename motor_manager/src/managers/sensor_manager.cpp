@@ -23,10 +23,10 @@ void SensorManager::subscribePuckAquiredEvent(void (*fnc)())
 
 void SensorManager::start()
 {
-    thread = std::thread(run);
+    thread = std::thread(run, this);
 }
 
-void SensorManager::run()
+void SensorManager::run(SensorManager &manager)
 {
     LightSensor lightSensor(LIGHT_SENSOR_PIN);
     TouchSensor puckSensor(PUCK_SENSOR_PIN);
@@ -36,7 +36,7 @@ void SensorManager::run()
     while (ros::ok())
     {
         if (puckSensor.isPushed())
-            callPuckAquiredHandlers();
+            manager.callPuckAquiredHandlers();
         CollisionEvent e;
         if (leftSensor.isPushed())
             e.sensor = CollisionSensor::LEFT;
@@ -48,12 +48,12 @@ void SensorManager::run()
                 e.sensor = CollisionSensor::RIGHT;
         }
         if (e.sensor != CollisionSensor::NONE)
-            callCollisionHandlers(e);
+            manager.callCollisionHandlers(e);
         unsigned short signal = lightSensor.checkSignal();
         if (signal > 0)
         {
             LightEvent le = {signal};
-            callLightHandlers(le);
+            manager.callLightHandlers(le);
         }
         loop_rate.sleep();
     }
