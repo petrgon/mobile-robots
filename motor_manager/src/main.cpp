@@ -7,8 +7,8 @@
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "robot_core");
-    setenv("WIRINGPI_GPIOMEM", "1", 1);
     ROS_INFO("ROS initialized");
+    setenv("WIRINGPI_GPIOMEM", "1", 1);
     wiringPiSetup();
     ROS_INFO("WiringPI initialized");
     MotorManager motor;

@@ -44,6 +44,6 @@ class SensorManager
     std::vector<void (*)(CollisionEvent)> collisionEventHandler;
     std::vector<void (*)()> puckAquiredEventHandler;
 
-    std::thread thread;
+    std::thread *thread;
 };
 #endif /*SENSOR_MANAGER_H*/

@@ -3,7 +3,8 @@
 SensorManager::SensorManager() {}
 SensorManager::~SensorManager()
 {
-    thread.join();
+    thread->join();
+    delete thread;
 }
 
 void SensorManager::subscribeLightEvent(void (*fnc)(LightEvent))
@@ -24,7 +25,7 @@ void SensorManager::subscribePuckAquiredEvent(void (*fnc)())
 void SensorManager::start()
 {
     ROS_INFO("Starting SensorManager");
-    thread = std::thread(SensorManager::run, this);
+    thread = new std::thread(SensorManager::run, this);
 }
 
 void SensorManager::run(SensorManager *manager)
