@@ -7,3 +7,5 @@ unsigned short int LightSensor::checkSignal()
     light_rev = digitalRead(pinNumber) ;
     ROS_INFO("light_receive: %d ", light_rev);
 }
+LightSensor::~LightSensor(){
+}

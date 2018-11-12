@@ -6,3 +6,5 @@ bool TouchSensor::isPushed()
     ROS_INFO("Touch sensor (pin: %d): %d ", pinNumber, recvData);
     return recvData != 0;
 }
+TouchSensor::~TouchSensor(){
+}

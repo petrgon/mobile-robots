@@ -11,7 +11,7 @@ class LightSensor : public Sensor
 {
   public:
     LightSensor(int pinNumber) : Sensor(pinNumber, INPUT) {};
-
+    virtual ~LightSensor() override;
     unsigned short int checkSignal();
 
 };

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(robot_core)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-add_compile_options(-std=c++11 -lpthread -lwiringPi)
+add_compile_options(-std=c++11 -lpthread)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -158,8 +158,10 @@ add_dependencies(robot_run robot_core_generate_messages_cpp)
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+FIND_LIBRARY(WIRINGPI_LIBRARY wiringPi /usr/local/include)
+find_package(Threads REQUIRED)
 
-target_link_libraries(robot_run ${catkin_LIBRARIES} wiringpi)
+target_link_libraries(robot_run ${catkin_LIBRARIES} ${WIRINGPI_LIBRARY} Threads::Threads)
 
 #############
 ## Install ##

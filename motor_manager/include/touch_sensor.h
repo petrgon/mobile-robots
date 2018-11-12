@@ -11,7 +11,7 @@ class TouchSensor : public Sensor
 {
   public:
     TouchSensor(int pinNumber) : Sensor(pinNumber, INPUT) {};
-
+    virtual ~TouchSensor() override;
     bool isPushed();
 
 };
