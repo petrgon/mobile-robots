@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(robot_core)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-add_compile_1options(-std=c++11 -Wall -pedantic)
+add_compile_options(-std=c++11 -Wall -pedantic)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -101,11 +101,14 @@ find_package(catkin REQUIRED COMPONENTS
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
-catkin_package(
+## catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES motor_manager
 #  CATKIN_DEPENDS roscpp std_msgs
 #  DEPENDS system_lib
+# )
+catkin_package(
+  CATKIN_DEPENDS roscpp std_msgs
 )
 
 ###########

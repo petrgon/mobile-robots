@@ -12,6 +12,7 @@ int main(int argc, char **argv)
     wiringPiSetup();
     ROS_INFO("WiringPI initialized");
     MotorManager motor;
+    ROS_INFO("TEST OUTPUT");
     SensorManager sensor;
     sensor.start();
     int coord_left = 100, coord_right = 100;
