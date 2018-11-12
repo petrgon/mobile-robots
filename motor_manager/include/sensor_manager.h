@@ -34,11 +34,11 @@ class SensorManager
     void start();
 
   private:
-    void callLightHandlers(LightEvent e);
-    void callCollisionHandlers(CollisionEvent e);
-    void callPuckAquiredHandlers();
+    void callLightHandlers(LightEvent e) const;
+    void callCollisionHandlers(CollisionEvent e) const;
+    void callPuckAquiredHandlers() const;
 
-    static void run(SensorManager & manager);
+    static void run(SensorManager  *manager);
 
     std::vector<void (*)(LightEvent)> lightEventHandler;
     std::vector<void (*)(CollisionEvent)> collisionEventHandler;
