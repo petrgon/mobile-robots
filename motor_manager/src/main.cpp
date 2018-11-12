@@ -18,6 +18,7 @@ int main(int argc, char **argv)
     ROS_INFO("Entering main thread");
     while (ros::ok())
     {
+        std::cout << "Speed L R: ";
         std::cin >> coord_left >> coord_right;
         motor.publishCoords(coord_left, coord_right);
         ros::spinOnce();

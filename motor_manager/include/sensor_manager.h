@@ -2,7 +2,6 @@
 #define SENSOR_MANAGER_H
 
 #include "ros/ros.h"
-#include "std_msgs/Int32MultiArray.h"
 
 #include "events.h"
 #include "light_sensor.h"
