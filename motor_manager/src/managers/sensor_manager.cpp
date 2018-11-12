@@ -1,10 +1,15 @@
 #include "../../include/sensor_manager.h"
 
-SensorManager::SensorManager() {}
+SensorManager::SensorManager() 
+{
+    ROS_INFO("SensorManager initialized");
+}
 SensorManager::~SensorManager()
 {
+    ROS_INFO("Joining thread");
     thread->join();
     delete thread;
+    ROS_INFO("Thread Joined");
 }
 
 void SensorManager::subscribeLightEvent(void (*fnc)(LightEvent))

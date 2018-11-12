@@ -5,6 +5,7 @@ MotorManager::MotorManager()
     ROS_INFO("Initializing MotorManager");
     ros::NodeHandle node_obj;
     ros::Publisher pub_motor_coords = node_obj.advertise<std_msgs::Int32MultiArray>("/motor_coords", 1);
+    ROS_INFO("MotorManager initialized");
 }
 
 void MotorManager::publishCoords(int left, int right)
