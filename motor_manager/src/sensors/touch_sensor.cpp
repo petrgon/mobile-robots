@@ -2,6 +2,7 @@
 
 bool TouchSensor::isPushed()
 {
-    // todo
-    return digitalRead(pinNumber) != 0;
+    int recvData = digitalRead(pinNumber);
+    ROS_INFO("Touch sensor (pin: %d): %d ", pinNumber, recvData);
+    return recvData != 0;
 }

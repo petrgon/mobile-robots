@@ -3,6 +3,7 @@
 
 #include "ros/ros.h"
 #include "wiringPi.h"
+#include "sensor.h"
 #include <string>
 
 class TouchSensor : public Sensor
