@@ -104,7 +104,7 @@ void SensorManager::subscribeBothTouchFreedEvent(State *state)
 void SensorManager::start()
 {
     ROS_INFO("Starting SensorManager");
-    if (!thread)
+    if (thread)
     {
         ROS_INFO("Joining previous thread for SensorManager");
         shouldEnd = true;

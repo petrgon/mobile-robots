@@ -5,6 +5,8 @@
 
 #include <queue>
 #include <thread>
+#include <condition_variable>
+#include <mutex>
 
 #include "../states/state.h"
 
@@ -27,6 +29,8 @@ class CallBackTimeManager
     static CallBackTimeManager *instance;
 
     std::thread *thread;
+    std::mutex m;
+    std::condition_variable condVar;
     bool shouldEnd;
 
     std::priority_queue<SubscribedCallBack> callbackHandlers;
@@ -38,14 +42,14 @@ struct SubscribedCallBack
     ~SubscribedCallBack();
     SubscribedCallBack(const SubscribedCallBack &) = default;
     SubscribedCallBack(SubscribedCallBack &&) = default;
-    SubscribedCallBack & operator=(const SubscribedCallBack &) = default;
-    SubscribedCallBack & operator=(SubscribedCallBack &&) = default;
-    bool operator > (const SubscribedCallBack &);
-    bool operator < (const SubscribedCallBack &);
-    bool operator >= (const SubscribedCallBack &);
-    bool operator <= (const SubscribedCallBack &);
-    bool operator == (const SubscribedCallBack &);
-    bool operator != (const SubscribedCallBack &);
+    SubscribedCallBack &operator=(const SubscribedCallBack &) = default;
+    SubscribedCallBack &operator=(SubscribedCallBack &&) = default;
+    bool operator>(const SubscribedCallBack &);
+    bool operator<(const SubscribedCallBack &);
+    bool operator>=(const SubscribedCallBack &);
+    bool operator<=(const SubscribedCallBack &);
+    bool operator==(const SubscribedCallBack &);
+    bool operator!=(const SubscribedCallBack &);
 
     State *state;
     std::chrono::nanoseconds time;
