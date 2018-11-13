@@ -10,9 +10,12 @@
 class TouchSensor : public Sensor
 {
   public:
-    TouchSensor(int pinNumber) : Sensor(pinNumber, INPUT) {};
+    TouchSensor(int pinNumber);
     virtual ~TouchSensor() override;
     bool isPushed();
+    bool getPrevious();
+  private:
+    bool previousValue;
 
 };
 

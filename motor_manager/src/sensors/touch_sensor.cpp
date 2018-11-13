@@ -1,10 +1,16 @@
-#include "../../include/touch_sensor.h"
+#include "../../include/sensors/touch_sensor.h"
+
+TouchSensor::TouchSensor(int pinNumber) : Sensor(pinNumber, INPUT), previousValue(false) {}
+
+TouchSensor::~TouchSensor() {}
 
 bool TouchSensor::isPushed()
 {
     int recvData = digitalRead(pinNumber);
     ROS_INFO("Touch sensor (pin: %d): %d ", pinNumber, recvData);
-    return recvData != 0;
+    return previousValue = recvData != 0;
 }
-TouchSensor::~TouchSensor(){
+bool TouchSensor::getPrevious()
+{
+    return previousValue;
 }

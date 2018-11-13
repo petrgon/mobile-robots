@@ -1,11 +1,19 @@
-#include "../../include/light_sensor.h"
+#include "../../include/sensors/light_sensor.h"
+
+LightSensor::LightSensor(int pinNumber) : Sensor(pinNumber, INPUT), previousSignal(0) {}
+
+LightSensor::~LightSensor()  {}
 
 unsigned short int LightSensor::checkSignal()
 {
-    unsigned short int light_rev = 0;
+    unsigned short int lightRev = 0;
     std_msgs::Int16 light_data;
-    light_rev = digitalRead(pinNumber) ;
-    ROS_INFO("light_receive: %d ", light_rev);
+    lightRev = digitalRead(pinNumber);
+    previousSignal = lightRev;
+    ROS_INFO("Light recieved: %d ", lightRev);
 }
-LightSensor::~LightSensor(){
+
+unsigned short int LightSensor::getPreviousSignal()
+{
+    return previousSignal;
 }
