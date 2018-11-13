@@ -20,8 +20,7 @@
 class SensorManager
 {
 public:
-
-  static SensorManager* getInstance();
+  static SensorManager *getInstance();
 
   ~SensorManager();
 
@@ -43,10 +42,10 @@ public:
   void subscribePuckAquiredEvent(State *);
   void subscribePuckLostEvent(State *);
 
-  void start();
-
 private:
   SensorManager();
+  
+  void start();
 
   static void resolveLightSensor(LightSensor &sensor, SensorManager *manager);
 
@@ -72,6 +71,6 @@ private:
   std::thread *thread;
   bool shouldEnd;
 
-  static SensorManager * instance;
+  static SensorManager *instance;
 };
 #endif /*SENSOR_MANAGER_H*/

@@ -9,7 +9,8 @@ SensorManager * SensorManager::getInstance(){
 }
 
 SensorManager::SensorManager() : thread(nullptr), shouldEnd(false)
-{
+{   
+    start();
     ROS_INFO("SensorManager initialized");
 }
 SensorManager::~SensorManager()
