@@ -7,12 +7,15 @@
 class MotorManager
 {
 public:
-  MotorManager();
+
+  static MotorManager* getInstance();
 
   void publishCoords(int left, int right);
 
 private:
+  MotorManager();
   ros::Publisher pub_motor_coords;
+  static MotorManager * instance;
 
   struct Coordinates
   {

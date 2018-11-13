@@ -1,5 +1,14 @@
 #include "../../include/managers/motor_manager.h"
 
+
+MotorManager * MotorManager::instance = nullptr;
+
+MotorManager * MotorManager::getInstance(){
+    if(!instance)
+        instance = new MotorManager();
+    return instance;
+}
+
 MotorManager::MotorManager()
 {
     ROS_INFO("Initializing MotorManager");
