@@ -1,15 +1,16 @@
 #include "../../include/managers/sensor_manager.h"
 
-SensorManager * SensorManager::instance = new SensorManager();
+SensorManager *SensorManager::instance = new SensorManager();
 
-SensorManager * SensorManager::getInstance(){
-    if(!instance)
+SensorManager *SensorManager::getInstance()
+{
+    if (!instance)
         instance = new SensorManager();
     return instance;
 }
 
 SensorManager::SensorManager() : thread(nullptr), shouldEnd(false)
-{   
+{
     start();
     ROS_INFO("SensorManager initialized");
 }
@@ -34,13 +35,20 @@ void SensorManager::subscribeToAll(State *state)
     subscribeBothTouchTriggeredEvent(state);
     subscribeBothTouchFreedEvent(state);
 }
-/*void SensorManager::unsubscribeFromAll(State *state)
+
+void SensorManager::unsubscribeFromAll(State *state)
 {
-    for (auto it = handlers.begin(); it != handlers.end(); it++)
-    {
-        it
-    }
-}*/
+    puckAquiredEventHandlers.remove(state);
+    puckLostEventHandlers.remove(state);
+    leftTouchTriggeredEventHandlers.remove(state);
+    leftTouchFreedEventHandlers.remove(state);
+    rightTouchTriggeredEventHandlers.remove(state);
+    rightTouchFreedEventHandlers.remove(state);
+    bothTouchTriggeredEventHandlers.remove(state);
+    bothTouchFreedEventHandlers.remove(state);
+    lightDetectedEventHandlers.remove(state);
+    lightLostEventHandlers.remove(state);
+}
 
 void SensorManager::subscribePuckAquiredEvent(State *state)
 {
@@ -182,7 +190,7 @@ void SensorManager::resolvePuckSensor(TouchSensor &sensor, SensorManager *manage
     }
 }
 
-void SensorManager::callEventHandlers(const std::vector<State *> &handlers, void (State::*ptr)())
+void SensorManager::callEventHandlers(const std::list<State *> &handlers, void (State::*ptr)())
 {
     for (auto it = handlers.begin(); it != handlers.end(); it++)
     {

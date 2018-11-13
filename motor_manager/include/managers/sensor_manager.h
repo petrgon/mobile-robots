@@ -25,7 +25,7 @@ public:
   ~SensorManager();
 
   void subscribeToAll(State *);
-  /*void unsubscribeFromAll(State *);*/
+  void unsubscribeFromAll(State *);
 
   void subscribeLightDetectedEvent(State *);
   void subscribeLightLostEvent(State *);
@@ -53,20 +53,20 @@ private:
 
   static void resolvePuckSensor(TouchSensor &sensor, SensorManager *manager);
 
-  static void callEventHandlers(const std::vector<State *> &handlers, void (State::*ptr)());
+  static void callEventHandlers(const std::list<State *> &handlers, void (State::*ptr)());
 
   static void run(SensorManager *manager);
 
-  std::vector<State *> lightDetectedEventHandlers;
-  std::vector<State *> lightLostEventHandlers;
-  std::vector<State *> puckAquiredEventHandlers;
-  std::vector<State *> puckLostEventHandlers;
-  std::vector<State *> leftTouchTriggeredEventHandlers;
-  std::vector<State *> leftTouchFreedEventHandlers;
-  std::vector<State *> rightTouchTriggeredEventHandlers;
-  std::vector<State *> rightTouchFreedEventHandlers;
-  std::vector<State *> bothTouchTriggeredEventHandlers;
-  std::vector<State *> bothTouchFreedEventHandlers;
+  std::list<State *> lightDetectedEventHandlers;
+  std::list<State *> lightLostEventHandlers;
+  std::list<State *> puckAquiredEventHandlers;
+  std::list<State *> puckLostEventHandlers;
+  std::list<State *> leftTouchTriggeredEventHandlers;
+  std::list<State *> leftTouchFreedEventHandlers;
+  std::list<State *> rightTouchTriggeredEventHandlers;
+  std::list<State *> rightTouchFreedEventHandlers;
+  std::list<State *> bothTouchTriggeredEventHandlers;
+  std::list<State *> bothTouchFreedEventHandlers;
 
   std::thread *thread;
   bool shouldEnd;
