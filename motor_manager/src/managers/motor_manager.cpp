@@ -1,7 +1,7 @@
 #include "../../include/managers/motor_manager.h"
 
 
-MotorManager * MotorManager::instance = nullptr;
+MotorManager * MotorManager::instance = new MotorManager();
 
 MotorManager * MotorManager::getInstance(){
     if(!instance)
