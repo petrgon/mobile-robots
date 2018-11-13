@@ -4,7 +4,7 @@ GetPuckState::GetPuckState() : State(), timeIsUp(true), puckTouchTriggered(false
                                lightDetected(false), leftTouchTriggered(false),
                                rightTouchTriggered(false), nextAction(SEARCH_RIGHT)
 {
-    SensorManager.getInstance()->subscribeToAll(this);
+    SensorManager::getInstance()->subscribeToAll(this);
 }
 
 GetPuckState::~GetPuckState(){};
@@ -66,31 +66,31 @@ void GetPuckState::run()
 {
     if (puckTouchTriggered)
     {
-        MotorManager.getInstance()->publishCoords(0, 0);
+        MotorManager::getInstance()->publishCoords(0, 0);
         nextAction = SEARCH_LEFT;
         timeIsUp = true;
     }
     else if (leftTouchTriggered && rightTouchTriggered)
     {
-        MotorManager.getInstance()->publishCoords(-150, -150);
+        MotorManager::getInstance()->publishCoords(-150, -150);
         nextAction = SEARCH_LEFT;
         timeIsUp = false;
     }
     else if (leftTouchTriggered)
     {
-        MotorManager.getInstance()->publishCoords(-100, -150);
+        MotorManager::getInstance()->publishCoords(-100, -150);
         nextAction = SEARCH_RIGHT;
         timeIsUp = false;
     }
     else if (rightTouchTriggered)
     {
-        MotorManager.getInstance()->publishCoords(-150, -100);
+        MotorManager::getInstance()->publishCoords(-150, -100);
         nextAction = SEARCH_LEFT;
         timeIsUp = false;
     }
     else if (lightDetected)
     {
-        MotorManager.getInstance()->publishCoords(150, 150);
+        MotorManager::getInstance()->publishCoords(150, 150);
         nextAction = SEARCH_RIGHT;
         timeIsUp = true;
     }
@@ -99,17 +99,17 @@ void GetPuckState::run()
         switch (nextAction)
         {
         case SEARCH_LEFT:
-            MotorManager.getInstance()->publishCoords(0, 100);
+            MotorManager::getInstance()->publishCoords(0, 100);
             nextAction = MOVE_FORWARD;
             timeIsUp = false;
             break;
         case SEARCH_RIGHT:
-            MotorManager.getInstance()->publishCoords(100, 0);
+            MotorManager::getInstance()->publishCoords(100, 0);
             nextAction = MOVE_FORWARD;
             timeIsUp = false;
             break;
         case MOVE_FORWARD:
-            MotorManager.getInstance()->publishCoords(100, 100);
+            MotorManager::getInstance()->publishCoords(100, 100);
             nextAction = SEARCH_LEFT;
             timeIsUp = false;
             break;
