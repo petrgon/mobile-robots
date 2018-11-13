@@ -11,6 +11,7 @@ unsigned short int LightSensor::checkSignal()
     lightRev = digitalRead(pinNumber);
     previousSignal = lightRev;
     ROS_INFO("Light recieved: %d ", lightRev);
+    return lightRev;
 }
 
 unsigned short int LightSensor::getPreviousSignal()
