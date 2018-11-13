@@ -1,5 +1,13 @@
 #include "../../include/managers/sensor_manager.h"
 
+SensorManager * SensorManager::instance = nullptr;
+
+SensorManager * SensorManager::getInstance(){
+    if(!instance)
+        instance = new SensorManager();
+    return instance;
+}
+
 SensorManager::SensorManager() : thread(nullptr), shouldEnd(false)
 {
     ROS_INFO("SensorManager initialized");

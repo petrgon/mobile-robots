@@ -20,7 +20,9 @@
 class SensorManager
 {
 public:
-  SensorManager();
+
+  static SensorManager* getInstance();
+
   ~SensorManager();
 
   void subscribeToAll(State *);
@@ -44,6 +46,8 @@ public:
   void start();
 
 private:
+  SensorManager();
+
   static void resolveLightSensor(LightSensor &sensor, SensorManager *manager);
 
   static void resolveFrontSensors(TouchSensor &left, TouchSensor &right, SensorManager *manager);
@@ -67,5 +71,7 @@ private:
 
   std::thread *thread;
   bool shouldEnd;
+
+  static SensorManager * instance;
 };
 #endif /*SENSOR_MANAGER_H*/
