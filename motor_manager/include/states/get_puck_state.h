@@ -10,7 +10,7 @@ class GetPuckState : public State
 {
 public:
   GetPuckState();
-  ~GetPuckState();
+  ~GetPuckState() override;
 
   void run() override;
 
