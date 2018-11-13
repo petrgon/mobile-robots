@@ -7,7 +7,7 @@
 #include "../sensors/touch_sensor.h"
 #include "../states/state.h"
 
-#include <vector>
+#include <list>
 #include <thread>
 
 #define FREQUENCE 10 //10Hz

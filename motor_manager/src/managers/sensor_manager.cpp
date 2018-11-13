@@ -16,10 +16,11 @@ SensorManager::SensorManager() : thread(nullptr), shouldEnd(false)
 }
 SensorManager::~SensorManager()
 {
-    ROS_INFO("Joining thread");
+    ROS_INFO("Joining SensorManager thread");
+    shouldEnd = true;
     thread->join();
     delete thread;
-    ROS_INFO("Thread Joined");
+    ROS_INFO("Thread SensorManager Joined");
 }
 
 void SensorManager::subscribeToAll(State *state)
