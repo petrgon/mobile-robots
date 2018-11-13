@@ -3,13 +3,15 @@ State::State() {}
 
 State::~State() {}
 
-bool State::operator==(const State & b) const {
+bool State::operator==(const State &b) const
+{
     return this == &b;
 }
 
 void State::timeElapsedEventHandler() {}
 
 void State::puckAquiredEventHandler() {}
+void State::puckLostEventHandler() {}
 
 void State::lightDetectedEventHandler() {}
 void State::lightLostEventHandler() {}
@@ -21,4 +23,4 @@ void State::rightTouchTriggeredEventHandler() {}
 void State::rightTouchFreedEventHandler() {}
 
 void State::bothTouchTriggeredEventHandler() {}
-void State::bothtTouchFreedEventHandler() {}
+void State::bothTouchFreedEventHandler() {}

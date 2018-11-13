@@ -6,18 +6,18 @@
 
 class MotorManager
 {
-  public:
-    MotorManager();
+public:
+  MotorManager();
 
-    void publishCoords(int left, int right);
+  void publishCoords(int left, int right);
 
-  private:    
-    ros::Publisher pub_motor_coords;
+private:
+  ros::Publisher pub_motor_coords;
 
-    struct Coordinates
-    {
-        int left;
-        int right;
-    };
+  struct Coordinates
+  {
+    int left;
+    int right;
+  };
 };
 #endif /*MOTOR_MANAGER_H*/
