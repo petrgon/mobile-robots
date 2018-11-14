@@ -3,7 +3,7 @@
 
 #include "ros/ros.h"
 
-#include <queue>
+#include <list>
 #include <thread>
 #include <condition_variable>
 #include <mutex>
@@ -33,7 +33,7 @@ class CallBackTimeManager
     std::condition_variable condVar;
     bool shouldEnd;
 
-    std::priority_queue<SubscribedCallBack> callbackHandlers;
+    std::list<SubscribedCallBack> callbackHandlers;
 };
 
 struct SubscribedCallBack

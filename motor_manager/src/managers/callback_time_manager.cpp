@@ -23,7 +23,20 @@ void CallBackTimeManager::subscribe(State *state, int64_t time)
 {
     std::unique_lock<std::mutex> lck(m);
     SubscribedCallBack callback(state, time);
-    callbackHandlers.push(callback);
+    auto it = callbackHandlers.begin();
+    for (; it != callbackHandlers.end(); ++it)
+    {
+        if (*it >= callback)
+            break;
+    }
+    if (*it == callback)
+    {
+        *it = callback;
+    }
+    else
+    {
+        callbackHandlers.insert(it, callback);
+    }
     lck.unlock();
     condVar.notify_all();
 }
@@ -52,14 +65,14 @@ void CallBackTimeManager::run(CallBackTimeManager *manager)
     while (!manager->shouldEnd && ros::ok())
     {
         std::unique_lock<std::mutex> lck(manager->m);
-        manager->condVar.wait(lck, [manager]{return !manager->callbackHandlers.empty();});
-        auto top = manager->callbackHandlers.top();
+        manager->condVar.wait(lck, [manager] { return !manager->callbackHandlers.empty(); });
+        auto top = manager->callbackHandlers.front();
         auto now = std::chrono::system_clock::now();
         if (top.subscribed + top.time <= now)
         {
             ROS_INFO("Time callback after %I64d ", top.time.count());
             top.state->timeElapsedEventHandler();
-            manager->callbackHandlers.pop();
+            manager->callbackHandlers.pop_front();
         }
         else
         {
@@ -74,7 +87,7 @@ void CallBackTimeManager::run(CallBackTimeManager *manager)
 SubscribedCallBack::SubscribedCallBack(State *state, int64_t milis)
     : state(state), time(std::chrono::milliseconds(milis)), subscribed(std::chrono::system_clock::now()) {}
 
-SubscribedCallBack::~SubscribedCallBack(){}
+SubscribedCallBack::~SubscribedCallBack() {}
 
 bool SubscribedCallBack::operator>(const SubscribedCallBack &b) const
 {
@@ -82,7 +95,7 @@ bool SubscribedCallBack::operator>(const SubscribedCallBack &b) const
 }
 bool SubscribedCallBack::operator<(const SubscribedCallBack &b) const
 {
-    return subscribed + time < b.subscribed + b.time;
+    return b > *this;
 }
 bool SubscribedCallBack::operator>=(const SubscribedCallBack &b) const
 {
@@ -94,7 +107,7 @@ bool SubscribedCallBack::operator<=(const SubscribedCallBack &b) const
 }
 bool SubscribedCallBack::operator==(const SubscribedCallBack &b) const
 {
-    return !operator>(b) && !operator<(b);
+    return state == b.state;
 }
 bool SubscribedCallBack::operator!=(const SubscribedCallBack &b) const
 {
