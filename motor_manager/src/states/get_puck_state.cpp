@@ -64,47 +64,58 @@ void GetPuckState::bothTouchFreedEventHandler()
 
 void GetPuckState::run()
 {
-    if ((!lightDetected && actualAction == LIGHT_DETECTED) ||
-        (!puckTouchTriggered && actualAction == PUCK_TRIGGERED))
+    if (puckTouchTriggered)
     {
-        timeIsUp = true;
+        if (actualAction != PUCK_TRIGGERED)
+        {
+            ROS_INFO("Program - puck cached");
+            MotorManager::getInstance()->publishCoords(0, 0);
+            actualAction = PUCK_TRIGGERED;
+            timeIsUp = true;
+        }
     }
-
-    if (puckTouchTriggered && actualAction != PUCK_TRIGGERED)
+    else if (leftTouchTriggered && rightTouchTriggered)
     {
-        ROS_INFO("Program - puck cached");
-        MotorManager::getInstance()->publishCoords(0, 0);
-        actualAction = PUCK_TRIGGERED;
+        if (actualAction != BOTH_TRIGGERED)
+        {
+            ROS_INFO("Program - front colision");
+            MotorManager::getInstance()->publishCoords(-120, -120);
+            actualAction = BOTH_TRIGGERED;
+            timeIsUp = false;
+            CallBackTimeManager::getInstance()->subscribe(this, 500);
+        }
     }
-    else if (leftTouchTriggered && rightTouchTriggered && actualAction != BOTH_TRIGGERED)
+    else if (leftTouchTriggered)
     {
-        ROS_INFO("Program - front colision");
-        MotorManager::getInstance()->publishCoords(-120, -120);
-        actualAction = BOTH_TRIGGERED;
-        timeIsUp = false;
-        CallBackTimeManager::getInstance()->subscribe(this, 500);
+        if (actualAction != LEFT_TRIGGERED)
+        {
+            ROS_INFO("Program - left colision");
+            MotorManager::getInstance()->publishCoords(-100, -120);
+            actualAction = LEFT_TRIGGERED;
+            timeIsUp = false;
+            CallBackTimeManager::getInstance()->subscribe(this, 500);
+        }
     }
-    else if (leftTouchTriggered && actualAction != LEFT_TRIGGERED)
+    else if (rightTouchTriggered)
     {
-        ROS_INFO("Program - left colision");
-        MotorManager::getInstance()->publishCoords(-100, -120);
-        actualAction = LEFT_TRIGGERED;
-        timeIsUp = false;
-        CallBackTimeManager::getInstance()->subscribe(this, 500);
+        if (actualAction != RIGHT_TRIGGERED)
+        {
+            ROS_INFO("Program - right colision");
+            MotorManager::getInstance()->publishCoords(-120, -100);
+            actualAction = RIGHT_TRIGGERED;
+            timeIsUp = false;
+            CallBackTimeManager::getInstance()->subscribe(this, 500);
+        }
     }
-    else if (rightTouchTriggered && actualAction != RIGHT_TRIGGERED)
+    else if (lightDetected)
     {
-        ROS_INFO("Program - right colision");
-        MotorManager::getInstance()->publishCoords(-120, -100);
-        actualAction = RIGHT_TRIGGERED;
-        timeIsUp = false;
-        CallBackTimeManager::getInstance()->subscribe(this, 500);
-    }
-    else if (lightDetected && actualAction != LIGHT_DETECTED)
-    {
-        ROS_INFO("Program - light detached");
-        MotorManager::getInstance()->publishCoords(100, 100);
-        actualAction = LIGHT_DETECTED;
+        if (actualAction != LIGHT_DETECTED)
+        {
+            ROS_INFO("Program - light detached");
+            MotorManager::getInstance()->publishCoords(100, 100);
+            actualAction = LIGHT_DETECTED;
+            timeIsUp = true;
+        }
     }
     else if (timeIsUp)
     {
