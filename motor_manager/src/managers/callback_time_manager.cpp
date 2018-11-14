@@ -73,6 +73,8 @@ void CallBackTimeManager::run(CallBackTimeManager *manager)
 SubscribedCallBack::SubscribedCallBack(State *state, int64_t dur)
     : state(state), time(std::chrono::nanoseconds(dur)), subscribed(std::chrono::system_clock::now()) {}
 
+SubscribedCallBack::~SubscribedCallBack(){}
+
 bool SubscribedCallBack::operator>(const SubscribedCallBack &b) const
 {
     return subscribed + time > b.subscribed + b.time;
