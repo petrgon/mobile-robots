@@ -15,7 +15,7 @@ CallBackTimeManager *CallBackTimeManager::getInstance()
 {
     if (!instance)
         instance = new CallBackTimeManager();
-    return instance
+    return instance;
 }
 
 void CallBackTimeManager::subscribe(State *state, int64_t time)
@@ -24,8 +24,8 @@ void CallBackTimeManager::subscribe(State *state, int64_t time)
     std::unique_lock<std::mutex> lck(m);
     SubscribedCallBack callback(state, time);
     callbackHandlers.push(callback);
-    std::unlock(m);
-    cv.notify_one();
+    m.unlock();
+    condVar.notify_one();
 }
 
 CallBackTimeManager::CallBackTimeManager() : thread(nullptr), shouldEnd(false)
@@ -51,19 +51,21 @@ void CallBackTimeManager::run(CallBackTimeManager *manager)
 {
     while (!manager->shouldEnd && ros::ok())
     {
-        std::unique_lock<std::mutex> lck(m);
-        cv.wait(lck, !manager->callbackHandlers.empty());
+        std::unique_lock<std::mutex> lck(manager->m);
+        manager->condVar.wait(lck, !manager->callbackHandlers.empty());
         auto top = manager->callbackHandlers.top;
-        auto now = std::chrono::system_clock::now() if (top->subscribed + top->time <= now)
+        auto now = std::chrono::system_clock::now();
+        if (top->subscribed + top->time <= now)
         {
             top->state->timeElapsedEventHandler();
             manager->callbackHandlers.pop;
         }
         else
         {
-            auto left = top->subscribed + top->time - now std::this_thread::sleep_for(left);
+            auto left = top->subscribed + top->time - now;
+            std::this_thread::sleep_for(left);
         }
-        std::unlock(m);
+        manager->m.unlock;
     }
     manager->shouldEnd = false;
 }

@@ -24,7 +24,7 @@ class CallBackTimeManager
     CallBackTimeManager();
 
     void start();
-    static void run(CallBackTimeManager *manager));
+    static void run(CallBackTimeManager *manager);
 
     static CallBackTimeManager *instance;
 
