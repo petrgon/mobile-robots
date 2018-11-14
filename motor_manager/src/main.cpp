@@ -9,7 +9,15 @@
 #include <iostream>
 #include <signal.h>
 
-void SIGINT_handler(int sig){   
+CallBackTimeManager *callback_manager;
+MotorManager *motor_manager;
+SensorManager *sensor_manager;
+
+void SIGINT_handler(int sig)
+{
+    delete callback_manager; //keep order
+    delete sensor_manager;
+    delete motor_manager;
     ros::shutdown();
 }
 
@@ -22,9 +30,9 @@ int main(int argc, char **argv)
     wiringPiSetup();
     ROS_INFO("WiringPI initialized");
 
-    CallBackTimeManager *callback_manager = CallBackTimeManager::getInstance();
-    MotorManager *motor_manager = MotorManager::getInstance();
-    SensorManager *sensor_manager = SensorManager::getInstance();
+    callback_manager = CallBackTimeManager::getInstance();
+    motor_manager = MotorManager::getInstance();
+    sensor_manager = SensorManager::getInstance();
 
     GetPuckState program;
 
@@ -34,9 +42,6 @@ int main(int argc, char **argv)
         program.run();
         ros::spinOnce();
     }
-
-    delete callback_manager; //keep order
-    delete sensor_manager;
-    delete motor_manager;
+    SIGINT_handler();
     return 0;
 }
