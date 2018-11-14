@@ -2,12 +2,12 @@
 
 GetPuckState::GetPuckState() : State(), timeIsUp(true), puckTouchTriggered(false),
                                lightDetected(false), leftTouchTriggered(false),
-                               rightTouchTriggered(false), nextAction(SEARCH_RIGHT)
+                               rightTouchTriggered(false), actualAction(MOVE_FORWARD)
 {
     SensorManager::getInstance()->subscribeToAll(this);
 }
 
-GetPuckState::~GetPuckState(){}
+GetPuckState::~GetPuckState() {}
 
 void GetPuckState::timeElapsedEventHandler()
 {
@@ -64,64 +64,73 @@ void GetPuckState::bothTouchFreedEventHandler()
 
 void GetPuckState::run()
 {
-    if (puckTouchTriggered)
+    if (!lightDetected && actualAction == LIGHT_DETECTED ||
+        !puckTouchTriggered && actualAction == PUCK_TRIGGERED)
+    {
+        timeIsUp = true;
+    }
+
+    if (puckTouchTriggered && actualAction != PUCK_TRIGGERED)
     {
         ROS_INFO("Program - puck cached");
         MotorManager::getInstance()->publishCoords(0, 0);
-        nextAction = SEARCH_LEFT;
-        timeIsUp = true;
+        actualAction = PUCK_TRIGGERED;
     }
-    else if (leftTouchTriggered && rightTouchTriggered)
+    else if (leftTouchTriggered && rightTouchTriggered && actualAction != BOTH_TRIGGERED)
     {
         ROS_INFO("Program - front colision");
         MotorManager::getInstance()->publishCoords(-150, -150);
-        nextAction = SEARCH_LEFT;
+        actualAction = BOTH_TRIGGERED;
         timeIsUp = false;
         CallBackTimeManager::getInstance()->subscribe(this, 500);
     }
-    else if (leftTouchTriggered)
+    else if (leftTouchTriggered && actualAction != LEFT_TRIGGERED)
     {
         ROS_INFO("Program - left colision");
         MotorManager::getInstance()->publishCoords(-100, -150);
-        nextAction = SEARCH_RIGHT;
+        actualAction = LEFT_TRIGGERED;
         timeIsUp = false;
         CallBackTimeManager::getInstance()->subscribe(this, 500);
     }
-    else if (rightTouchTriggered)
+    else if (rightTouchTriggered && actualAction != RIGHT_TRIGGERED)
     {
         ROS_INFO("Program - right colision");
         MotorManager::getInstance()->publishCoords(-150, -100);
-        nextAction = SEARCH_LEFT;
+        actualAction = RIGHT_TRIGGERED;
         timeIsUp = false;
         CallBackTimeManager::getInstance()->subscribe(this, 500);
     }
-    else if (lightDetected)
+    else if (lightDetected && actualAction != LIGHT_DETECTED)
     {
         ROS_INFO("Program - light detached");
         MotorManager::getInstance()->publishCoords(150, 150);
-        nextAction = SEARCH_RIGHT;
-        timeIsUp = true;
+        actualAction = LIGHT_DETECTED;
     }
     else if (timeIsUp)
     {
         ROS_INFO("Program - time is up");
-        switch (nextAction)
+        switch (actualAction)
         {
-        case SEARCH_LEFT:
-            MotorManager::getInstance()->publishCoords(0, 100);
-            nextAction = MOVE_FORWARD;
-            timeIsUp = false;
-            CallBackTimeManager::getInstance()->subscribe(this, 1000);
-            break;
-        case SEARCH_RIGHT:
-            MotorManager::getInstance()->publishCoords(100, 0);
-            nextAction = MOVE_FORWARD;
-            timeIsUp = false;
-            CallBackTimeManager::getInstance()->subscribe(this, 1000);
-            break;
         case MOVE_FORWARD:
+        case PUCK_TRIGGERED:
+        case RIGHT_TRIGGERED:
+            MotorManager::getInstance()->publishCoords(0, 100);
+            actualAction = SEARCH_LEFT;
+            timeIsUp = false;
+            CallBackTimeManager::getInstance()->subscribe(this, 1000);
+            break;
+        case LEFT_TRIGGERED:
+        case LIGHT_DETECTED:
+        case BOTH_TRIGGERED:
+            MotorManager::getInstance()->publishCoords(100, 0);
+            actualAction = SEARCH_RIGHT;
+            timeIsUp = false;
+            CallBackTimeManager::getInstance()->subscribe(this, 1000);
+            break;
+        case SEARCH_LEFT:
+        case SEARCH_RIGHT:
             MotorManager::getInstance()->publishCoords(100, 100);
-            nextAction = SEARCH_LEFT;
+            actualAction = MOVE_FORWARD;
             timeIsUp = false;
             CallBackTimeManager::getInstance()->subscribe(this, 500);
             break;

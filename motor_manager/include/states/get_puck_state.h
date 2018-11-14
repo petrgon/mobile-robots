@@ -34,7 +34,8 @@ public:
 
 private:
   enum Actions {
-    SEARCH_LEFT, SEARCH_RIGHT, MOVE_FORWARD
+    SEARCH_LEFT, SEARCH_RIGHT, MOVE_FORWARD, PUCK_TRIGGERED, 
+    LEFT_TRIGGERED, RIGHT_TRIGGERED, BOTH_TRIGGERED, LIGHT_DETECTED
   };
 
   bool timeIsUp;
@@ -43,6 +44,6 @@ private:
   bool leftTouchTriggered;
   bool rightTouchTriggered;
 
-  Actions nextAction;
+  Actions actualAction;
 };
 #endif /*GET_PUCK_STATE_MANAGER_H*/
