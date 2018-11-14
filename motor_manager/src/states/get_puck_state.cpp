@@ -75,21 +75,21 @@ void GetPuckState::run()
         MotorManager::getInstance()->publishCoords(-150, -150);
         nextAction = SEARCH_LEFT;
         timeIsUp = false;
-        CallBackTimeManager::getInstance()->subscribe(this, 500000000);
+        CallBackTimeManager::getInstance()->subscribe(this, 500000);
     }
     else if (leftTouchTriggered)
     {
         MotorManager::getInstance()->publishCoords(-100, -150);
         nextAction = SEARCH_RIGHT;
         timeIsUp = false;
-        CallBackTimeManager::getInstance()->subscribe(this, 500000000);
+        CallBackTimeManager::getInstance()->subscribe(this, 500000);
     }
     else if (rightTouchTriggered)
     {
         MotorManager::getInstance()->publishCoords(-150, -100);
         nextAction = SEARCH_LEFT;
         timeIsUp = false;
-        CallBackTimeManager::getInstance()->subscribe(this, 500000000);
+        CallBackTimeManager::getInstance()->subscribe(this, 500000);
     }
     else if (lightDetected)
     {
@@ -117,7 +117,7 @@ void GetPuckState::run()
             MotorManager::getInstance()->publishCoords(100, 100);
             nextAction = SEARCH_LEFT;
             timeIsUp = false;
-            CallBackTimeManager::getInstance()->subscribe(this, 500000000);
+            CallBackTimeManager::getInstance()->subscribe(this, 500000);
             break;
         }
     }

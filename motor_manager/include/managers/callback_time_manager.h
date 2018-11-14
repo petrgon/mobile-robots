@@ -18,7 +18,7 @@ class CallBackTimeManager
     ~CallBackTimeManager();
     static CallBackTimeManager *getInstance();
 
-    void subscribe(State *, int64_t nanosec);
+    void subscribe(State *, int64_t milis);
 
   private:
     CallBackTimeManager();
@@ -52,7 +52,7 @@ struct SubscribedCallBack
     bool operator!=(const SubscribedCallBack &) const;
 
     State *state;
-    std::chrono::nanoseconds time;
+    std::chrono::milliseconds time;
     std::chrono::time_point<std::chrono::system_clock> subscribed;
 };
 #endif /*CALLBACK_TIME_MANAGER_H*/

@@ -20,7 +20,6 @@ CallBackTimeManager *CallBackTimeManager::getInstance()
 
 void CallBackTimeManager::subscribe(State *state, int64_t time)
 {
-
     std::unique_lock<std::mutex> lck(m);
     SubscribedCallBack callback(state, time);
     callbackHandlers.push(callback);
@@ -70,8 +69,8 @@ void CallBackTimeManager::run(CallBackTimeManager *manager)
     manager->shouldEnd = false;
 }
 
-SubscribedCallBack::SubscribedCallBack(State *state, int64_t dur)
-    : state(state), time(std::chrono::nanoseconds(dur)), subscribed(std::chrono::system_clock::now()) {}
+SubscribedCallBack::SubscribedCallBack(State *state, int64_t milis)
+    : state(state), time(std::chrono::milliseconds(milis)), subscribed(std::chrono::system_clock::now()) {}
 
 SubscribedCallBack::~SubscribedCallBack(){}
 
