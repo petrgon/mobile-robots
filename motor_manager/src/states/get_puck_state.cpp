@@ -7,7 +7,7 @@ GetPuckState::GetPuckState() : State(), timeIsUp(true), puckTouchTriggered(false
     SensorManager::getInstance()->subscribeToAll(this);
 }
 
-GetPuckState::~GetPuckState(){};
+GetPuckState::~GetPuckState(){}
 
 void GetPuckState::timeElapsedEventHandler()
 {

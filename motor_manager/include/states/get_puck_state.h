@@ -36,12 +36,12 @@ private:
     SEARCH_LEFT, SEARCH_RIGHT, MOVE_FORWARD
   };
 
-  Actions nextAction;
-  
+  bool timeIsUp;
+  bool puckTouchTriggered;
   bool lightDetected;
   bool leftTouchTriggered;
   bool rightTouchTriggered;
-  bool puckTouchTriggered;
-  bool timeIsUp;
+
+  Actions nextAction;
 };
 #endif /*GET_PUCK_STATE_MANAGER_H*/
