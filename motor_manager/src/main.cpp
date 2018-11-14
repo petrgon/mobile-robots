@@ -9,15 +9,27 @@
 #include <iostream>
 #include <signal.h>
 
-CallBackTimeManager *callback_manager;
-MotorManager *motor_manager;
-SensorManager *sensor_manager;
+CallBackTimeManager *callback_manager = nullptr;
+MotorManager *motor_manager = nullptr;
+SensorManager *sensor_manager = nullptr;
 
 void SIGINT_handler(int sig)
 {
-    delete callback_manager; //keep order
-    delete sensor_manager;
-    delete motor_manager;
+    if (callback_manager)
+    {
+        delete callback_manager; //keep order
+        callback_manager = nullptr
+    }
+    if (sensor_manager)
+    {
+        delete sensor_manager;
+        sensor_manager = nullptr;
+    }
+    if (motor_manager)
+    {
+        delete motor_manager;
+        motor_manager = nullptr;
+    }
     ros::shutdown();
 }
 
