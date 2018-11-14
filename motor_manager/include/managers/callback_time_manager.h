@@ -1,5 +1,5 @@
-#ifndef MOTOR_MANAGER_H
-#define MOTOR_MANAGER_H
+#ifndef CALLBACK_TIME_MANAGER_H
+#define CALLBACK_TIME_MANAGER_H
 
 #include "ros/ros.h"
 
@@ -55,4 +55,4 @@ struct SubscribedCallBack
     std::chrono::nanoseconds time;
     std::chrono::time_point<std::chrono::system_clock> subscribed;
 };
-#endif /*MOTOR_MANAGER_H*/
+#endif /*CALLBACK_TIME_MANAGER_H*/
