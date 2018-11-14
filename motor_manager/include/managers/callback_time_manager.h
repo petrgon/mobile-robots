@@ -40,8 +40,8 @@ struct SubscribedCallBack
 {
     SubscribedCallBack(State *, int64_t);
     ~SubscribedCallBack();
-    SubscribedCallBack(const SubscribedCallBack &) = default;
-    SubscribedCallBack(SubscribedCallBack &&) = default;
+    SubscribedCallBack(const SubscribedCallBack &);
+    SubscribedCallBack(SubscribedCallBack &&);
     SubscribedCallBack &operator=(const SubscribedCallBack &) = default;
     SubscribedCallBack &operator=(SubscribedCallBack &&) = default;
     bool operator>(const SubscribedCallBack &) const;
