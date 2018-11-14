@@ -62,8 +62,8 @@ void CallBackTimeManager::run(CallBackTimeManager *manager)
         }
         else
         {
-            auto left = top.subscribed + top.time - now;
-            std::this_thread::sleep_for(left);
+            auto until = top.subscribed + top.time;
+            manager->condVar.wait_until(lck, until);
         }
         lck.unlock();
     }
