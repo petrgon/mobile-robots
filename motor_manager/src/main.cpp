@@ -18,7 +18,7 @@ void SIGINT_handler(int sig)
     if (callback_manager)
     {
         delete callback_manager; //keep order
-        callback_manager = nullptr
+        callback_manager = nullptr;
     }
     if (sensor_manager)
     {
