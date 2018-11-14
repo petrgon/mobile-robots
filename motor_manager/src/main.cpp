@@ -42,6 +42,6 @@ int main(int argc, char **argv)
         program.run();
         ros::spinOnce();
     }
-    SIGINT_handler();
+    SIGINT_handler(15);
     return 0;
 }
