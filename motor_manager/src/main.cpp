@@ -7,6 +7,7 @@
 #include "../include/managers/sensor_manager.h"
 
 #include <iostream>
+#include <signal.h>
 
 void SIGINT_handler(int sig){   
     ros::shutdown();
