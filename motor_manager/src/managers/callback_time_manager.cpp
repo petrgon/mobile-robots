@@ -30,15 +30,9 @@ void CallBackTimeManager::subscribe(State *state, int64_t time)
             break;
     }
     if (it != callbackHandlers.end() && *it == callback)
-    {
-        ROS_INFO("CHANGING %p", it->state);
         *it = callback;
-    }
     else
-    {
-        ROS_INFO("INSERTING %p, it->state");
         callbackHandlers.insert(it, callback);
-    }
     lck.unlock();
     condVar.notify_all();
 }
@@ -72,7 +66,7 @@ void CallBackTimeManager::run(CallBackTimeManager *manager)
         auto now = std::chrono::system_clock::now();
         if (top.subscribed + top.time <= now)
         {
-            ROS_INFO("Time callback after %I64d ", top.time.count());
+            ROS_INFO("Calling %p after %d time", top.state, top.time.count());
             top.state->timeElapsedEventHandler();
             manager->callbackHandlers.pop_front();
         }

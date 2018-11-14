@@ -8,9 +8,14 @@
 
 #include <iostream>
 
+void SIGINT_handler(int sig){   
+    ros::shutdown();
+}
+
 int main(int argc, char **argv)
 {
-    ros::init(argc, argv, "robot_core");
+    ros::init(argc, argv, "robot_core", ros::init_options::NoSigintHandler);
+    signal(SIGINT, SIGINT_handler);
     ROS_INFO("ROS initialized");
     setenv("WIRINGPI_GPIOMEM", "1", 1);
     wiringPiSetup();
