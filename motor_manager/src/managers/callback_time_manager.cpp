@@ -89,6 +89,9 @@ SubscribedCallBack::SubscribedCallBack(State *state, int64_t milis)
 
 SubscribedCallBack::~SubscribedCallBack() {}
 
+SubscribedCallBack::SubscribedCallBack(const SubscribedCallBack &b) : state(b.state), subscribed(b.subscribed), time(b.time) {}
+SubscribedCallBack::SubscribedCallBack(SubscribedCallBack &&b) : state(std::move(b.state)), subscribed(std::move(b.subscribed)), time(std::move(b.time)) {}
+
 bool SubscribedCallBack::operator>(const SubscribedCallBack &b) const
 {
     return subscribed + time > b.subscribed + b.time;
@@ -99,11 +102,11 @@ bool SubscribedCallBack::operator<(const SubscribedCallBack &b) const
 }
 bool SubscribedCallBack::operator>=(const SubscribedCallBack &b) const
 {
-    return !operator<(b);
+    return !(*this < b);
 }
 bool SubscribedCallBack::operator<=(const SubscribedCallBack &b) const
 {
-    return !operator>(b);
+    return !(*this > b);
 }
 bool SubscribedCallBack::operator==(const SubscribedCallBack &b) const
 {
@@ -111,5 +114,5 @@ bool SubscribedCallBack::operator==(const SubscribedCallBack &b) const
 }
 bool SubscribedCallBack::operator!=(const SubscribedCallBack &b) const
 {
-    return !operator==(b);
+    return !(*this == b);
 }
