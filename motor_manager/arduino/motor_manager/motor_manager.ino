@@ -14,7 +14,7 @@
 
 #define RIGHT_WHEEL_CALIBRATION 1.045
 #define LEFT_WHEEL_CALIBRATION 0.955
-#define MAX_VELOCITY (255 / MAX(RIGHT_WHEEL_CALIBRATION, LEFT_WHEEL_CALIBRATION))
+#define MAX_VELOCITY 244
 
 struct Coordinates
 {
@@ -28,8 +28,8 @@ Coordinates coord;
 
 void getCoordsHandler(const std_msgs::Int32MultiArray &input)
 {
-  coord.left = MIN(MAX_VELOCITY, input.data[0]);
-  coord.right = MIN(MAX_VELOCITY, input.data[1]);
+  coord.left = input.data[0];
+  coord.right = input.data[1];
 }
 
 ros::Subscriber<std_msgs::Int32MultiArray> sub_motor_coords("motor_coords", &getCoordsHandler);
@@ -71,8 +71,8 @@ void loop()
     digitalWrite(in1, HIGH);
     digitalWrite(in2, LOW);
   }
-  analogWrite(enA, ABS(coord.left) * LEFT_WHEEL_CALIBRATION);
-  analogWrite(enB, ABS(coord.right) * RIGHT_WHEEL_CALIBRATION);
+  analogWrite(enA, MIN(ABS(coord.left) * LEFT_WHEEL_CALIBRATION, MAX_VELOCITY));
+  analogWrite(enB, MIN(ABS(coord.right) * RIGHT_WHEEL_CALIBRATION, MAX_VELOCITY));
 
   nh.spinOnce();
 }

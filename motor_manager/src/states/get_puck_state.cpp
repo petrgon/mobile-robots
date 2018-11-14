@@ -64,8 +64,8 @@ void GetPuckState::bothTouchFreedEventHandler()
 
 void GetPuckState::run()
 {
-    if (!lightDetected && actualAction == LIGHT_DETECTED ||
-        !puckTouchTriggered && actualAction == PUCK_TRIGGERED)
+    if ((!lightDetected && actualAction == LIGHT_DETECTED) ||
+        (!puckTouchTriggered && actualAction == PUCK_TRIGGERED))
     {
         timeIsUp = true;
     }
@@ -79,7 +79,7 @@ void GetPuckState::run()
     else if (leftTouchTriggered && rightTouchTriggered && actualAction != BOTH_TRIGGERED)
     {
         ROS_INFO("Program - front colision");
-        MotorManager::getInstance()->publishCoords(-150, -150);
+        MotorManager::getInstance()->publishCoords(-120, -120);
         actualAction = BOTH_TRIGGERED;
         timeIsUp = false;
         CallBackTimeManager::getInstance()->subscribe(this, 500);
@@ -87,7 +87,7 @@ void GetPuckState::run()
     else if (leftTouchTriggered && actualAction != LEFT_TRIGGERED)
     {
         ROS_INFO("Program - left colision");
-        MotorManager::getInstance()->publishCoords(-100, -150);
+        MotorManager::getInstance()->publishCoords(-100, -120);
         actualAction = LEFT_TRIGGERED;
         timeIsUp = false;
         CallBackTimeManager::getInstance()->subscribe(this, 500);
@@ -95,7 +95,7 @@ void GetPuckState::run()
     else if (rightTouchTriggered && actualAction != RIGHT_TRIGGERED)
     {
         ROS_INFO("Program - right colision");
-        MotorManager::getInstance()->publishCoords(-150, -100);
+        MotorManager::getInstance()->publishCoords(-120, -100);
         actualAction = RIGHT_TRIGGERED;
         timeIsUp = false;
         CallBackTimeManager::getInstance()->subscribe(this, 500);
@@ -103,7 +103,7 @@ void GetPuckState::run()
     else if (lightDetected && actualAction != LIGHT_DETECTED)
     {
         ROS_INFO("Program - light detached");
-        MotorManager::getInstance()->publishCoords(150, 150);
+        MotorManager::getInstance()->publishCoords(100, 100);
         actualAction = LIGHT_DETECTED;
     }
     else if (timeIsUp)
@@ -114,25 +114,25 @@ void GetPuckState::run()
         case MOVE_FORWARD:
         case PUCK_TRIGGERED:
         case RIGHT_TRIGGERED:
-            MotorManager::getInstance()->publishCoords(0, 100);
+            MotorManager::getInstance()->publishCoords(-95, 95);
             actualAction = SEARCH_LEFT;
             timeIsUp = false;
-            CallBackTimeManager::getInstance()->subscribe(this, 1000);
+            CallBackTimeManager::getInstance()->subscribe(this, 2300);
             break;
         case LEFT_TRIGGERED:
         case LIGHT_DETECTED:
         case BOTH_TRIGGERED:
-            MotorManager::getInstance()->publishCoords(100, 0);
+            MotorManager::getInstance()->publishCoords(100, -100);
             actualAction = SEARCH_RIGHT;
             timeIsUp = false;
-            CallBackTimeManager::getInstance()->subscribe(this, 1000);
+            CallBackTimeManager::getInstance()->subscribe(this, 2300);
             break;
         case SEARCH_LEFT:
         case SEARCH_RIGHT:
             MotorManager::getInstance()->publishCoords(100, 100);
             actualAction = MOVE_FORWARD;
             timeIsUp = false;
-            CallBackTimeManager::getInstance()->subscribe(this, 500);
+            CallBackTimeManager::getInstance()->subscribe(this, 1500);
             break;
         }
     }

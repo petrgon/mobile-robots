@@ -6,6 +6,7 @@
 #include "../managers/sensor_manager.h"
 #include "../managers/callback_time_manager.h"
 #include <vector>
+#include <atomic>
 
 class GetPuckState : public State
 {
@@ -38,7 +39,7 @@ private:
     LEFT_TRIGGERED, RIGHT_TRIGGERED, BOTH_TRIGGERED, LIGHT_DETECTED
   };
 
-  bool timeIsUp;
+  std::atomic<bool> timeIsUp;
   bool puckTouchTriggered;
   bool lightDetected;
   bool leftTouchTriggered;
