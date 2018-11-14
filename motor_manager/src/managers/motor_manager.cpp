@@ -13,7 +13,7 @@ MotorManager::MotorManager()
 {
     ROS_INFO("Initializing MotorManager");
     ros::NodeHandle node_obj;
-    pub_motor_coords = node_obj.advertise<std_msgs::Int32MultiArray>("motor_coords", 1);
+    pub_motor_coords = node_obj.advertise<std_msgs::Int32MultiArray>("motor_coords", 5);
     ROS_INFO("MotorManager initialized");
 }
 

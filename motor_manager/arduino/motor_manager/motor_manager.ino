@@ -26,13 +26,13 @@ struct Coordinates
 ros::NodeHandle nh;
 Coordinates coord;
 
-void getCoordsHandler(const std_msgs::Int32MultiArray::ConstPtr &input)
+void getCoordsHandler(const std_msgs::Int32MultiArray &input)
 {
   coord.left = MIN(MAX_VELOCITY, input.data[0]);
   coord.right = MIN(MAX_VELOCITY, input.data[1]);
 }
 
-ros::Subscriber<std_msgs::Int32MultiArray> sub_motor_coords("motor_coords", &getCoordsHandler);
+ros::Subscriber<std_msgs::Int32MultiArray> sub_motor_coords("motor_coords", 5, getCoordsHandler);
 
 void setup()
 {
