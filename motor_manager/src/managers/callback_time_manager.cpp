@@ -66,7 +66,7 @@ void CallBackTimeManager::run(CallBackTimeManager *manager)
         auto now = std::chrono::system_clock::now();
         if (top.subscribed + top.time <= now)
         {
-            ROS_INFO("Calling %p after %d time", top.state, top.time.count());
+            ROS_INFO("Calling %p after %d milisec", top.state, top.time.count());
             top.state->timeElapsedEventHandler();
             manager->callbackHandlers.pop_front();
         }
@@ -85,8 +85,11 @@ SubscribedCallBack::SubscribedCallBack(State *state, int64_t milis)
 
 SubscribedCallBack::~SubscribedCallBack() {}
 
-SubscribedCallBack::SubscribedCallBack(const SubscribedCallBack &b) : state(b.state), subscribed(b.subscribed), time(b.time) {}
-SubscribedCallBack::SubscribedCallBack(SubscribedCallBack &&b) : state(std::move(b.state)), subscribed(std::move(b.subscribed)), time(std::move(b.time)) {}
+SubscribedCallBack::SubscribedCallBack(const SubscribedCallBack &b) 
+        : state(b.state), subscribed(b.subscribed), time(b.time) {}
+
+SubscribedCallBack::SubscribedCallBack(SubscribedCallBack &&b) 
+        : state(std::move(b.state)), subscribed(std::move(b.subscribed)), time(std::move(b.time)) {}
 
 bool SubscribedCallBack::operator>(const SubscribedCallBack &b) const
 {
