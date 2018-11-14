@@ -124,7 +124,6 @@ void SensorManager::run(SensorManager *manager)
     ros::Rate loop_rate(FREQUENCE);
     while (ros::ok() && !manager->shouldEnd)
     {
-        ROS_INFO("Checking sensors");
         resolveLightSensor(lightSensor, manager);
         resolveFrontSensors(leftSensor, rightSensor, manager);
         resolvePuckSensor(puckSensor, manager);
