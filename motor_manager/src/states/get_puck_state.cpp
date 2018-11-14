@@ -68,7 +68,6 @@ void GetPuckState::run()
     {
         if (actualAction != PUCK_TRIGGERED)
         {
-            ROS_INFO("Program - puck cached");
             doAction(0, 0, PUCK_TRIGGERED, -1);
         }
     }
@@ -76,7 +75,6 @@ void GetPuckState::run()
     {
         if (actualAction != BOTH_TRIGGERED)
         {
-            ROS_INFO("Program - front colision");
             doAction(-120, -120, BOTH_TRIGGERED, 750);
         }
     }
@@ -84,7 +82,6 @@ void GetPuckState::run()
     {
         if (actualAction != LEFT_TRIGGERED)
         {
-            ROS_INFO("Program - left colision");
             doAction(-100, -120, LEFT_TRIGGERED, 750);
         }
     }
@@ -92,7 +89,6 @@ void GetPuckState::run()
     {
         if (actualAction != RIGHT_TRIGGERED)
         {
-            ROS_INFO("Program - right colision");
             doAction(-120, -100, RIGHT_TRIGGERED, 750);
         }
     }
@@ -100,7 +96,6 @@ void GetPuckState::run()
     {
         if (actualAction != LIGHT_DETECTED)
         {
-            ROS_INFO("Program - light detached");
             doAction(100, 100, LIGHT_DETECTED, -1);
         }
     }
@@ -120,10 +115,10 @@ void GetPuckState::run()
             doAction(100, -100, SEARCH_RIGHT, 2300);
             break;
         case SEARCH_LEFT:
-            doAction(100, 100, MOVE_FORWARD_RIGHT, 1500);
+            doAction(100, 100, MOVE_FORWARD_RIGHT, 2000);
             break;
         case SEARCH_RIGHT:
-            doAction(100, 100, MOVE_FORWARD_LEFT, 1500);
+            doAction(100, 100, MOVE_FORWARD_LEFT, 2000);
             break;
         }
     }
