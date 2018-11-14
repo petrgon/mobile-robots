@@ -115,10 +115,10 @@ void GetPuckState::run()
             doAction(100, -100, SEARCH_RIGHT, 2300);
             break;
         case SEARCH_LEFT:
-            doAction(125, 125, MOVE_FORWARD_RIGHT, 1750);
+            doAction(100, 100, MOVE_FORWARD_RIGHT, 2000);
             break;
         case SEARCH_RIGHT:
-            doAction(125, 125, MOVE_FORWARD_LEFT, 1750);
+            doAction(100, 100, MOVE_FORWARD_LEFT, 2000);
             break;
         }
     }
