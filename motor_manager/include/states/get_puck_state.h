@@ -35,9 +35,11 @@ public:
 
 private:
   enum Actions {
-    SEARCH_LEFT, SEARCH_RIGHT, MOVE_FORWARD, PUCK_TRIGGERED, 
+    SEARCH_LEFT, SEARCH_RIGHT, MOVE_FORWARD_LEFT, MOVE_FORWARD_RIGHT, PUCK_TRIGGERED, 
     LEFT_TRIGGERED, RIGHT_TRIGGERED, BOTH_TRIGGERED, LIGHT_DETECTED
   };
+
+  void doAction(int leftWheelSpeed, int rightWheelSpeed, Actions nextAction, int timeOut);
 
   std::atomic<bool> timeIsUp;
   bool puckTouchTriggered;

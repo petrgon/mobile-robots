@@ -2,7 +2,7 @@
 
 GetPuckState::GetPuckState() : State(), timeIsUp(true), puckTouchTriggered(false),
                                lightDetected(false), leftTouchTriggered(false),
-                               rightTouchTriggered(false), actualAction(MOVE_FORWARD)
+                               rightTouchTriggered(false), actualAction(MOVE_FORWARD_LEFT)
 {
     SensorManager::getInstance()->subscribeToAll(this);
 }
@@ -69,9 +69,7 @@ void GetPuckState::run()
         if (actualAction != PUCK_TRIGGERED)
         {
             ROS_INFO("Program - puck cached");
-            MotorManager::getInstance()->publishCoords(0, 0);
-            actualAction = PUCK_TRIGGERED;
-            timeIsUp = true;
+            doAction(0, 0, PUCK_TRIGGERED, -1);
         }
     }
     else if (leftTouchTriggered && rightTouchTriggered)
@@ -79,10 +77,7 @@ void GetPuckState::run()
         if (actualAction != BOTH_TRIGGERED)
         {
             ROS_INFO("Program - front colision");
-            MotorManager::getInstance()->publishCoords(-120, -120);
-            actualAction = BOTH_TRIGGERED;
-            timeIsUp = false;
-            CallBackTimeManager::getInstance()->subscribe(this, 500);
+            doAction(-120, -120, BOTH_TRIGGERED, 750);
         }
     }
     else if (leftTouchTriggered)
@@ -90,10 +85,7 @@ void GetPuckState::run()
         if (actualAction != LEFT_TRIGGERED)
         {
             ROS_INFO("Program - left colision");
-            MotorManager::getInstance()->publishCoords(-100, -120);
-            actualAction = LEFT_TRIGGERED;
-            timeIsUp = false;
-            CallBackTimeManager::getInstance()->subscribe(this, 500);
+            doAction(-100, -120, LEFT_TRIGGERED, 750);
         }
     }
     else if (rightTouchTriggered)
@@ -101,10 +93,7 @@ void GetPuckState::run()
         if (actualAction != RIGHT_TRIGGERED)
         {
             ROS_INFO("Program - right colision");
-            MotorManager::getInstance()->publishCoords(-120, -100);
-            actualAction = RIGHT_TRIGGERED;
-            timeIsUp = false;
-            CallBackTimeManager::getInstance()->subscribe(this, 500);
+            doAction(-120, -100, RIGHT_TRIGGERED, 750);
         }
     }
     else if (lightDetected)
@@ -112,39 +101,46 @@ void GetPuckState::run()
         if (actualAction != LIGHT_DETECTED)
         {
             ROS_INFO("Program - light detached");
-            MotorManager::getInstance()->publishCoords(100, 100);
-            actualAction = LIGHT_DETECTED;
-            timeIsUp = true;
+            doAction(100, 100, LIGHT_DETECTED, -1);
         }
     }
     else if (timeIsUp)
     {
-        ROS_INFO("Program - time is up");
         switch (actualAction)
         {
-        case MOVE_FORWARD:
+        case MOVE_FORWARD_LEFT:
         case PUCK_TRIGGERED:
         case RIGHT_TRIGGERED:
-            MotorManager::getInstance()->publishCoords(-95, 95);
-            actualAction = SEARCH_LEFT;
-            timeIsUp = false;
-            CallBackTimeManager::getInstance()->subscribe(this, 2300);
+            doAction(-95, 95, SEARCH_LEFT, 2300);
             break;
         case LEFT_TRIGGERED:
+        case MOVE_FORWARD_RIGHT:
         case LIGHT_DETECTED:
         case BOTH_TRIGGERED:
-            MotorManager::getInstance()->publishCoords(100, -100);
-            actualAction = SEARCH_RIGHT;
-            timeIsUp = false;
-            CallBackTimeManager::getInstance()->subscribe(this, 2300);
+            doAction(100, -100, SEARCH_RIGHT, 2300);
             break;
         case SEARCH_LEFT:
+            doAction(100, 100, MOVE_FORWARD_RIGHT, 1500);
+            break;
         case SEARCH_RIGHT:
-            MotorManager::getInstance()->publishCoords(100, 100);
-            actualAction = MOVE_FORWARD;
-            timeIsUp = false;
-            CallBackTimeManager::getInstance()->subscribe(this, 1500);
+            doAction(100, 100, MOVE_FORWARD_LEFT, 1500);
             break;
         }
+    }
+}
+
+void GetPuckState::doAction(int leftWheelSpeed, int rightWheelSpeed,
+                            GetPuckState::Actions nextAction, int timeOut)
+{
+    MotorManager::getInstance()->publishCoords(leftWheelSpeed, leftWheelSpeed);
+    actualAction = nextAction;
+    if (timeOut > 0)
+    {
+        timeIsUp = false;
+        CallBackTimeManager::getInstance()->subscribe(this, timeOut);
+    }
+    else
+    {
+        timeIsUp = true;
     }
 }
