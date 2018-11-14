@@ -28,8 +28,9 @@ int main(int argc, char **argv)
         program.run();
         ros::spinOnce();
     }
-    delete callback_manager;
-    delete motor_manager;
+
+    delete callback_manager; //keep order
     delete sensor_manager;
+    delete motor_manager;
     return 0;
 }

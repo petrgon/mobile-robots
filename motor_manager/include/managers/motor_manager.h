@@ -10,6 +10,8 @@ public:
 
   static MotorManager* getInstance();
 
+  ~MotorManager();
+
   void publishCoords(int left, int right);
 
 private:

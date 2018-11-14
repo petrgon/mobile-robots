@@ -2,6 +2,10 @@
 
 MotorManager *MotorManager::instance = nullptr;
 
+MotorManager::~MotorManager(){
+    publishCoords(0,0);
+}
+
 MotorManager *MotorManager::getInstance()
 {
     if (!instance)
