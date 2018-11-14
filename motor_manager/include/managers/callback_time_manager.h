@@ -44,12 +44,12 @@ struct SubscribedCallBack
     SubscribedCallBack(SubscribedCallBack &&) = default;
     SubscribedCallBack &operator=(const SubscribedCallBack &) = default;
     SubscribedCallBack &operator=(SubscribedCallBack &&) = default;
-    bool operator>(const SubscribedCallBack &);
-    bool operator<(const SubscribedCallBack &);
-    bool operator>=(const SubscribedCallBack &);
-    bool operator<=(const SubscribedCallBack &);
-    bool operator==(const SubscribedCallBack &);
-    bool operator!=(const SubscribedCallBack &);
+    bool operator>(const SubscribedCallBack &) const;
+    bool operator<(const SubscribedCallBack &) const;
+    bool operator>=(const SubscribedCallBack &) const;
+    bool operator<=(const SubscribedCallBack &) const;
+    bool operator==(const SubscribedCallBack &) const;
+    bool operator!=(const SubscribedCallBack &) const;
 
     State *state;
     std::chrono::nanoseconds time;
