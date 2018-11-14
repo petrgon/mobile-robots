@@ -105,13 +105,13 @@ void GetPuckState::run()
             MotorManager::getInstance()->publishCoords(0, 100);
             nextAction = MOVE_FORWARD;
             timeIsUp = false;
-            CallBackTimeManager::getInstance()->subscribe(this, 1000000000);
+            CallBackTimeManager::getInstance()->subscribe(this, 1000000);
             break;
         case SEARCH_RIGHT:
             MotorManager::getInstance()->publishCoords(100, 0);
             nextAction = MOVE_FORWARD;
             timeIsUp = false;
-            CallBackTimeManager::getInstance()->subscribe(this, 1000000000);
+            CallBackTimeManager::getInstance()->subscribe(this, 1000000);
             break;
         case MOVE_FORWARD:
             MotorManager::getInstance()->publishCoords(100, 100);
