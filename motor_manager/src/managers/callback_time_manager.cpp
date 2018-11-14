@@ -6,6 +6,7 @@ CallBackTimeManager::~CallBackTimeManager()
 {
     ROS_INFO("Joining CallBackTimeManager thread");
     shouldEnd = true;
+    condVar.notify_all();
     thread->join();
     delete thread;
     ROS_INFO("Thread CallBackTimeManager Joined");
@@ -24,7 +25,7 @@ void CallBackTimeManager::subscribe(State *state, int64_t time)
     SubscribedCallBack callback(state, time);
     callbackHandlers.push(callback);
     lck.unlock();
-    condVar.notify_one();
+    condVar.notify_all();
 }
 
 CallBackTimeManager::CallBackTimeManager() : thread(nullptr), shouldEnd(false)
