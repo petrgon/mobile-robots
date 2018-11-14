@@ -139,6 +139,7 @@ void SensorManager::resolveLightSensor(LightSensor &sensor, SensorManager *manag
     unsigned short state = sensor.checkSignal();
     if (prevState != state)
     {
+        ROS_INFO("Light recieved: %d ", state);
         if (state == 1)
             callEventHandlers(manager->lightLostEventHandlers, &State::lightLostEventHandler);
         else
@@ -154,6 +155,8 @@ void SensorManager::resolveFrontSensors(TouchSensor &left, TouchSensor &right, S
     bool rightState = right.isPushed();
     if (prevLeftState != leftState && prevRightState != rightState && rightState == leftState) //both changed state
     {
+        ROS_INFO("Touch sensor (left): %d ", leftState);
+        ROS_INFO("Touch sensor (right): %d ", rightState);
         if (rightState)
             callEventHandlers(manager->bothTouchTriggeredEventHandlers, &State::bothTouchTriggeredEventHandler);
         else
@@ -163,6 +166,7 @@ void SensorManager::resolveFrontSensors(TouchSensor &left, TouchSensor &right, S
     {
         if (prevLeftState != leftState)
         {
+            ROS_INFO("Touch sensor (left): %d ", leftState);
             if (leftState)
                 callEventHandlers(manager->leftTouchTriggeredEventHandlers, &State::leftTouchTriggeredEventHandler);
             else
@@ -170,6 +174,7 @@ void SensorManager::resolveFrontSensors(TouchSensor &left, TouchSensor &right, S
         }
         if (prevRightState != rightState)
         {
+            ROS_INFO("Touch sensor (right): %d ", rightState);
             if (rightState)
                 callEventHandlers(manager->rightTouchTriggeredEventHandlers, &State::rightTouchTriggeredEventHandler);
             else
@@ -184,6 +189,7 @@ void SensorManager::resolvePuckSensor(TouchSensor &sensor, SensorManager *manage
     bool state = sensor.isPushed();
     if (prevState != state)
     {
+        ROS_INFO("Touch sensor (puck): %d ", state);
         if (state)
             callEventHandlers(manager->puckAquiredEventHandlers, &State::puckAquiredEventHandler);
         else

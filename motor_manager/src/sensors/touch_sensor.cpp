@@ -7,7 +7,6 @@ TouchSensor::~TouchSensor() {}
 bool TouchSensor::isPushed()
 {
     int recvData = digitalRead(pinNumber);
-    ROS_INFO("Touch sensor (pin: %d): %d ", pinNumber, recvData);
     return previousValue = recvData != 0;
 }
 bool TouchSensor::getPrevious()
