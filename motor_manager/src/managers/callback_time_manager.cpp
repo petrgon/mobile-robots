@@ -23,7 +23,7 @@ void CallBackTimeManager::subscribe(State *state, int64_t time)
     std::unique_lock<std::mutex> lck(m);
     SubscribedCallBack callback(state, time);
     callbackHandlers.push(callback);
-    m.unlock();
+    lck.unlock();
     condVar.notify_one();
 }
 
@@ -64,7 +64,7 @@ void CallBackTimeManager::run(CallBackTimeManager *manager)
             auto left = top.subscribed + top.time - now;
             std::this_thread::sleep_for(left);
         }
-        manager->m.unlock();
+        lck.unlock();
     }
     manager->shouldEnd = false;
 }
