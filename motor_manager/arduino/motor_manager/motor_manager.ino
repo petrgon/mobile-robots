@@ -32,7 +32,7 @@ void getCoordsHandler(const std_msgs::Int32MultiArray &input)
   coord.right = MIN(MAX_VELOCITY, input.data[1]);
 }
 
-ros::Subscriber<std_msgs::Int32MultiArray> sub_motor_coords("motor_coords", 5, getCoordsHandler);
+ros::Subscriber<std_msgs::Int32MultiArray> sub_motor_coords("motor_coords", &getCoordsHandler);
 
 void setup()
 {
