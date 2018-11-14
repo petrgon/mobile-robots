@@ -75,21 +75,21 @@ void GetPuckState::run()
     {
         if (actualAction != BOTH_TRIGGERED)
         {
-            doAction(-120, -120, BOTH_TRIGGERED, 750);
+            doAction(-100, -100, BOTH_TRIGGERED, 450);
         }
     }
     else if (leftTouchTriggered)
     {
         if (actualAction != LEFT_TRIGGERED)
         {
-            doAction(-100, -120, LEFT_TRIGGERED, 750);
+            doAction(-90, -110, LEFT_TRIGGERED, 450);
         }
     }
     else if (rightTouchTriggered)
     {
         if (actualAction != RIGHT_TRIGGERED)
         {
-            doAction(-120, -100, RIGHT_TRIGGERED, 750);
+            doAction(-110, -90, RIGHT_TRIGGERED, 450);
         }
     }
     else if (lightDetected)
@@ -106,17 +106,18 @@ void GetPuckState::run()
         case MOVE_FORWARD_LEFT:
         case PUCK_TRIGGERED:
         case RIGHT_TRIGGERED:
-            doAction(-95, 95, SEARCH_LEFT, 2300);
+            doAction(-95, 100, SEARCH_LEFT, 3000);
             break;
         case LEFT_TRIGGERED:
         case MOVE_FORWARD_RIGHT:
         case LIGHT_DETECTED:
         case BOTH_TRIGGERED:
-            doAction(100, -100, SEARCH_RIGHT, 2300);
+            doAction(100, -95, SEARCH_RIGHT, 3000);
             break;
         case SEARCH_LEFT:
             doAction(100, 100, MOVE_FORWARD_RIGHT, 2000);
             break;
+
         case SEARCH_RIGHT:
             doAction(100, 100, MOVE_FORWARD_LEFT, 2000);
             break;
