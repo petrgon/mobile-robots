@@ -29,12 +29,14 @@ void CallBackTimeManager::subscribe(State *state, int64_t time)
         if (*it >= callback)
             break;
     }
-    if (*it == callback)
+    if (it != callbackHandlers.end() && *it == callback)
     {
+        ROS_INFO("CHANGING %p", it->state);
         *it = callback;
     }
     else
     {
+        ROS_INFO("INSERTING %p, it->state");
         callbackHandlers.insert(it, callback);
     }
     lck.unlock();
