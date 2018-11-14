@@ -1,6 +1,6 @@
 #include "../../include/managers/callback_time_manager.h"
 
-CallBackTimeManager *CallBackTimeManager::instance = new CallBackTimeManager();
+CallBackTimeManager *CallBackTimeManager::instance = nullptr;
 
 CallBackTimeManager::~CallBackTimeManager()
 {

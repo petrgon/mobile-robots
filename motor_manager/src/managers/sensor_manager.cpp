@@ -1,6 +1,6 @@
 #include "../../include/managers/sensor_manager.h"
 
-SensorManager *SensorManager::instance = new SensorManager();
+SensorManager *SensorManager::instance = nullptr;
 
 SensorManager *SensorManager::getInstance()
 {
