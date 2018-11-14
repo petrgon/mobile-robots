@@ -52,7 +52,7 @@ void CallBackTimeManager::run(CallBackTimeManager *manager)
     while (!manager->shouldEnd && ros::ok())
     {
         std::unique_lock<std::mutex> lck(manager->m);
-        manager->condVar.wait(lck, !manager->callbackHandlers.empty());
+        manager->condVar.wait(lck, [manager]{return !manager->callbackHandlers.empty();});
         auto top = manager->callbackHandlers.top();
         auto now = std::chrono::system_clock::now();
         if (top.subscribed + top.time <= now)
