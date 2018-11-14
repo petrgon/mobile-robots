@@ -21,18 +21,23 @@ CallBackTimeManager *CallBackTimeManager::getInstance()
 
 void CallBackTimeManager::subscribe(State *state, int64_t time)
 {
-    std::unique_lock<std::mutex> lck(m);
     SubscribedCallBack callback(state, time);
+    std::unique_lock<std::mutex> lck(m);
     auto it = callbackHandlers.begin();
+    auto firstBigger = callbackHandlers.end();
     for (; it != callbackHandlers.end(); ++it)
     {
         if (*it >= callback)
-            break;
+            firstBigger = it;
+        if (*it == callback)
+        {
+            *it = callback;
+            lck.unlock();
+            condVar.notify_all();
+            return;
+        }
     }
-    if (it != callbackHandlers.end() && *it == callback)
-        *it = callback;
-    else
-        callbackHandlers.insert(it, callback);
+    callbackHandlers.insert(firstBigger, callback);
     lck.unlock();
     condVar.notify_all();
 }
@@ -85,11 +90,11 @@ SubscribedCallBack::SubscribedCallBack(State *state, int64_t milis)
 
 SubscribedCallBack::~SubscribedCallBack() {}
 
-SubscribedCallBack::SubscribedCallBack(const SubscribedCallBack &b) 
-        : state(b.state), subscribed(b.subscribed), time(b.time) {}
+SubscribedCallBack::SubscribedCallBack(const SubscribedCallBack &b)
+    : state(b.state), subscribed(b.subscribed), time(b.time) {}
 
-SubscribedCallBack::SubscribedCallBack(SubscribedCallBack &&b) 
-        : state(std::move(b.state)), subscribed(std::move(b.subscribed)), time(std::move(b.time)) {}
+SubscribedCallBack::SubscribedCallBack(SubscribedCallBack &&b)
+    : state(std::move(b.state)), subscribed(std::move(b.subscribed)), time(std::move(b.time)) {}
 
 bool SubscribedCallBack::operator>(const SubscribedCallBack &b) const
 {
