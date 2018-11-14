@@ -53,19 +53,19 @@ void CallBackTimeManager::run(CallBackTimeManager *manager)
     {
         std::unique_lock<std::mutex> lck(manager->m);
         manager->condVar.wait(lck, !manager->callbackHandlers.empty());
-        auto top = manager->callbackHandlers.top;
+        auto top = manager->callbackHandlers.top();
         auto now = std::chrono::system_clock::now();
-        if (top->subscribed + top->time <= now)
+        if (top.subscribed + top.time <= now)
         {
-            top->state->timeElapsedEventHandler();
-            manager->callbackHandlers.pop;
+            top.state->timeElapsedEventHandler();
+            manager->callbackHandlers.pop();
         }
         else
         {
-            auto left = top->subscribed + top->time - now;
+            auto left = top.subscribed + top.time - now;
             std::this_thread::sleep_for(left);
         }
-        manager->m.unlock;
+        manager->m.unlock();
     }
     manager->shouldEnd = false;
 }
