@@ -132,7 +132,7 @@ void GetPuckState::run()
 void GetPuckState::doAction(int leftWheelSpeed, int rightWheelSpeed,
                             GetPuckState::Actions nextAction, int timeOut)
 {
-    MotorManager::getInstance()->publishCoords(leftWheelSpeed, leftWheelSpeed);
+    MotorManager::getInstance()->publishCoords(leftWheelSpeed, rightWheelSpeed);
     actualAction = nextAction;
     if (timeOut > 0)
     {
