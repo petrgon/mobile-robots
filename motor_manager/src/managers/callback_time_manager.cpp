@@ -56,7 +56,7 @@ void CallBackTimeManager::run(CallBackTimeManager *manager)
         auto now = std::chrono::system_clock::now();
         if (top.subscribed + top.time <= now)
         {
-            ROS_INFO("Time callback after %d ", top.time);
+            ROS_INFO("Time callback after %I64d ", top.time.count());
             top.state->timeElapsedEventHandler();
             manager->callbackHandlers.pop();
         }
