@@ -2,8 +2,10 @@
 
 MotorManager *MotorManager::instance = nullptr;
 
-MotorManager::~MotorManager(){
-    publishCoords(0,0);
+MotorManager::~MotorManager()
+{
+    publishCoords(0, 0);
+    ros::spinOnce();
 }
 
 MotorManager *MotorManager::getInstance()
