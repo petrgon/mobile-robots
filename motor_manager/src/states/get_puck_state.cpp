@@ -66,12 +66,14 @@ void GetPuckState::run()
 {
     if (puckTouchTriggered)
     {
+        ROS_INFO("Program - puck cached");
         MotorManager::getInstance()->publishCoords(0, 0);
         nextAction = SEARCH_LEFT;
         timeIsUp = true;
     }
     else if (leftTouchTriggered && rightTouchTriggered)
     {
+        ROS_INFO("Program - front colision");
         MotorManager::getInstance()->publishCoords(-150, -150);
         nextAction = SEARCH_LEFT;
         timeIsUp = false;
@@ -79,6 +81,7 @@ void GetPuckState::run()
     }
     else if (leftTouchTriggered)
     {
+        ROS_INFO("Program - left colision");
         MotorManager::getInstance()->publishCoords(-100, -150);
         nextAction = SEARCH_RIGHT;
         timeIsUp = false;
@@ -86,6 +89,7 @@ void GetPuckState::run()
     }
     else if (rightTouchTriggered)
     {
+        ROS_INFO("Program - right colision");
         MotorManager::getInstance()->publishCoords(-150, -100);
         nextAction = SEARCH_LEFT;
         timeIsUp = false;
@@ -93,12 +97,14 @@ void GetPuckState::run()
     }
     else if (lightDetected)
     {
+        ROS_INFO("Program - light detached");
         MotorManager::getInstance()->publishCoords(150, 150);
         nextAction = SEARCH_RIGHT;
         timeIsUp = true;
     }
     else if (timeIsUp)
     {
+        ROS_INFO("Program - time is up");
         switch (nextAction)
         {
         case SEARCH_LEFT:
@@ -121,4 +127,5 @@ void GetPuckState::run()
             break;
         }
     }
+    ROS_INFO("Program - no action");
 }
