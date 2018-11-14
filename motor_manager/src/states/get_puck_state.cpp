@@ -77,7 +77,7 @@ void GetPuckState::run()
         MotorManager::getInstance()->publishCoords(-150, -150);
         nextAction = SEARCH_LEFT;
         timeIsUp = false;
-        CallBackTimeManager::getInstance()->subscribe(this, 500000);
+        CallBackTimeManager::getInstance()->subscribe(this, 500);
     }
     else if (leftTouchTriggered)
     {
@@ -85,7 +85,7 @@ void GetPuckState::run()
         MotorManager::getInstance()->publishCoords(-100, -150);
         nextAction = SEARCH_RIGHT;
         timeIsUp = false;
-        CallBackTimeManager::getInstance()->subscribe(this, 500000);
+        CallBackTimeManager::getInstance()->subscribe(this, 500);
     }
     else if (rightTouchTriggered)
     {
@@ -93,7 +93,7 @@ void GetPuckState::run()
         MotorManager::getInstance()->publishCoords(-150, -100);
         nextAction = SEARCH_LEFT;
         timeIsUp = false;
-        CallBackTimeManager::getInstance()->subscribe(this, 500000);
+        CallBackTimeManager::getInstance()->subscribe(this, 500);
     }
     else if (lightDetected)
     {
@@ -111,21 +111,20 @@ void GetPuckState::run()
             MotorManager::getInstance()->publishCoords(0, 100);
             nextAction = MOVE_FORWARD;
             timeIsUp = false;
-            CallBackTimeManager::getInstance()->subscribe(this, 1000000);
+            CallBackTimeManager::getInstance()->subscribe(this, 1000);
             break;
         case SEARCH_RIGHT:
             MotorManager::getInstance()->publishCoords(100, 0);
             nextAction = MOVE_FORWARD;
             timeIsUp = false;
-            CallBackTimeManager::getInstance()->subscribe(this, 1000000);
+            CallBackTimeManager::getInstance()->subscribe(this, 1000);
             break;
         case MOVE_FORWARD:
             MotorManager::getInstance()->publishCoords(100, 100);
             nextAction = SEARCH_LEFT;
             timeIsUp = false;
-            CallBackTimeManager::getInstance()->subscribe(this, 500000);
+            CallBackTimeManager::getInstance()->subscribe(this, 500);
             break;
         }
     }
-    ROS_INFO("Program - no action");
 }

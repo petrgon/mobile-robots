@@ -18,17 +18,18 @@
 
 struct Coordinates
 {
+  Coordinates() : left(0), right(0) {}
   int left;
   int right;
 };
 
 ros::NodeHandle nh;
-Coordinates *coord = nullptr;
+Coordinates coord;
 
-void getCoordsHandler(const std_msgs::Int32MultiArray &input)
+void getCoordsHandler(const std_msgs::Int32MultiArray::ConstPtr &input)
 {
-  coord->left = MIN(MAX_VELOCITY, input.date[0]);
-  coord->right = MIN(MAX_VELOCITY, input.date[1]);
+  coord.left = MIN(MAX_VELOCITY, input.data[0]);
+  coord.right = MIN(MAX_VELOCITY, input.data[1]);
 }
 
 ros::Subscriber<std_msgs::Int32MultiArray> sub_motor_coords("motor_coords", &getCoordsHandler);
@@ -49,32 +50,29 @@ void setup()
 
 void loop()
 {
-  if (coord)
+  if (coord.left < 0)
   {
-    if (coord->left < 0)
-    {
-      digitalWrite(in3, HIGH);
-      digitalWrite(in4, LOW);
-    }
-    else
-    {
-      digitalWrite(in3, LOW);
-      digitalWrite(in4, HIGH);
-    }
-
-    if (coord->right < 0)
-    {
-      digitalWrite(in1, LOW);
-      digitalWrite(in2, HIGH);
-    }
-    else
-    {
-      digitalWrite(in1, HIGH);
-      digitalWrite(in2, LOW);
-    }
-    analogWrite(enA, ABS(coord->left) * LEFT_WHEEL_CALIBRATION);
-    analogWrite(enB, ABS(coord->right) * RIGHT_WHEEL_CALIBRATION);
+    digitalWrite(in3, HIGH);
+    digitalWrite(in4, LOW);
   }
+  else
+  {
+    digitalWrite(in3, LOW);
+    digitalWrite(in4, HIGH);
+  }
+
+  if (coord.right < 0)
+  {
+    digitalWrite(in1, LOW);
+    digitalWrite(in2, HIGH);
+  }
+  else
+  {
+    digitalWrite(in1, HIGH);
+    digitalWrite(in2, LOW);
+  }
+  analogWrite(enA, ABS(coord.left) * LEFT_WHEEL_CALIBRATION);
+  analogWrite(enB, ABS(coord.right) * RIGHT_WHEEL_CALIBRATION);
 
   nh.spinOnce();
 }
