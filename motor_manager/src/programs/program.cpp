@@ -26,8 +26,8 @@ void Program::rightTouchFreedEventHandler() {}
 void Program::bothTouchTriggeredEventHandler() {}
 void Program::bothTouchFreedEventHandler() {}
 
-void State::ir600FoundEventHandler() {}
-void State::ir600LostEventHandler() {}
+void Program::ir600FoundEventHandler() {}
+void Program::ir600LostEventHandler() {}
 
-void State::ir1500FoundEventHandler() {}
-void State::ir1500LostEventHandler() {}
+void Program::ir1500FoundEventHandler() {}
+void Program::ir1500LostEventHandler() {}
