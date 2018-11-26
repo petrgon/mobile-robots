@@ -1,5 +1,5 @@
-#ifndef LIGHT_SENSOR_H
-#define LIGHT_SENSOR_H
+#ifndef INFRA_RED_SENSOR_H
+#define INFRA_RED_SENSOR_H
 
 #include "ros/ros.h"
 #include "wiringPi.h"
@@ -8,11 +8,11 @@
 
 #include <string>
 
-class LightSensor : public Sensor
+class InfraRedSensor : public Sensor
 {
   public:
-    LightSensor(int pinNumber);
-    virtual ~LightSensor() override;
+    InfraRedSensor(int pinNumber);
+    virtual ~InfraRedSensor() override;
     unsigned short int checkSignal();
     unsigned short int getPreviousSignal();
 
@@ -21,4 +21,4 @@ class LightSensor : public Sensor
 
 };
 
-#endif /*LIGHT_SENSOR_H*/
+#endif /*INFRA_RED_SENSOR_H*/

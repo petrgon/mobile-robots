@@ -7,7 +7,6 @@ LightSensor::~LightSensor()  {}
 unsigned short int LightSensor::checkSignal()
 {
     unsigned short int lightRev = 0;
-    std_msgs::Int16 light_data;
     lightRev = digitalRead(pinNumber);
     previousSignal = lightRev;
     return lightRev;
