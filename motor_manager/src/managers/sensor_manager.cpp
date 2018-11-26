@@ -225,18 +225,18 @@ void SensorManager::resolveIRSensor(InfraRedSensor &sensor, SensorManager *manag
         ROS_INFO("IR sensor: %d ", state);
         if (state == 0)
         {
-            if (prevState == 600)
+            if (prevState == InfraRedSensor::SIGNAL_600)
                 callEventHandlers(manager->ir600LostEventHandlers, &Program::ir600LostEventHandler);
-            else if (prevState == 1500)
+            else if (prevState == InfraRedSensor::SIGNAL_1500)
                 callEventHandlers(manager->ir1500LostEventHandlers, &Program::ir1500LostEventHandler);
             else
                 ROS_ERROR("IR Sensor invalid previous value: %d ", prevState);
         }
         else
         {
-            if (state == 600)
+            if (state == InfraRedSensor::SIGNAL_600)
                 callEventHandlers(manager->ir600FoundEventHandlers, &Program::ir600FoundEventHandler);
-            else if (state == 1500)
+            else if (state == InfraRedSensor::SIGNAL_1500)
                 callEventHandlers(manager->ir1500FoundEventHandlers, &Program::ir1500FoundEventHandler);
             else
                 ROS_ERROR("IR Sensor invalid value: %d ", state);

@@ -17,7 +17,7 @@
 #define LEFT_SENSOR_PIN 5
 #define RIGHT_SENSOR_PIN 1
 #define PUCK_SENSOR_PIN 4
-#define INFRA_RED_SENSOR_PIN 4 //TODO change pin
+#define INFRA_RED_SENSOR_PIN 0
 
 class SensorManager
 {
