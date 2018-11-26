@@ -13,8 +13,11 @@ class InfraRedSensor : public Sensor
   public:
     InfraRedSensor(int pinNumber);
     virtual ~InfraRedSensor() override;
-    unsigned short int checkSignal();
-    unsigned short int getPreviousSignal();
+    unsigned int checkSignal();
+    unsigned int getPreviousSignal();
+
+    static const u_int32_t SIGNAL_600;
+    static const u_int32_t SIGNAL_1500;
 
   private:
     unsigned short int previousSignal;
