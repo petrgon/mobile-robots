@@ -1,7 +1,11 @@
 #ifndef STATE_MANAGER_H
 #define STATE_MANAGER_H
 
-class Program
+#include "../sensor_observer.h"
+#include "../states/state.h"
+#include <atomic>
+
+class Program : public SensorObserver
 {
 public:
   Program();
@@ -15,29 +19,15 @@ public:
 
   virtual bool operator==(const Program &b) const;
 
-  virtual void run() = 0;
+  virtual void run();
+  virtual void changeState(unsigned int nextState);
 
-  virtual void timeElapsedEventHandler();
+protected:
+  State *actualState;
+  unsigned int nextState;
 
-  virtual void puckAquiredEventHandler();
-  virtual void puckLostEventHandler();
-
-  virtual void lightDetectedEventHandler();
-  virtual void lightLostEventHandler();
-
-  virtual void leftTouchTriggeredEventHandler();
-  virtual void leftTouchFreedEventHandler();
-
-  virtual void rightTouchTriggeredEventHandler();
-  virtual void rightTouchFreedEventHandler();
-
-  virtual void bothTouchTriggeredEventHandler();
-  virtual void bothTouchFreedEventHandler();
-
-  virtual void ir600FoundEventHandler();
-  virtual void ir600LostEventHandler();
-
-  virtual void ir1500FoundEventHandler();
-  virtual void ir1500LostEventHandler();
+  State *allStates;
+  int stateConut;
 };
+
 #endif /*STATE_MANAGER_H*/

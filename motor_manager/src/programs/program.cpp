@@ -1,33 +1,25 @@
 #include "../../include/programs/program.h"
 
-Program::Program() {}
-
-Program::~Program() {}
-
-bool Program::operator==(const Program &b) const
+Program::Program() : SensorObserver()
 {
-    return this == &b;
 }
 
-void Program::timeElapsedEventHandler() {}
+Program::~Program() {
+    if (allStates != nullptr){
+        delete [] allStates;
+    }
+}
 
-void Program::puckAquiredEventHandler() {}
-void Program::puckLostEventHandler() {}
+void Program::run(){
+    if (nextState < stateConut){
+        actualState->unsubscribe();
+        actualState = &allStates[nextState];
+        nextState = stateConut;
+        actualState->stateInit();
+    }
+    actualState->run();
+}
 
-void Program::lightDetectedEventHandler() {}
-void Program::lightLostEventHandler() {}
-
-void Program::leftTouchTriggeredEventHandler() {}
-void Program::leftTouchFreedEventHandler() {}
-
-void Program::rightTouchTriggeredEventHandler() {}
-void Program::rightTouchFreedEventHandler() {}
-
-void Program::bothTouchTriggeredEventHandler() {}
-void Program::bothTouchFreedEventHandler() {}
-
-void Program::ir600FoundEventHandler() {}
-void Program::ir600LostEventHandler() {}
-
-void Program::ir1500FoundEventHandler() {}
-void Program::ir1500LostEventHandler() {}
+void Program::changeState(unsigned int nextState){
+    this->nextState = nextState; 
+}
