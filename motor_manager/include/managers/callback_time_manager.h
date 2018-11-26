@@ -9,6 +9,9 @@
 #include <mutex>
 
 #include "../programs/program.h"
+#include "../sensor_observer.h"
+
+// TODO rename Program to SensorObserver
 
 struct SubscribedCallBack;
 
@@ -19,6 +22,7 @@ class CallBackTimeManager
     static CallBackTimeManager *getInstance();
 
     void subscribe(Program *, int64_t milis);
+    void unsubscribe(SensorObserver *);
 
   private:
     CallBackTimeManager();

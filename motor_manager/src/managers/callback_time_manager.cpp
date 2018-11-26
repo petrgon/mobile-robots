@@ -42,6 +42,11 @@ void CallBackTimeManager::subscribe(Program *program, int64_t time)
     condVar.notify_all();
 }
 
+void CallBackTimeManager::unsubscribe(SensorObserver *observer)
+{
+    //TODO unsubscribe time call back
+}
+
 CallBackTimeManager::CallBackTimeManager() : thread(nullptr), shouldEnd(false)
 {
     start();
