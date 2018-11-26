@@ -218,8 +218,8 @@ void SensorManager::resolvePuckSensor(TouchSensor &sensor, SensorManager *manage
 
 void SensorManager::resolveIRSensor(InfraRedSensor &sensor, SensorManager *manager)
 {
-    unsigned short int prevState = sensor.getPreviousSignal();
-    unsigned short int state = sensor.checkSignal();
+    auto prevState = sensor.getPreviousSignal();
+    auto state = sensor.checkSignal();
     if (prevState != state)
     {
         ROS_INFO("IR sensor: %d ", state);

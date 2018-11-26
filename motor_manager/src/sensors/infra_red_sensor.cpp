@@ -7,7 +7,7 @@ InfraRedSensor::InfraRedSensor(int pinNumber) : Sensor(pinNumber, INPUT), previo
 
 InfraRedSensor::~InfraRedSensor() {}
 
-unsigned short int InfraRedSensor::checkSignal()
+unsigned int InfraRedSensor::checkSignal()
 { //TODO make a desision
     unsigned short int lightRev = 0;
     lightRev = digitalRead(pinNumber);
@@ -15,7 +15,7 @@ unsigned short int InfraRedSensor::checkSignal()
     return lightRev;
 }
 
-unsigned short int InfraRedSensor::getPreviousSignal()
+unsigned int InfraRedSensor::getPreviousSignal()
 {
     return previousSignal;
 }
