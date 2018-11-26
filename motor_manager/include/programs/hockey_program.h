@@ -1,18 +1,18 @@
-#ifndef GET_PUCK_STATE_MANAGER_H
-#define GET_PUCK_STATE_MANAGER_H
+#ifndef GET_PUCK_PROGRAM_MANAGER_H
+#define GET_PUCK_PROGRAM_MANAGER_H
 
-#include "state.h"
+#include "program.h"
 #include "../managers/motor_manager.h"
 #include "../managers/sensor_manager.h"
 #include "../managers/callback_time_manager.h"
 #include <vector>
 #include <atomic>
 
-class GetPuckState : public State
+class HockeyProgram : public Program
 {
 public:
-  GetPuckState();
-  ~GetPuckState() override;
+  HockeyProgram();
+  ~HockeyProgram() override;
 
   void run() override;
 
@@ -49,4 +49,4 @@ private:
 
   Actions actualAction;
 };
-#endif /*GET_PUCK_STATE_MANAGER_H*/
+#endif /*GET_PUCK_PROGRAM_MANAGER_H*/
