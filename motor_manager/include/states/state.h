@@ -33,5 +33,11 @@ public:
 
   virtual void bothTouchTriggeredEventHandler();
   virtual void bothTouchFreedEventHandler();
+
+  virtual void ir600FoundEventHandler();
+  virtual void ir600LostEventHandler();
+
+  virtual void ir1500FoundEventHandler();
+  virtual void ir1500LostEventHandler();
 };
 #endif /*STATE_MANAGER_H*/

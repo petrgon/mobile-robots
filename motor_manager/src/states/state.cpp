@@ -24,3 +24,9 @@ void State::rightTouchFreedEventHandler() {}
 
 void State::bothTouchTriggeredEventHandler() {}
 void State::bothTouchFreedEventHandler() {}
+
+void State::ir600FoundEventHandler() {}
+void State::ir600LostEventHandler() {}
+
+void State::ir1500FoundEventHandler() {}
+void State::ir1500LostEventHandler() {}

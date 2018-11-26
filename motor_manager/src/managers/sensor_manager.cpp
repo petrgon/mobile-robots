@@ -35,6 +35,10 @@ void SensorManager::subscribeToAll(State *state)
     subscribeRightTouchFreedEvent(state);
     subscribeBothTouchTriggeredEvent(state);
     subscribeBothTouchFreedEvent(state);
+    subscribeIR600FoundEvent(state);
+    subscribeIR600LostEvent(state);
+    subscribeIR1500FoundEvent(state);
+    subscribeIR1500LostEvent(state);
 }
 
 void SensorManager::unsubscribeFromAll(State *state)
@@ -49,6 +53,10 @@ void SensorManager::unsubscribeFromAll(State *state)
     bothTouchFreedEventHandlers.remove(state);
     lightDetectedEventHandlers.remove(state);
     lightLostEventHandlers.remove(state);
+    ir600FoundEventHandlers.remove(state);
+    ir600LostEventHandlers.remove(state);
+    ir1500FoundEventHandlers.remove(state);
+    ir1500LostEventHandlers.remove(state);
 }
 
 void SensorManager::subscribePuckAquiredEvent(State *state)
@@ -101,6 +109,24 @@ void SensorManager::subscribeBothTouchFreedEvent(State *state)
     bothTouchFreedEventHandlers.push_back(state);
 }
 
+void SensorManager::subscribeIR600FoundEvent(State *state)
+{
+    //TODO Code needed
+}
+void SensorManager::subscribeIR600LostEvent(State *state)
+{
+    //TODO Code needed
+}
+
+void SensorManager::subscribeIR1500FoundEvent(State *state)
+{
+    //TODO Code needed
+}
+void SensorManager::subscribeIR1500LostEvent(State *state)
+{
+    //TODO Code needed
+}
+
 void SensorManager::start()
 {
     ROS_INFO("Starting SensorManager");
@@ -121,12 +147,14 @@ void SensorManager::run(SensorManager *manager)
     TouchSensor puckSensor(PUCK_SENSOR_PIN);
     TouchSensor leftSensor(LEFT_SENSOR_PIN);
     TouchSensor rightSensor(RIGHT_SENSOR_PIN);
+    InfraRedSensor infraRedSensor(INFRA_RED_SENSOR_PIN);
     ros::Rate loop_rate(FREQUENCE);
     while (ros::ok() && !manager->shouldEnd)
     {
         resolveLightSensor(lightSensor, manager);
         resolveFrontSensors(leftSensor, rightSensor, manager);
         resolvePuckSensor(puckSensor, manager);
+        resolveIRSensor(infraRedSensor, manager);
         loop_rate.sleep();
     }
     manager->shouldEnd = false;
@@ -194,6 +222,11 @@ void SensorManager::resolvePuckSensor(TouchSensor &sensor, SensorManager *manage
         else
             callEventHandlers(manager->puckLostEventHandlers, &State::puckLostEventHandler);
     }
+}
+
+void SensorManager::resolveIRSensor(InfraRedSensor &sensor, SensorManager *manager)
+{
+    //TODO Code needed
 }
 
 void SensorManager::callEventHandlers(const std::list<State *> &handlers, void (State::*ptr)())
