@@ -41,7 +41,7 @@ void ProgramManager::start()
     }
 }
 
-void ProgramManager::setProgram(State *program)
+void ProgramManager::setProgram(Program *program)
 {
     ROS_INFO("Changing running program");
     delete runningProgram;

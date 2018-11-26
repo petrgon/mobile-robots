@@ -1,68 +1,68 @@
-#include "../../include/programs/get_puck_program.h"
+#include "../../include/programs/hockey_program.h"
 
-GetPuckProgram::GetPuckProgram() : Program(), timeIsUp(true), puckTouchTriggered(false),
+HockeyProgram::HockeyProgram() : Program(), timeIsUp(true), puckTouchTriggered(false),
                                lightDetected(false), leftTouchTriggered(false),
                                rightTouchTriggered(false), actualAction(MOVE_FORWARD_LEFT)
 {
     SensorManager::getInstance()->subscribeToAll(this);
 }
 
-GetPuckProgram::~GetPuckProgram() {}
+HockeyProgram::~HockeyProgram() {}
 
-void GetPuckProgram::timeElapsedEventHandler()
+void HockeyProgram::timeElapsedEventHandler()
 {
     timeIsUp = true;
 }
 
-void GetPuckProgram::puckAquiredEventHandler()
+void HockeyProgram::puckAquiredEventHandler()
 {
     puckTouchTriggered = true;
 }
 
-void GetPuckProgram::puckLostEventHandler()
+void HockeyProgram::puckLostEventHandler()
 {
     puckTouchTriggered = false;
 }
 
-void GetPuckProgram::lightDetectedEventHandler()
+void HockeyProgram::lightDetectedEventHandler()
 {
     lightDetected = true;
 }
-void GetPuckProgram::lightLostEventHandler()
+void HockeyProgram::lightLostEventHandler()
 {
     lightDetected = false;
 }
 
-void GetPuckProgram::leftTouchTriggeredEventHandler()
+void HockeyProgram::leftTouchTriggeredEventHandler()
 {
     leftTouchTriggered = true;
 }
-void GetPuckProgram::leftTouchFreedEventHandler()
+void HockeyProgram::leftTouchFreedEventHandler()
 {
     leftTouchTriggered = false;
 }
 
-void GetPuckProgram::rightTouchTriggeredEventHandler()
+void HockeyProgram::rightTouchTriggeredEventHandler()
 {
     rightTouchTriggered = true;
 }
-void GetPuckProgram::rightTouchFreedEventHandler()
+void HockeyProgram::rightTouchFreedEventHandler()
 {
     rightTouchTriggered = false;
 }
 
-void GetPuckProgram::bothTouchTriggeredEventHandler()
+void HockeyProgram::bothTouchTriggeredEventHandler()
 {
     leftTouchTriggeredEventHandler();
     rightTouchTriggeredEventHandler();
 }
-void GetPuckProgram::bothTouchFreedEventHandler()
+void HockeyProgram::bothTouchFreedEventHandler()
 {
     leftTouchFreedEventHandler();
     rightTouchFreedEventHandler();
 }
 
-void GetPuckProgram::run()
+void HockeyProgram::run()
 {
     if (puckTouchTriggered)
     {
@@ -125,8 +125,8 @@ void GetPuckProgram::run()
     }
 }
 
-void GetPuckProgram::doAction(int leftWheelSpeed, int rightWheelSpeed,
-                            GetPuckProgram::Actions nextAction, int timeOut)
+void HockeyProgram::doAction(int leftWheelSpeed, int rightWheelSpeed,
+                            HockeyProgram::Actions nextAction, int timeOut)
 {
     MotorManager::getInstance()->publishCoords(leftWheelSpeed, rightWheelSpeed);
     actualAction = nextAction;
