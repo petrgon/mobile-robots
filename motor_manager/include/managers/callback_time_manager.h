@@ -8,7 +8,7 @@
 #include <condition_variable>
 #include <mutex>
 
-#include "../states/state.h"
+#include "../programs/program.h"
 
 struct SubscribedCallBack;
 
@@ -18,7 +18,7 @@ class CallBackTimeManager
     ~CallBackTimeManager();
     static CallBackTimeManager *getInstance();
 
-    void subscribe(State *, int64_t milis);
+    void subscribe(Program *, int64_t milis);
 
   private:
     CallBackTimeManager();
@@ -38,7 +38,7 @@ class CallBackTimeManager
 
 struct SubscribedCallBack
 {
-    SubscribedCallBack(State *, int64_t);
+    SubscribedCallBack(Program *, int64_t);
     ~SubscribedCallBack();
     SubscribedCallBack(const SubscribedCallBack &);
     SubscribedCallBack(SubscribedCallBack &&);
@@ -51,7 +51,7 @@ struct SubscribedCallBack
     bool operator==(const SubscribedCallBack &) const;
     bool operator!=(const SubscribedCallBack &) const;
 
-    State *state;
+    Program *program;
     std::chrono::milliseconds time;
     std::chrono::time_point<std::chrono::system_clock> subscribed;
 };
