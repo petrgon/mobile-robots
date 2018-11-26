@@ -7,7 +7,7 @@
 #include "../../include/managers/motor_manager.h"
 #include "../../include/managers/sensor_manager.h"
 
-#include "../states/state.h"
+#include "../programs/program.h"
 
 struct SubscribedCallBack;
 
@@ -17,14 +17,14 @@ class ProgramManager
     ~ProgramManager();
     static ProgramManager *getInstance();
     void start();
-    void setProgram(State *program);
+    void setProgram(Program *program);
 
   private:
     ProgramManager();
 
     static ProgramManager *instance;
 
-    State *runningProgram;
+    Program *runningProgram;
     CallBackTimeManager *callback_manager = nullptr;
     MotorManager *motor_manager = nullptr;
     SensorManager *sensor_manager = nullptr;

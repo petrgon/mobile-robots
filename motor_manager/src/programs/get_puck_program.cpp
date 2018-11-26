@@ -1,68 +1,68 @@
-#include "../../include/states/get_puck_state.h"
+#include "../../include/programs/get_puck_program.h"
 
-GetPuckState::GetPuckState() : State(), timeIsUp(true), puckTouchTriggered(false),
+GetPuckProgram::GetPuckProgram() : Program(), timeIsUp(true), puckTouchTriggered(false),
                                lightDetected(false), leftTouchTriggered(false),
                                rightTouchTriggered(false), actualAction(MOVE_FORWARD_LEFT)
 {
     SensorManager::getInstance()->subscribeToAll(this);
 }
 
-GetPuckState::~GetPuckState() {}
+GetPuckProgram::~GetPuckProgram() {}
 
-void GetPuckState::timeElapsedEventHandler()
+void GetPuckProgram::timeElapsedEventHandler()
 {
     timeIsUp = true;
 }
 
-void GetPuckState::puckAquiredEventHandler()
+void GetPuckProgram::puckAquiredEventHandler()
 {
     puckTouchTriggered = true;
 }
 
-void GetPuckState::puckLostEventHandler()
+void GetPuckProgram::puckLostEventHandler()
 {
     puckTouchTriggered = false;
 }
 
-void GetPuckState::lightDetectedEventHandler()
+void GetPuckProgram::lightDetectedEventHandler()
 {
     lightDetected = true;
 }
-void GetPuckState::lightLostEventHandler()
+void GetPuckProgram::lightLostEventHandler()
 {
     lightDetected = false;
 }
 
-void GetPuckState::leftTouchTriggeredEventHandler()
+void GetPuckProgram::leftTouchTriggeredEventHandler()
 {
     leftTouchTriggered = true;
 }
-void GetPuckState::leftTouchFreedEventHandler()
+void GetPuckProgram::leftTouchFreedEventHandler()
 {
     leftTouchTriggered = false;
 }
 
-void GetPuckState::rightTouchTriggeredEventHandler()
+void GetPuckProgram::rightTouchTriggeredEventHandler()
 {
     rightTouchTriggered = true;
 }
-void GetPuckState::rightTouchFreedEventHandler()
+void GetPuckProgram::rightTouchFreedEventHandler()
 {
     rightTouchTriggered = false;
 }
 
-void GetPuckState::bothTouchTriggeredEventHandler()
+void GetPuckProgram::bothTouchTriggeredEventHandler()
 {
     leftTouchTriggeredEventHandler();
     rightTouchTriggeredEventHandler();
 }
-void GetPuckState::bothTouchFreedEventHandler()
+void GetPuckProgram::bothTouchFreedEventHandler()
 {
     leftTouchFreedEventHandler();
     rightTouchFreedEventHandler();
 }
 
-void GetPuckState::run()
+void GetPuckProgram::run()
 {
     if (puckTouchTriggered)
     {
@@ -125,8 +125,8 @@ void GetPuckState::run()
     }
 }
 
-void GetPuckState::doAction(int leftWheelSpeed, int rightWheelSpeed,
-                            GetPuckState::Actions nextAction, int timeOut)
+void GetPuckProgram::doAction(int leftWheelSpeed, int rightWheelSpeed,
+                            GetPuckProgram::Actions nextAction, int timeOut)
 {
     MotorManager::getInstance()->publishCoords(leftWheelSpeed, rightWheelSpeed);
     actualAction = nextAction;

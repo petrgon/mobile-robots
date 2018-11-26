@@ -1,19 +1,19 @@
 #ifndef STATE_MANAGER_H
 #define STATE_MANAGER_H
 
-class State
+class Program
 {
 public:
-  State();
-  State(const State &) = default;
-  State(State &&) = default;
+  Program();
+  Program(const Program &) = default;
+  Program(Program &&) = default;
 
-  virtual ~State() = 0;
+  virtual ~Program() = 0;
 
-  virtual State &operator=(const State &) = default;
-  virtual State &operator=(State &&) = default;
+  virtual Program &operator=(const Program &) = default;
+  virtual Program &operator=(Program &&) = default;
 
-  virtual bool operator==(const State &b) const;
+  virtual bool operator==(const Program &b) const;
 
   virtual void run() = 0;
 
