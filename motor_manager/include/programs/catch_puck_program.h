@@ -2,6 +2,7 @@
 #define CATCH_PUCK_PROGRAM_H
 
 #include "program.h"
+#include "../managers/program_manager.h"
 #include "score_program.h"
 #include "../states/search_left_state.h"
 #include "../states/search_right_state.h"

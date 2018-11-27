@@ -3,7 +3,6 @@
 
 #include "../sensor_observer.h"
 #include "../states/state.h"
-#include "../managers/program_manager.h"
 #include <atomic>
 
 class Program : public SensorObserver

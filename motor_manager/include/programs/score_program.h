@@ -2,6 +2,7 @@
 #define SCORE_PROGRAM_H
 
 #include "program.h"
+#include "../managers/program_manager.h"
 #include "catch_puck_program.h"
 #include "../states/search_left_state.h"
 #include "../states/move_forward_state.h"
