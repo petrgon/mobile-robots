@@ -8,6 +8,7 @@
 #include "../../include/managers/sensor_manager.h"
 
 #include "../programs/program.h"
+#include "../states/state.h"
 
 struct SubscribedCallBack;
 

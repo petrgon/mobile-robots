@@ -2,9 +2,10 @@
 #define STATE_H
 
 #include "../sensor_observer.h"
-#include "../programs/program.h"
 #include "../managers/callback_time_manager.h"
 #include "../managers/sensor_manager.h"
+
+class Program;
 
 class State : public SensorObserver
 {

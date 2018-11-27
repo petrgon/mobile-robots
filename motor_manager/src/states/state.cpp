@@ -1,4 +1,5 @@
 #include "../../include/states/state.h"
+#include "../../include/programs/program.h"
 
 State::State(Program *program) : SensorObserver(), program(program), timeOut(-1), isActive(false) {}
 
