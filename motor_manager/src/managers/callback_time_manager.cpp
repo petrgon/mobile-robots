@@ -44,7 +44,7 @@ void CallBackTimeManager::subscribe(SensorObserver *observer, int64_t time)
 
 void CallBackTimeManager::unsubscribe(SensorObserver *observer)
 {
-    //TODO unsubscribe time call back
+    callbackHandlers.remove_if([observer](const SubscribedCallBack & a) { return a.observer == observer; });
 }
 
 CallBackTimeManager::CallBackTimeManager() : thread(nullptr), shouldEnd(false)
