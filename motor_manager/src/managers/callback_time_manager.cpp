@@ -96,10 +96,10 @@ SubscribedCallBack::SubscribedCallBack(SensorObserver *observer, int64_t milis)
 SubscribedCallBack::~SubscribedCallBack() {}
 
 SubscribedCallBack::SubscribedCallBack(const SubscribedCallBack &b)
-    : observer(b.observer), subscribed(b.subscribed), time(b.time) {}
+    : observer(b.observer), time(b.time) , subscribed(b.subscribed){}
 
 SubscribedCallBack::SubscribedCallBack(SubscribedCallBack &&b)
-    : observer(std::move(b.observer)), subscribed(std::move(b.subscribed)), time(std::move(b.time)) {}
+    : observer(std::move(b.observer)), time(std::move(b.time)), subscribed(std::move(b.subscribed)) {}
 
 bool SubscribedCallBack::operator>(const SubscribedCallBack &b) const
 {
