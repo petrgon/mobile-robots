@@ -15,7 +15,7 @@ public:
   State(const State &) = default;
   State(State &&) = default;
 
-  virtual ~State() = 0;
+  virtual ~State();
 
   virtual State &operator=(const State &) = default;
   virtual State &operator=(State &&) = default;

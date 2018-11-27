@@ -12,8 +12,6 @@ public:
   SearchLeftState(const SearchLeftState &) = default;
   SearchLeftState(SearchLeftState &&) = default;
 
-  virtual ~SearchLeftState();
-
   virtual SearchLeftState &operator=(const SearchLeftState &) = default;
   virtual SearchLeftState &operator=(SearchLeftState &&) = default;
 

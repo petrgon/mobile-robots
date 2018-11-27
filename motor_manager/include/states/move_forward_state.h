@@ -12,8 +12,6 @@ public:
   MoveForwardState(const MoveForwardState &) = default;
   MoveForwardState(MoveForwardState &&) = default;
 
-  virtual ~MoveForwardState();
-
   virtual MoveForwardState &operator=(const MoveForwardState &) = default;
   virtual MoveForwardState &operator=(MoveForwardState &&) = default;
 
