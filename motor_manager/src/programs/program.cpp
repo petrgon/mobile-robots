@@ -11,15 +11,14 @@ Program::~Program() {
 }
 
 void Program::run(){
-    if (nextState < stateConut){
-        actualState->unsubscribe();
-        actualState = &allStates[nextState];
-        nextState = stateConut;
+    if (nextState != nullptr){
+        actualState = nextState;
+        nextState = nullptr;
         actualState->stateInit();
     }
     actualState->run();
 }
 
-void Program::changeState(unsigned int nextState){
+void Program::changeState(State *nextState){
     this->nextState = nextState; 
 }

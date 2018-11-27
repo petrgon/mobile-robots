@@ -20,11 +20,11 @@ public:
   virtual bool operator==(const Program &b) const;
 
   virtual void run();
-  virtual void changeState(unsigned int nextState);
+  virtual void changeState(State *nextState);
 
 protected:
   State *actualState;
-  unsigned int nextState;
+  State *nextState;
 
   State *allStates;
   int stateConut;

@@ -17,12 +17,4 @@ public:
 
   virtual bool operator==(const ScoreProgram &b) const;
 };
-
-enum ScoreProgramStates : int
-{
-  MOVE_FORWARD_LEFT = 0,
-  MOVE_FORWARD_RIGHT,
-  SEARCH_LEFT
-  //TODO add all states
-};
 #endif /*SCORE_PROGRAM_H*/
