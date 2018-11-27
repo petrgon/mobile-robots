@@ -4,9 +4,6 @@
 #include "state.h"
 #include "../managers/motor_manager.h"
 
-#define SPEED_LEFT 100
-#define SPEED_RIGHT -95
-
 class SearchRightState : public State
 {
 public:
@@ -24,5 +21,9 @@ public:
 
   virtual void run() override;
   virtual void stateInit() override;
+
+private:
+  static const int SPEED_LEFT = -100;
+  static const int SPEED_RIGHT = -95;
 };
 #endif /*MOVE_SEARCH_RIGHT_STATE_H*/
