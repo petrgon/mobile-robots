@@ -12,12 +12,11 @@ public:
   MoveBackRightState(const MoveBackRightState &) = default;
   MoveBackRightState(MoveBackRightState &&) = default;
 
+  virtual ~MoveBackRightState() override;
+
   virtual MoveBackRightState &operator=(const MoveBackRightState &) = default;
   virtual MoveBackRightState &operator=(MoveBackRightState &&) = default;
 
-  virtual bool operator==(const MoveBackRightState &b) const;
-
-  virtual void run() override;
   virtual void stateInit() override;
 
 private:

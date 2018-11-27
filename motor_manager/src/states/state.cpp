@@ -231,3 +231,5 @@ void State::unsubscribe() {
     CallBackTimeManager::getInstance()->unsubscribe(this);
     SensorManager::getInstance()->unsubscribeFromAll(this);
 }
+
+void State::run() {}

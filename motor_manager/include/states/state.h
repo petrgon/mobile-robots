@@ -15,12 +15,10 @@ public:
   State(const State &) = default;
   State(State &&) = default;
 
-  virtual ~State();
+  virtual ~State() = 0;
 
   virtual State &operator=(const State &) = default;
   virtual State &operator=(State &&) = default;
-
-  virtual bool operator==(const State &b) const;
   
   virtual State * setTimeElapsedNextState(State *);
 
@@ -68,7 +66,7 @@ public:
   virtual void ir1500FoundEventHandler() override;
   virtual void ir1500LostEventHandler() override;
 
-  virtual void run() = 0;
+  virtual void run();
   virtual void stateInit();
 
 protected:

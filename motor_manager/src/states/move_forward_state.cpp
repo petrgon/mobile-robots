@@ -4,7 +4,7 @@ MoveForwardState::MoveForwardState(Program *program) : State(program) {}
 
 MoveForwardState::MoveForwardState(Program *program, int timeOut) : State(program, timeOut) {}
 
-void MoveForwardState::run() {}
+MoveForwardState::~MoveForwardState(){}
 
 void MoveForwardState::stateInit() {
     State::stateInit();

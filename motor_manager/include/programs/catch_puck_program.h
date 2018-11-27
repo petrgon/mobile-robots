@@ -23,10 +23,10 @@ public:
   CatchPuckProgram(const CatchPuckProgram &) = default;
   CatchPuckProgram(CatchPuckProgram &&) = default;
 
+  virtual ~CatchPuckProgram() override;
+
   virtual CatchPuckProgram &operator=(const CatchPuckProgram &) = default;
   virtual CatchPuckProgram &operator=(CatchPuckProgram &&) = default;
-
-  virtual bool operator==(const CatchPuckProgram &b) const;
 
   virtual void puckAquiredEventHandler() override;
 

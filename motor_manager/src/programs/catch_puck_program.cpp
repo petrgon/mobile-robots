@@ -49,6 +49,8 @@ CatchPuckProgram::CatchPuckProgram(int irFrequency) : Program(), irFrequency(irF
     nextState = moveForwardRight;
 }
 
+CatchPuckProgram::~CatchPuckProgram(){}
+
 void CatchPuckProgram::puckAquiredEventHandler(){
     ProgramManager::getInstance()->setProgram(new ScoreProgram(irFrequency));
 }

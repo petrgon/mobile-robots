@@ -45,6 +45,8 @@ ScoreProgram::ScoreProgram(int irFrequency) : Program(), irFrequency(irFrequency
     nextState = search;
 }
 
+ScoreProgram::~ScoreProgram(){}
+
 void ScoreProgram::puckLostEventHandler(){
     ProgramManager::getInstance()->setProgram(new CatchPuckProgram(irFrequency));
 }

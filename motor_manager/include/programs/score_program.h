@@ -22,10 +22,10 @@ public:
   ScoreProgram(const ScoreProgram &) = default;
   ScoreProgram(ScoreProgram &&) = default;
 
+  virtual ~ScoreProgram() override;
+
   virtual ScoreProgram &operator=(const ScoreProgram &) = default;
   virtual ScoreProgram &operator=(ScoreProgram &&) = default;
-
-  virtual bool operator==(const ScoreProgram &b) const;
 
   virtual void puckLostEventHandler() override;
 

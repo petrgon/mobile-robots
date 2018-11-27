@@ -4,7 +4,7 @@ SearchRightState::SearchRightState(Program *program) : State(program) {}
 
 SearchRightState::SearchRightState(Program *program, int timeOut) : State(program, timeOut) {}
 
-void SearchRightState::run() {}
+SearchRightState::~SearchRightState(){}
 
 void SearchRightState::stateInit() {
     State::stateInit();

@@ -18,8 +18,6 @@ public:
   virtual Program &operator=(const Program &) = default;
   virtual Program &operator=(Program &&) = default;
 
-  virtual bool operator==(const Program &b) const;
-
   virtual void run();
   virtual void changeState(State *nextState);
 

@@ -11,13 +11,12 @@ public:
   SearchLeftState(Program *, int);
   SearchLeftState(const SearchLeftState &) = default;
   SearchLeftState(SearchLeftState &&) = default;
+  
+  virtual ~SearchLeftState() override;
 
   virtual SearchLeftState &operator=(const SearchLeftState &) = default;
   virtual SearchLeftState &operator=(SearchLeftState &&) = default;
 
-  virtual bool operator==(const SearchLeftState &b) const;
-
-  virtual void run() override;
   virtual void stateInit() override;
 
 private:

@@ -4,7 +4,7 @@ MoveBackRightState::MoveBackRightState(Program *program) : State(program) {}
 
 MoveBackRightState::MoveBackRightState(Program *program, int timeOut) : State(program, timeOut) {}
 
-void MoveBackRightState::run() {}
+MoveBackRightState::~MoveBackRightState(){}
 
 void MoveBackRightState::stateInit() {
     State::stateInit();
