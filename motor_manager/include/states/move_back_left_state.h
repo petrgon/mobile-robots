@@ -15,7 +15,7 @@ public:
   MoveBackLeftState(const MoveBackLeftState &) = default;
   MoveBackLeftState(MoveBackLeftState &&) = default;
 
-  virtual ~MoveBackLeftState() = 0;
+  virtual ~MoveBackLeftState();
 
   virtual MoveBackLeftState &operator=(const MoveBackLeftState &) = default;
   virtual MoveBackLeftState &operator=(MoveBackLeftState &&) = default;

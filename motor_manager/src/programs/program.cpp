@@ -6,6 +6,9 @@ Program::Program() : SensorObserver()
 
 Program::~Program() {
     if (allStates != nullptr){
+        for (int i = 0; i < stateConut; i++){
+            delete allStates[i];
+        }
         delete [] allStates;
     }
 }
