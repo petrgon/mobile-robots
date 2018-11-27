@@ -1,8 +1,8 @@
 #include "../../include/states/state.h"
 
-State::State(Program *program) : SensorObserver(), program(program), timeOut(-1) {}
+State::State(Program *program) : SensorObserver(), program(program), timeOut(-1), isActive(false) {}
 
-State::State(Program *program, int timeOut) : SensorObserver(), program(program), timeOut(timeOut) {}
+State::State(Program *program, int timeOut) : SensorObserver(), program(program), timeOut(timeOut), isActive(false) {}
 
 State::~State(){
     unsubscribe();
@@ -107,89 +107,120 @@ State *State::setIr1500LostNextState(State *nextState)
 
 void State::timeElapsedEventHandler()
 {
-    if (timeElapsedNextState)
+    if (isActive && timeElapsedNextState){
         program->changeState(timeElapsedNextState);
+        isActive = false;
+    }
 }
 
 void State::puckAquiredEventHandler()
 {
-    if (puckAquiredNextState)
+    if (isActive && puckAquiredNextState){
         program->changeState(puckAquiredNextState);
+        isActive = false;
+    }
 }
 void State::puckLostEventHandler()
 {
-    if (puckLostNextState)
+    if (isActive && puckLostNextState){
         program->changeState(puckLostNextState);
+        isActive = false;
+    }
 }
 
 void State::lightDetectedEventHandler()
 {
-    if (lightDetectedNextState)
+    if (isActive && lightDetectedNextState){
         program->changeState(lightDetectedNextState);
+        isActive = false;
+    }
 }
 void State::lightLostEventHandler()
 {
-    if (lightLostNextState)
+    if (isActive && lightLostNextState){
         program->changeState(lightLostNextState);
+        isActive = false;
+    }
 }
 
 void State::leftTouchTriggeredEventHandler()
 {
-    if (leftTouchFreedNextState)
+    if (isActive && leftTouchFreedNextState){
         program->changeState(leftTouchFreedNextState);
+        isActive = false;
+    }
 }
 void State::leftTouchFreedEventHandler()
 {
-    if (leftTouchFreedNextState)
+    if (isActive && leftTouchFreedNextState){
         program->changeState(leftTouchFreedNextState);
+        isActive = false;
+    }
 }
 
 void State::rightTouchTriggeredEventHandler()
 {
-    if (rightTouchTriggeredNextState)
+    if (isActive && rightTouchTriggeredNextState){
         program->changeState(rightTouchTriggeredNextState);
+        isActive = false;
+    }
 }
 void State::rightTouchFreedEventHandler()
 {
-    if (rightTouchFreedNextState)
+    if (isActive && rightTouchFreedNextState){
         program->changeState(rightTouchFreedNextState);
+        isActive = false;
+    }
 }
 
 void State::bothTouchTriggeredEventHandler()
 {
-    if (bothTouchTriggeredNextState)
+    if (isActive && bothTouchTriggeredNextState){
         program->changeState(bothTouchTriggeredNextState);
+        isActive = false;
+    }
 }
 void State::bothTouchFreedEventHandler()
 {
-    if (bothTouchFreedNextState)
+    if (isActive && bothTouchFreedNextState){
         program->changeState(bothTouchFreedNextState);
+        isActive = false;
+    }
 }
 
 void State::ir600FoundEventHandler()
 {
-    if (ir600FoundNextState)
+    if (isActive && ir600FoundNextState){
         program->changeState(ir600FoundNextState);
+        isActive = false;
+    }
 }
 void State::ir600LostEventHandler()
 {
-    if (ir600LostNextState)
+    if (isActive && ir600LostNextState){
         program->changeState(ir600LostNextState);
+        isActive = false;
+    }
 }
 
 void State::ir1500FoundEventHandler()
 {
-    if (ir1500FoundNextState)
+    if (isActive && ir1500FoundNextState){
         program->changeState(ir1500FoundNextState);
+        isActive = false;
+    }
 }
 void State::ir1500LostEventHandler()
 {
-    if (ir1500LostNextState)
+    if (isActive && ir1500LostNextState){
         program->changeState(ir1500LostNextState);
+        isActive = false;
+    }
 }
 
 void State::stateInit()
 {
+    isActive = true;
     if (timeOut > 0){
         CallBackTimeManager::getInstance()->subscribe(this, timeOut);
     }

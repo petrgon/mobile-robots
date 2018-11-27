@@ -75,6 +75,7 @@ protected:
 
   Program *program;
   int timeOut;
+  bool isActive;
 
   State *timeElapsedNextState;
 
