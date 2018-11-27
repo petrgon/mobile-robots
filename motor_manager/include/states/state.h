@@ -6,8 +6,6 @@
 #include "../managers/callback_time_manager.h"
 #include "../managers/sensor_manager.h"
 
-class Program;
-
 class State : public SensorObserver
 {
 public:

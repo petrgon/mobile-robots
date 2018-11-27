@@ -5,8 +5,6 @@
 #include "../states/state.h"
 #include <atomic>
 
-class State;
-
 class Program : public SensorObserver
 {
 public:
