@@ -1,6 +1,6 @@
 #include "../../include/programs/score_program.h"
 
-ScoreProgram::ScoreProgram(int irFreqency) : Program(), irFrequency(irFrequency)
+ScoreProgram::ScoreProgram(int irFrequency) : Program(), irFrequency(irFrequency)
 {
     State *search = new SearchLeftState(this, SEARCHING_TIME);
     State *moveForward = new MoveForwardState(this, MOVE_FORWARD_TIME);
@@ -22,7 +22,7 @@ ScoreProgram::ScoreProgram(int irFreqency) : Program(), irFrequency(irFrequency)
     rightCollision->setTimeElapsedNextState(search);
     bothCollision->setTimeElapsedNextState(search);
     
-    if (irFreqency < 1000){
+    if (irFrequency < 1000){
         search->setIr600FoundNextState(irDetected);
         moveForward->setIr600FoundNextState(irDetected);
         irDetected->setIr600LostNextState(search);

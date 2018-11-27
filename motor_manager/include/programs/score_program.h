@@ -18,7 +18,7 @@
 class ScoreProgram : public Program
 {
 public:
-  ScoreProgram(int irFreqency);
+  ScoreProgram(int irFrequency);
   ScoreProgram(const ScoreProgram &) = default;
   ScoreProgram(ScoreProgram &&) = default;
 
