@@ -20,7 +20,7 @@ ProgramManager::~ProgramManager()
         motor_manager = nullptr;
     }
     delete runningProgram;
-    instance == nullptr;
+    instance = nullptr;
     ros::shutdown();
 }
 

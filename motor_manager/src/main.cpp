@@ -1,7 +1,7 @@
 #include "../include/managers/program_manager.h"
 
 #include <signal.h>
-#include "../../include/programs/hockey_program.h"
+#include "../include/programs/catch_puck_program.h"
 
 void SIGINT_handler(int sig)
 {
@@ -19,7 +19,7 @@ int main(int argc, char **argv)
     ROS_INFO("WiringPI initialized");
 
     ProgramManager * programManager = ProgramManager::getInstance();
-    Program * program = new HockeyProgram();
+    Program * program = new CatchPuckProgram(1500); //TODO
     programManager->setProgram(program);
     programManager->start();
     delete programManager;  //deletes also program
