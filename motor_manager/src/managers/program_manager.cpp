@@ -26,7 +26,7 @@ ProgramManager::~ProgramManager()
 
 ProgramManager *ProgramManager::getInstance()
 {
-    if (instance == nullptr)
+    if (!instance)
         instance = new ProgramManager();
     return instance;
 }
