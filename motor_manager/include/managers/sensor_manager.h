@@ -6,7 +6,7 @@
 #include "../sensors/light_sensor.h"
 #include "../sensors/touch_sensor.h"
 #include "../sensors/infra_red_sensor.h"
-#include "../programs/program.h"
+#include "../sensor_observer.h"
 
 #include <list>
 #include <thread>
@@ -26,29 +26,29 @@ public:
 
   ~SensorManager();
 
-  void subscribeToAll(Program *);
-  void unsubscribeFromAll(Program *);
+  void subscribeToAll(SensorObserver *);
+  void unsubscribeFromAll(SensorObserver *);
 
-  void subscribeLightDetectedEvent(Program *);
-  void subscribeLightLostEvent(Program *);
+  void subscribeLightDetectedEvent(SensorObserver *);
+  void subscribeLightLostEvent(SensorObserver *);
 
-  void subscribeLeftTouchTriggeredEvent(Program *);
-  void subscribeLeftTouchFreedEvent(Program *);
+  void subscribeLeftTouchTriggeredEvent(SensorObserver *);
+  void subscribeLeftTouchFreedEvent(SensorObserver *);
 
-  void subscribeRightTouchTriggeredEvent(Program *);
-  void subscribeRightTouchFreedEvent(Program *);
+  void subscribeRightTouchTriggeredEvent(SensorObserver *);
+  void subscribeRightTouchFreedEvent(SensorObserver *);
 
-  void subscribeBothTouchTriggeredEvent(Program *);
-  void subscribeBothTouchFreedEvent(Program *);
+  void subscribeBothTouchTriggeredEvent(SensorObserver *);
+  void subscribeBothTouchFreedEvent(SensorObserver *);
 
-  void subscribePuckAquiredEvent(Program *);
-  void subscribePuckLostEvent(Program *);
+  void subscribePuckAquiredEvent(SensorObserver *);
+  void subscribePuckLostEvent(SensorObserver *);
   
-  void subscribeIR600FoundEvent(Program *);
-  void subscribeIR600LostEvent(Program *);
+  void subscribeIR600FoundEvent(SensorObserver *);
+  void subscribeIR600LostEvent(SensorObserver *);
 
-  void subscribeIR1500FoundEvent(Program *);
-  void subscribeIR1500LostEvent(Program *);
+  void subscribeIR1500FoundEvent(SensorObserver *);
+  void subscribeIR1500LostEvent(SensorObserver *);
 
 private:
   SensorManager();
@@ -63,24 +63,24 @@ private:
 
   static void resolveIRSensor(InfraRedSensor &sensor, SensorManager *manager);
 
-  static void callEventHandlers(const std::list<Program *> &handlers, void (Program::*ptr)());
+  static void callEventHandlers(const std::list<SensorObserver *> &handlers, void (SensorObserver::*ptr)());
 
   static void run(SensorManager *manager);
 
-  std::list<Program *> lightDetectedEventHandlers;
-  std::list<Program *> lightLostEventHandlers;
-  std::list<Program *> puckAquiredEventHandlers;
-  std::list<Program *> puckLostEventHandlers;
-  std::list<Program *> leftTouchTriggeredEventHandlers;
-  std::list<Program *> leftTouchFreedEventHandlers;
-  std::list<Program *> rightTouchTriggeredEventHandlers;
-  std::list<Program *> rightTouchFreedEventHandlers;
-  std::list<Program *> bothTouchTriggeredEventHandlers;
-  std::list<Program *> bothTouchFreedEventHandlers;
-  std::list<Program *> ir600FoundEventHandlers;
-  std::list<Program *> ir600LostEventHandlers;
-  std::list<Program *> ir1500FoundEventHandlers;
-  std::list<Program *> ir1500LostEventHandlers;
+  std::list<SensorObserver *> lightDetectedEventHandlers;
+  std::list<SensorObserver *> lightLostEventHandlers;
+  std::list<SensorObserver *> puckAquiredEventHandlers;
+  std::list<SensorObserver *> puckLostEventHandlers;
+  std::list<SensorObserver *> leftTouchTriggeredEventHandlers;
+  std::list<SensorObserver *> leftTouchFreedEventHandlers;
+  std::list<SensorObserver *> rightTouchTriggeredEventHandlers;
+  std::list<SensorObserver *> rightTouchFreedEventHandlers;
+  std::list<SensorObserver *> bothTouchTriggeredEventHandlers;
+  std::list<SensorObserver *> bothTouchFreedEventHandlers;
+  std::list<SensorObserver *> ir600FoundEventHandlers;
+  std::list<SensorObserver *> ir600LostEventHandlers;
+  std::list<SensorObserver *> ir1500FoundEventHandlers;
+  std::list<SensorObserver *> ir1500LostEventHandlers;
 
   std::thread *thread;
   bool shouldEnd;

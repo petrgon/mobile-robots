@@ -19,9 +19,9 @@ CallBackTimeManager *CallBackTimeManager::getInstance()
     return instance;
 }
 
-void CallBackTimeManager::subscribe(Program *program, int64_t time)
+void CallBackTimeManager::subscribe(SensorObserver *observer, int64_t time)
 {
-    SubscribedCallBack callback(program, time);
+    SubscribedCallBack callback(observer, time);
     std::unique_lock<std::mutex> lck(m);
     auto it = callbackHandlers.begin();
     auto firstBigger = callbackHandlers.end();
@@ -76,8 +76,8 @@ void CallBackTimeManager::run(CallBackTimeManager *manager)
         auto now = std::chrono::system_clock::now();
         if (top.subscribed + top.time <= now)
         {
-            ROS_INFO("Calling %p after %d milisec", top.program, top.time.count());
-            top.program->timeElapsedEventHandler();
+            ROS_INFO("Calling %p after %d milisec", top.observer, top.time.count());
+            top.observer->timeElapsedEventHandler();
             manager->callbackHandlers.pop_front();
         }
         else
@@ -90,16 +90,16 @@ void CallBackTimeManager::run(CallBackTimeManager *manager)
     manager->shouldEnd = false;
 }
 
-SubscribedCallBack::SubscribedCallBack(Program *program, int64_t milis)
-    : program(program), time(std::chrono::milliseconds(milis)), subscribed(std::chrono::system_clock::now()) {}
+SubscribedCallBack::SubscribedCallBack(SensorObserver *observer, int64_t milis)
+    : observer(observer), time(std::chrono::milliseconds(milis)), subscribed(std::chrono::system_clock::now()) {}
 
 SubscribedCallBack::~SubscribedCallBack() {}
 
 SubscribedCallBack::SubscribedCallBack(const SubscribedCallBack &b)
-    : program(b.program), subscribed(b.subscribed), time(b.time) {}
+    : observer(b.observer), subscribed(b.subscribed), time(b.time) {}
 
 SubscribedCallBack::SubscribedCallBack(SubscribedCallBack &&b)
-    : program(std::move(b.program)), subscribed(std::move(b.subscribed)), time(std::move(b.time)) {}
+    : observer(std::move(b.observer)), subscribed(std::move(b.subscribed)), time(std::move(b.time)) {}
 
 bool SubscribedCallBack::operator>(const SubscribedCallBack &b) const
 {
@@ -119,7 +119,7 @@ bool SubscribedCallBack::operator<=(const SubscribedCallBack &b) const
 }
 bool SubscribedCallBack::operator==(const SubscribedCallBack &b) const
 {
-    return program == b.program;
+    return observer == b.observer;
 }
 bool SubscribedCallBack::operator!=(const SubscribedCallBack &b) const
 {

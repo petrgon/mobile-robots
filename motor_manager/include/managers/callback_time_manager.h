@@ -8,10 +8,7 @@
 #include <condition_variable>
 #include <mutex>
 
-#include "../programs/program.h"
 #include "../sensor_observer.h"
-
-// TODO rename Program to SensorObserver
 
 struct SubscribedCallBack;
 
@@ -21,7 +18,7 @@ class CallBackTimeManager
     ~CallBackTimeManager();
     static CallBackTimeManager *getInstance();
 
-    void subscribe(Program *, int64_t milis);
+    void subscribe(SensorObserver *, int64_t milis);
     void unsubscribe(SensorObserver *);
 
   private:
@@ -42,7 +39,7 @@ class CallBackTimeManager
 
 struct SubscribedCallBack
 {
-    SubscribedCallBack(Program *, int64_t);
+    SubscribedCallBack(SensorObserver *, int64_t);
     ~SubscribedCallBack();
     SubscribedCallBack(const SubscribedCallBack &);
     SubscribedCallBack(SubscribedCallBack &&);
@@ -55,7 +52,7 @@ struct SubscribedCallBack
     bool operator==(const SubscribedCallBack &) const;
     bool operator!=(const SubscribedCallBack &) const;
 
-    Program *program;
+    SensorObserver *observer;
     std::chrono::milliseconds time;
     std::chrono::time_point<std::chrono::system_clock> subscribed;
 };

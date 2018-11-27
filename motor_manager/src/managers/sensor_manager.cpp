@@ -23,100 +23,100 @@ SensorManager::~SensorManager()
     ROS_INFO("Thread SensorManager Joined");
 }
 
-void SensorManager::subscribeToAll(Program *program)
+void SensorManager::subscribeToAll(SensorObserver *observer)
 {
-    subscribePuckAquiredEvent(program);
-    subscribePuckLostEvent(program);
-    subscribeLightDetectedEvent(program);
-    subscribeLightLostEvent(program);
-    subscribeLeftTouchTriggeredEvent(program);
-    subscribeLeftTouchFreedEvent(program);
-    subscribeRightTouchTriggeredEvent(program);
-    subscribeRightTouchFreedEvent(program);
-    subscribeBothTouchTriggeredEvent(program);
-    subscribeBothTouchFreedEvent(program);
+    subscribePuckAquiredEvent(observer);
+    subscribePuckLostEvent(observer);
+    subscribeLightDetectedEvent(observer);
+    subscribeLightLostEvent(observer);
+    subscribeLeftTouchTriggeredEvent(observer);
+    subscribeLeftTouchFreedEvent(observer);
+    subscribeRightTouchTriggeredEvent(observer);
+    subscribeRightTouchFreedEvent(observer);
+    subscribeBothTouchTriggeredEvent(observer);
+    subscribeBothTouchFreedEvent(observer);
 }
 
-void SensorManager::unsubscribeFromAll(Program *program)
+void SensorManager::unsubscribeFromAll(SensorObserver *observer)
 {
-    puckAquiredEventHandlers.remove(program);
-    puckLostEventHandlers.remove(program);
-    leftTouchTriggeredEventHandlers.remove(program);
-    leftTouchFreedEventHandlers.remove(program);
-    rightTouchTriggeredEventHandlers.remove(program);
-    rightTouchFreedEventHandlers.remove(program);
-    bothTouchTriggeredEventHandlers.remove(program);
-    bothTouchFreedEventHandlers.remove(program);
-    lightDetectedEventHandlers.remove(program);
-    lightLostEventHandlers.remove(program);
+    puckAquiredEventHandlers.remove(observer);
+    puckLostEventHandlers.remove(observer);
+    leftTouchTriggeredEventHandlers.remove(observer);
+    leftTouchFreedEventHandlers.remove(observer);
+    rightTouchTriggeredEventHandlers.remove(observer);
+    rightTouchFreedEventHandlers.remove(observer);
+    bothTouchTriggeredEventHandlers.remove(observer);
+    bothTouchFreedEventHandlers.remove(observer);
+    lightDetectedEventHandlers.remove(observer);
+    lightLostEventHandlers.remove(observer);
 }
 
-void SensorManager::subscribePuckAquiredEvent(Program *program)
+void SensorManager::subscribePuckAquiredEvent(SensorObserver *observer)
 {
-    puckAquiredEventHandlers.push_back(program);
+    puckAquiredEventHandlers.push_back(observer);
 }
 
-void SensorManager::subscribePuckLostEvent(Program *program)
+void SensorManager::subscribePuckLostEvent(SensorObserver *observer)
 {
-    puckLostEventHandlers.push_back(program);
+    puckLostEventHandlers.push_back(observer);
 }
 
-void SensorManager::subscribeLightDetectedEvent(Program *program)
+void SensorManager::subscribeLightDetectedEvent(SensorObserver *observer)
 {
-    lightDetectedEventHandlers.push_back(program);
+    lightDetectedEventHandlers.push_back(observer);
 }
 
-void SensorManager::subscribeLightLostEvent(Program *program)
+void SensorManager::subscribeLightLostEvent(SensorObserver *observer)
 {
-    lightLostEventHandlers.push_back(program);
+    lightLostEventHandlers.push_back(observer);
 }
 
-void SensorManager::subscribeLeftTouchTriggeredEvent(Program *program)
+void SensorManager::subscribeLeftTouchTriggeredEvent(SensorObserver *observer)
 {
-    leftTouchTriggeredEventHandlers.push_back(program);
+    leftTouchTriggeredEventHandlers.push_back(observer);
 }
 
-void SensorManager::subscribeLeftTouchFreedEvent(Program *program)
+void SensorManager::subscribeLeftTouchFreedEvent(SensorObserver *observer)
 {
-    leftTouchFreedEventHandlers.push_back(program);
+    leftTouchFreedEventHandlers.push_back(observer);
 }
 
-void SensorManager::subscribeRightTouchTriggeredEvent(Program *program)
+void SensorManager::subscribeRightTouchTriggeredEvent(SensorObserver *observer)
 {
-    rightTouchTriggeredEventHandlers.push_back(program);
+    rightTouchTriggeredEventHandlers.push_back(observer);
 }
 
-void SensorManager::subscribeRightTouchFreedEvent(Program *program)
+void SensorManager::subscribeRightTouchFreedEvent(SensorObserver *observer)
 {
-    rightTouchFreedEventHandlers.push_back(program);
+    rightTouchFreedEventHandlers.push_back(observer);
 }
 
-void SensorManager::subscribeBothTouchTriggeredEvent(Program *program)
+void SensorManager::subscribeBothTouchTriggeredEvent(SensorObserver *observer)
 {
-    bothTouchTriggeredEventHandlers.push_back(program);
+    bothTouchTriggeredEventHandlers.push_back(observer);
 }
 
-void SensorManager::subscribeBothTouchFreedEvent(Program *program)
+void SensorManager::subscribeBothTouchFreedEvent(SensorObserver *observer)
 {
-    bothTouchFreedEventHandlers.push_back(program);
+    bothTouchFreedEventHandlers.push_back(observer);
 }
 
-void SensorManager::subscribeIR600FoundEvent(Program *program)
+void SensorManager::subscribeIR600FoundEvent(SensorObserver *observer)
 {
-    ir600FoundEventHandlers.push_back(program);
+    ir600FoundEventHandlers.push_back(observer);
 }
-void SensorManager::subscribeIR600LostEvent(Program *program)
+void SensorManager::subscribeIR600LostEvent(SensorObserver *observer)
 {
-    ir600LostEventHandlers.push_back(program);
+    ir600LostEventHandlers.push_back(observer);
 }
 
-void SensorManager::subscribeIR1500FoundEvent(Program *program)
+void SensorManager::subscribeIR1500FoundEvent(SensorObserver *observer)
 {
-    ir1500FoundEventHandlers.push_back(program);
+    ir1500FoundEventHandlers.push_back(observer);
 }
-void SensorManager::subscribeIR1500LostEvent(Program *program)
+void SensorManager::subscribeIR1500LostEvent(SensorObserver *observer)
 {
-    ir1500LostEventHandlers.push_back(program);
+    ir1500LostEventHandlers.push_back(observer);
 }
 
 void SensorManager::start()
@@ -160,9 +160,9 @@ void SensorManager::resolveLightSensor(LightSensor &sensor, SensorManager *manag
     {
         ROS_INFO("Light recieved: %d ", state);
         if (state == 1)
-            callEventHandlers(manager->lightLostEventHandlers, &Program::lightLostEventHandler);
+            callEventHandlers(manager->lightLostEventHandlers, &SensorObserver::lightLostEventHandler);
         else
-            callEventHandlers(manager->lightDetectedEventHandlers, &Program::lightDetectedEventHandler);
+            callEventHandlers(manager->lightDetectedEventHandlers, &SensorObserver::lightDetectedEventHandler);
     }
 }
 
@@ -177,9 +177,9 @@ void SensorManager::resolveFrontSensors(TouchSensor &left, TouchSensor &right, S
         ROS_INFO("Touch sensor (left): %d ", leftState);
         ROS_INFO("Touch sensor (right): %d ", rightState);
         if (rightState)
-            callEventHandlers(manager->bothTouchTriggeredEventHandlers, &Program::bothTouchTriggeredEventHandler);
+            callEventHandlers(manager->bothTouchTriggeredEventHandlers, &SensorObserver::bothTouchTriggeredEventHandler);
         else
-            callEventHandlers(manager->bothTouchFreedEventHandlers, &Program::bothTouchFreedEventHandler);
+            callEventHandlers(manager->bothTouchFreedEventHandlers, &SensorObserver::bothTouchFreedEventHandler);
     }
     else
     {
@@ -187,17 +187,17 @@ void SensorManager::resolveFrontSensors(TouchSensor &left, TouchSensor &right, S
         {
             ROS_INFO("Touch sensor (left): %d ", leftState);
             if (leftState)
-                callEventHandlers(manager->leftTouchTriggeredEventHandlers, &Program::leftTouchTriggeredEventHandler);
+                callEventHandlers(manager->leftTouchTriggeredEventHandlers, &SensorObserver::leftTouchTriggeredEventHandler);
             else
-                callEventHandlers(manager->leftTouchFreedEventHandlers, &Program::leftTouchFreedEventHandler);
+                callEventHandlers(manager->leftTouchFreedEventHandlers, &SensorObserver::leftTouchFreedEventHandler);
         }
         if (prevRightState != rightState)
         {
             ROS_INFO("Touch sensor (right): %d ", rightState);
             if (rightState)
-                callEventHandlers(manager->rightTouchTriggeredEventHandlers, &Program::rightTouchTriggeredEventHandler);
+                callEventHandlers(manager->rightTouchTriggeredEventHandlers, &SensorObserver::rightTouchTriggeredEventHandler);
             else
-                callEventHandlers(manager->rightTouchFreedEventHandlers, &Program::rightTouchFreedEventHandler);
+                callEventHandlers(manager->rightTouchFreedEventHandlers, &SensorObserver::rightTouchFreedEventHandler);
         }
     }
 }
@@ -210,9 +210,9 @@ void SensorManager::resolvePuckSensor(TouchSensor &sensor, SensorManager *manage
     {
         ROS_INFO("Touch sensor (puck): %d ", state);
         if (state)
-            callEventHandlers(manager->puckAquiredEventHandlers, &Program::puckAquiredEventHandler);
+            callEventHandlers(manager->puckAquiredEventHandlers, &SensorObserver::puckAquiredEventHandler);
         else
-            callEventHandlers(manager->puckLostEventHandlers, &Program::puckLostEventHandler);
+            callEventHandlers(manager->puckLostEventHandlers, &SensorObserver::puckLostEventHandler);
     }
 }
 
@@ -226,25 +226,25 @@ void SensorManager::resolveIRSensor(InfraRedSensor &sensor, SensorManager *manag
         if (state == 0)
         {
             if (prevState == InfraRedSensor::SIGNAL_600)
-                callEventHandlers(manager->ir600LostEventHandlers, &Program::ir600LostEventHandler);
+                callEventHandlers(manager->ir600LostEventHandlers, &SensorObserver::ir600LostEventHandler);
             else if (prevState == InfraRedSensor::SIGNAL_1500)
-                callEventHandlers(manager->ir1500LostEventHandlers, &Program::ir1500LostEventHandler);
+                callEventHandlers(manager->ir1500LostEventHandlers, &SensorObserver::ir1500LostEventHandler);
             else
                 ROS_ERROR("IR Sensor invalid previous value: %d ", prevState);
         }
         else
         {
             if (state == InfraRedSensor::SIGNAL_600)
-                callEventHandlers(manager->ir600FoundEventHandlers, &Program::ir600FoundEventHandler);
+                callEventHandlers(manager->ir600FoundEventHandlers, &SensorObserver::ir600FoundEventHandler);
             else if (state == InfraRedSensor::SIGNAL_1500)
-                callEventHandlers(manager->ir1500FoundEventHandlers, &Program::ir1500FoundEventHandler);
+                callEventHandlers(manager->ir1500FoundEventHandlers, &SensorObserver::ir1500FoundEventHandler);
             else
                 ROS_ERROR("IR Sensor invalid value: %d ", state);
         }
     }
 }
 
-void SensorManager::callEventHandlers(const std::list<Program *> &handlers, void (Program::*ptr)())
+void SensorManager::callEventHandlers(const std::list<SensorObserver *> &handlers, void (SensorObserver::*ptr)())
 {
     for (auto it = handlers.begin(); it != handlers.end(); it++)
     {
