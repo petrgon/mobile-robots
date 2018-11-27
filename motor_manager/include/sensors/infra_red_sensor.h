@@ -5,7 +5,7 @@
 #include "wiringPi.h"
 
 #include "sensor.h"
-
+#include <chrono>
 #include <string>
 
 class InfraRedSensor : public Sensor
