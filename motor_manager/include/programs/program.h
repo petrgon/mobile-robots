@@ -1,5 +1,5 @@
-#ifndef STATE_MANAGER_H
-#define STATE_MANAGER_H
+#ifndef PROGRAM_MANAGER_H
+#define PROGRAM_MANAGER_H
 
 #include "../sensor_observer.h"
 #include "../states/state.h"
@@ -31,4 +31,4 @@ protected:
   int stateConut;
 };
 
-#endif /*STATE_MANAGER_H*/
+#endif /*PROGRAM_MANAGER_H*/
