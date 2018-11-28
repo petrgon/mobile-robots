@@ -2,6 +2,9 @@
 
 ProgramManager *ProgramManager::instance = nullptr;
 
+ProgramManager::ProgramManager() : runningProgram(nullptr), callback_manager(nullptr),
+                                   motor_manager(nullptr), sensor_manager(nullptr) {}
+
 ProgramManager::~ProgramManager()
 {
     if (callback_manager)

@@ -26,8 +26,8 @@ class ProgramManager
     static ProgramManager *instance;
 
     Program *runningProgram;
-    CallBackTimeManager *callback_manager = nullptr;
-    MotorManager *motor_manager = nullptr;
-    SensorManager *sensor_manager = nullptr;
+    CallBackTimeManager *callback_manager ;
+    MotorManager *motor_manager;
+    SensorManager *sensor_manager;
 };
 #endif /*PROGRAM_MANAGER_H*/
