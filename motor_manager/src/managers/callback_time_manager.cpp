@@ -45,6 +45,7 @@ void CallBackTimeManager::subscribe(SensorObserver *observer, int64_t time)
 void CallBackTimeManager::unsubscribe(SensorObserver *observer)
 {
     callbackHandlers.remove_if([observer](const SubscribedCallBack & a) { return a.observer == observer; });
+    ROS_INFO("CallbackTime unsubscribed %p", observer);
 }
 
 CallBackTimeManager::CallBackTimeManager() : thread(nullptr), shouldEnd(false)

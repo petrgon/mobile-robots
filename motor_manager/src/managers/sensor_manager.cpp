@@ -35,6 +35,10 @@ void SensorManager::subscribeToAll(SensorObserver *observer)
     subscribeRightTouchFreedEvent(observer);
     subscribeBothTouchTriggeredEvent(observer);
     subscribeBothTouchFreedEvent(observer);
+    subscribeIR600FoundEvent(observer);
+    subscribeIR600LostEvent(observer);
+    subscribeIR1500FoundEvent(observer);
+    subscribeIR1500LostEvent(observer);
 }
 
 void SensorManager::unsubscribeFromAll(SensorObserver *observer)
@@ -49,6 +53,11 @@ void SensorManager::unsubscribeFromAll(SensorObserver *observer)
     bothTouchFreedEventHandlers.remove(observer);
     lightDetectedEventHandlers.remove(observer);
     lightLostEventHandlers.remove(observer);
+    ir600FoundEventHandlers.remove(observer);
+    ir600LostEventHandlers.remove(observer);
+    ir1500FoundEventHandlers.remove(observer);
+    ir1500LostEventHandlers.remove(observer);
+    ROS_INFO("SensorManager unsubsribed %p", observer);
 }
 
 void SensorManager::subscribePuckAquiredEvent(SensorObserver *observer)
