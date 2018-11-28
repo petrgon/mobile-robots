@@ -2,12 +2,13 @@
 
 const u_int32_t InfraRedSensor::SIGNAL_600 = 600;
 const u_int32_t InfraRedSensor::SIGNAL_1500 = 1500;
+const u_int32_t InfraRedSensor::NO_SIGNAL = 0;
 
 InfraRedSensor::InfraRedSensor(int pinNumber) : Sensor(pinNumber, INPUT), previousSignal(0) {}
 
 InfraRedSensor::~InfraRedSensor() {}
 
-unsigned int InfraRedSensor::checkSignal()
+u_int32_t InfraRedSensor::checkSignal()
 {
     long long zeroCount = 0LL;
     long long oneCount = 0LL;
@@ -16,7 +17,7 @@ unsigned int InfraRedSensor::checkSignal()
     do
     {
         int input = digitalRead(pinNumber);
-        ROS_DEBUG("IR Sensor input read %d", input);
+        ROS_INFO("IR Sensor input read %d", input);
         if (input)
             oneCount++;
         else
@@ -25,13 +26,13 @@ unsigned int InfraRedSensor::checkSignal()
         microseconds = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
     } while (microseconds < 10000LL); //longest cycle is 3700 us
     float retVal = oneCount / (float)(oneCount + zeroCount);
-    ROS_DEBUG("IR Sensor value counted %.2f", retVal);
+    ROS_INFO("IR Sensor value counted %.2f", retVal);
     if (retVal > 0.17f && retVal < 0.22f)
-        return 1500;
+        return SIGNAL_1500;
     else if (retVal > 0.27f && retVal < 0.32f)
-        return 600;
+        return SIGNAL_600;
     else
-        return 0;
+        return NO_SIGNAL;
 }
 
 unsigned int InfraRedSensor::getPreviousSignal()

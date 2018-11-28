@@ -232,7 +232,7 @@ void SensorManager::resolveIRSensor(InfraRedSensor &sensor, SensorManager *manag
     if (prevState != state)
     {
         ROS_INFO("IR sensor: %d ", state);
-        if (state == 0)
+        if (state == InfraRedSensor::NO_SIGNAL)
         {
             if (prevState == InfraRedSensor::SIGNAL_600)
                 callEventHandlers(manager->ir600LostEventHandlers, &SensorObserver::ir600LostEventHandler);

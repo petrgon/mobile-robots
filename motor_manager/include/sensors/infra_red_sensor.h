@@ -18,9 +18,10 @@ class InfraRedSensor : public Sensor
 
     static const u_int32_t SIGNAL_600;
     static const u_int32_t SIGNAL_1500;
+    static const u_int32_t NO_SIGNAL;
 
   private:
-    unsigned short int previousSignal;
+    u_int32_t previousSignal;
 
 };
 
