@@ -10,7 +10,7 @@ CatchPuckProgram::CatchPuckProgram(int irFrequency) : Program(), irFrequency(irF
     State *leftCollision = new MoveBackLeftState(this, COLLISION_TIME);
     State *rightCollision = new MoveBackRightState(this, COLLISION_TIME);
     State *bothCollision = new MoveBackwardState(this, COLLISION_TIME);
-    
+
     leftCollision->setTimeElapsedNextState(searchRight);
     rightCollision->setTimeElapsedNextState(searchLeft);
     bothCollision->setTimeElapsedNextState(searchRight);
@@ -35,7 +35,7 @@ CatchPuckProgram::CatchPuckProgram(int irFrequency) : Program(), irFrequency(irF
     lightDetected->setBothTouchTriggeredNextState(bothCollision)->setLightLostNextState(searchLeft);
 
     stateConut = 8;
-    allStates = new State*[stateConut];
+    allStates = new State *[stateConut];
     allStates[0] = searchLeft;
     allStates[1] = searchRight;
     allStates[2] = moveForwardLeft;
@@ -51,8 +51,12 @@ CatchPuckProgram::CatchPuckProgram(int irFrequency) : Program(), irFrequency(irF
     SensorManager::getInstance()->subscribePuckAquiredEvent(this);
 }
 
-CatchPuckProgram::~CatchPuckProgram(){}
+CatchPuckProgram::~CatchPuckProgram()
+{
+    SensorManager::getInstance()->unsubscribeFromAll(this);
+}
 
-void CatchPuckProgram::puckAquiredEventHandler(){
+void CatchPuckProgram::puckAquiredEventHandler()
+{
     ProgramManager::getInstance()->setProgram(new ScoreProgram(irFrequency));
 }

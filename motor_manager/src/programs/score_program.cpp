@@ -21,19 +21,22 @@ ScoreProgram::ScoreProgram(int irFrequency) : Program(), irFrequency(irFrequency
     leftCollision->setTimeElapsedNextState(search);
     rightCollision->setTimeElapsedNextState(search);
     bothCollision->setTimeElapsedNextState(search);
-    
-    if (irFrequency < 1000){
+
+    if (irFrequency < 1000)
+    {
         search->setIr600FoundNextState(irDetected);
         moveForward->setIr600FoundNextState(irDetected);
         irDetected->setIr600LostNextState(search);
-    } else {
+    }
+    else
+    {
         search->setIr1500FoundNextState(irDetected);
         moveForward->setIr1500FoundNextState(irDetected);
         irDetected->setIr1500LostNextState(search);
     }
 
     stateConut = 6;
-    allStates = new State*[stateConut];
+    allStates = new State *[stateConut];
     allStates[0] = search;
     allStates[1] = moveForward;
     allStates[2] = irDetected;
@@ -47,8 +50,12 @@ ScoreProgram::ScoreProgram(int irFrequency) : Program(), irFrequency(irFrequency
     SensorManager::getInstance()->subscribePuckLostEvent(this);
 }
 
-ScoreProgram::~ScoreProgram(){}
+ScoreProgram::~ScoreProgram()
+{
+    SensorManager::getInstance()->unsubscribeFromAll(this);
+}
 
-void ScoreProgram::puckLostEventHandler(){
+void ScoreProgram::puckLostEventHandler()
+{
     ProgramManager::getInstance()->setProgram(new CatchPuckProgram(irFrequency));
 }
