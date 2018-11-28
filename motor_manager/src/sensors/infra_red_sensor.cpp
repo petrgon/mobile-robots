@@ -15,7 +15,9 @@ unsigned int InfraRedSensor::checkSignal()
     long long microseconds = 0LL;
     do
     {
-        if (digitalRead(pinNumber))
+        int input = digitalRead(pinNumber);
+        ROS_DEBUG("IR Sensor input read %d", input);
+        if (input)
             oneCount++;
         else
             zeroCount++;
@@ -23,6 +25,7 @@ unsigned int InfraRedSensor::checkSignal()
         microseconds = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
     } while (microseconds < 10000LL); //longest cycle is 3700 us
     float retVal = oneCount / (float)(oneCount + zeroCount);
+    ROS_DEBUG("IR Sensor value counted %.2f", retVal);
     if (retVal > 0.17f && retVal < 0.22f)
         return 1500;
     else if (retVal > 0.27f && retVal < 0.32f)
