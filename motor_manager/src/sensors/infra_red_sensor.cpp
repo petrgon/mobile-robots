@@ -24,10 +24,10 @@ u_int32_t InfraRedSensor::checkSignal()
         microseconds = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
     } while (microseconds < 10000LL); //longest cycle is 3700 us
     float retVal = zeroCount / (float)(oneCount + zeroCount);
-    ROS_INFO("IR Sensor value counted %.2f", retVal);
-    if (retVal > 0.17f && retVal < 0.22f)
+    ROS_INFO("IR Sensor value counted %f", retVal);
+    if (retVal >= 0.17f && retVal <= 0.22f)
         return SIGNAL_1500;
-    else if (retVal > 0.27f && retVal < 0.32f)
+    else if (retVal >= 0.27f && retVal <= 0.32f)
         return SIGNAL_600;
     else
         return NO_SIGNAL;
