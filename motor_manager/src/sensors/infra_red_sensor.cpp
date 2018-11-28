@@ -17,7 +17,6 @@ u_int32_t InfraRedSensor::checkSignal()
     do
     {
         int input = digitalRead(pinNumber);
-        ROS_INFO("IR Sensor input read %d", input);
         if (input)
             oneCount++;
         else
