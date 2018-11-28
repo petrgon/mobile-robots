@@ -43,6 +43,8 @@ ScoreProgram::ScoreProgram(int irFrequency) : Program(), irFrequency(irFrequency
 
     actualState = nullptr;
     nextState = search;
+
+    SensorManager::getInstance()->subscribePuckLostEvent(this);
 }
 
 ScoreProgram::~ScoreProgram(){}

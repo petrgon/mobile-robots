@@ -47,6 +47,8 @@ CatchPuckProgram::CatchPuckProgram(int irFrequency) : Program(), irFrequency(irF
 
     actualState = nullptr;
     nextState = moveForwardRight;
+
+    SensorManager::getInstance()->subscribePuckAquiredEvent(this);
 }
 
 CatchPuckProgram::~CatchPuckProgram(){}
