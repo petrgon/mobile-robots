@@ -5,7 +5,8 @@ ProgramManager *ProgramManager::instance = nullptr;
 ProgramManager::ProgramManager() : runningProgram(nullptr),
                                    callback_manager(CallBackTimeManager::getInstance()),
                                    motor_manager(MotorManager::getInstance()),
-                                   sensor_manager(SensorManager::getInstance()) {}
+                                   sensor_manager(SensorManager::getInstance()),
+                                   nextProgram(nullptr) {}
 
 ProgramManager::~ProgramManager()
 {
@@ -41,6 +42,9 @@ void ProgramManager::start()
     ROS_INFO("ProgramManager start called");
     while (ros::ok())
     {
+        if (nextProgram){
+            changeProgram();
+        }
         runningProgram->run();
         ros::spinOnce();
     }
@@ -48,7 +52,12 @@ void ProgramManager::start()
 
 void ProgramManager::setProgram(Program *program)
 {
+    nextProgram = program;
+}
+
+void ProgramManager::changeProgram(){
     ROS_INFO("Changing running program");
     delete runningProgram;
-    runningProgram = program;
+    runningProgram = nextProgram;
+    nextProgram = nullptr;
 }

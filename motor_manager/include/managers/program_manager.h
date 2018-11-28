@@ -22,6 +22,7 @@ class ProgramManager
 
   private:
     ProgramManager();
+    void changeProgram();
 
     static ProgramManager *instance;
 
@@ -29,5 +30,7 @@ class ProgramManager
     CallBackTimeManager *callback_manager ;
     MotorManager *motor_manager;
     SensorManager *sensor_manager;
+
+    Program *nextProgram;
 };
 #endif /*PROGRAM_MANAGER_H*/
