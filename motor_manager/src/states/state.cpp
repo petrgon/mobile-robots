@@ -168,9 +168,9 @@ void State::lightLostEventHandler()
 
 void State::leftTouchTriggeredEventHandler()
 {
-    if (isActive && leftTouchFreedNextState)
+    if (isActive && leftTouchTriggeredNextState)
     {
-        program->changeState(leftTouchFreedNextState);
+        program->changeState(leftTouchTriggeredNextState);
         isActive = false;
     }
 }
