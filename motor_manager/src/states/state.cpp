@@ -1,11 +1,28 @@
 #include "../../include/states/state.h"
 #include "../../include/programs/program.h"
 
-State::State(Program *program) : SensorObserver(), program(program), timeOut(-1), isActive(false) {}
+State::State(Program *program) : SensorObserver(), program(program), timeOut(-1), isActive(false),
+                                 timeElapsedNextState(nullptr), puckAquiredNextState(nullptr),
+                                 puckLostNextState(nullptr), lightDetectedNextState(nullptr),
+                                 lightLostNextState(nullptr), leftTouchTriggeredNextState(nullptr),
+                                 leftTouchFreedNextState(nullptr), rightTouchTriggeredNextState(nullptr),
+                                 rightTouchFreedNextState(nullptr), bothTouchTriggeredNextState(nullptr),
+                                 bothTouchFreedNextState(nullptr), ir600FoundNextState(nullptr),
+                                 ir600LostNextState(nullptr), ir1500FoundNextState(nullptr),
+                                 ir1500LostNextState(nullptr) {}
 
-State::State(Program *program, int timeOut) : SensorObserver(), program(program), timeOut(timeOut), isActive(false) {}
+State::State(Program *program, int timeOut) : SensorObserver(), program(program), timeOut(timeOut), isActive(false),
+                                 timeElapsedNextState(nullptr), puckAquiredNextState(nullptr),
+                                 puckLostNextState(nullptr), lightDetectedNextState(nullptr),
+                                 lightLostNextState(nullptr), leftTouchTriggeredNextState(nullptr),
+                                 leftTouchFreedNextState(nullptr), rightTouchTriggeredNextState(nullptr),
+                                 rightTouchFreedNextState(nullptr), bothTouchTriggeredNextState(nullptr),
+                                 bothTouchFreedNextState(nullptr), ir600FoundNextState(nullptr),
+                                 ir600LostNextState(nullptr), ir1500FoundNextState(nullptr),
+                                 ir1500LostNextState(nullptr) {}
 
-State::~State(){
+State::~State()
+{
     unsubscribe();
 }
 
@@ -108,7 +125,8 @@ State *State::setIr1500LostNextState(State *nextState)
 
 void State::timeElapsedEventHandler()
 {
-    if (isActive && timeElapsedNextState){
+    if (isActive && timeElapsedNextState)
+    {
         program->changeState(timeElapsedNextState);
         isActive = false;
     }
@@ -116,14 +134,16 @@ void State::timeElapsedEventHandler()
 
 void State::puckAquiredEventHandler()
 {
-    if (isActive && puckAquiredNextState){
+    if (isActive && puckAquiredNextState)
+    {
         program->changeState(puckAquiredNextState);
         isActive = false;
     }
 }
 void State::puckLostEventHandler()
 {
-    if (isActive && puckLostNextState){
+    if (isActive && puckLostNextState)
+    {
         program->changeState(puckLostNextState);
         isActive = false;
     }
@@ -131,14 +151,16 @@ void State::puckLostEventHandler()
 
 void State::lightDetectedEventHandler()
 {
-    if (isActive && lightDetectedNextState){
+    if (isActive && lightDetectedNextState)
+    {
         program->changeState(lightDetectedNextState);
         isActive = false;
     }
 }
 void State::lightLostEventHandler()
 {
-    if (isActive && lightLostNextState){
+    if (isActive && lightLostNextState)
+    {
         program->changeState(lightLostNextState);
         isActive = false;
     }
@@ -146,14 +168,16 @@ void State::lightLostEventHandler()
 
 void State::leftTouchTriggeredEventHandler()
 {
-    if (isActive && leftTouchFreedNextState){
+    if (isActive && leftTouchFreedNextState)
+    {
         program->changeState(leftTouchFreedNextState);
         isActive = false;
     }
 }
 void State::leftTouchFreedEventHandler()
 {
-    if (isActive && leftTouchFreedNextState){
+    if (isActive && leftTouchFreedNextState)
+    {
         program->changeState(leftTouchFreedNextState);
         isActive = false;
     }
@@ -161,14 +185,16 @@ void State::leftTouchFreedEventHandler()
 
 void State::rightTouchTriggeredEventHandler()
 {
-    if (isActive && rightTouchTriggeredNextState){
+    if (isActive && rightTouchTriggeredNextState)
+    {
         program->changeState(rightTouchTriggeredNextState);
         isActive = false;
     }
 }
 void State::rightTouchFreedEventHandler()
 {
-    if (isActive && rightTouchFreedNextState){
+    if (isActive && rightTouchFreedNextState)
+    {
         program->changeState(rightTouchFreedNextState);
         isActive = false;
     }
@@ -176,14 +202,16 @@ void State::rightTouchFreedEventHandler()
 
 void State::bothTouchTriggeredEventHandler()
 {
-    if (isActive && bothTouchTriggeredNextState){
+    if (isActive && bothTouchTriggeredNextState)
+    {
         program->changeState(bothTouchTriggeredNextState);
         isActive = false;
     }
 }
 void State::bothTouchFreedEventHandler()
 {
-    if (isActive && bothTouchFreedNextState){
+    if (isActive && bothTouchFreedNextState)
+    {
         program->changeState(bothTouchFreedNextState);
         isActive = false;
     }
@@ -191,14 +219,16 @@ void State::bothTouchFreedEventHandler()
 
 void State::ir600FoundEventHandler()
 {
-    if (isActive && ir600FoundNextState){
+    if (isActive && ir600FoundNextState)
+    {
         program->changeState(ir600FoundNextState);
         isActive = false;
     }
 }
 void State::ir600LostEventHandler()
 {
-    if (isActive && ir600LostNextState){
+    if (isActive && ir600LostNextState)
+    {
         program->changeState(ir600LostNextState);
         isActive = false;
     }
@@ -206,14 +236,16 @@ void State::ir600LostEventHandler()
 
 void State::ir1500FoundEventHandler()
 {
-    if (isActive && ir1500FoundNextState){
+    if (isActive && ir1500FoundNextState)
+    {
         program->changeState(ir1500FoundNextState);
         isActive = false;
     }
 }
 void State::ir1500LostEventHandler()
 {
-    if (isActive && ir1500LostNextState){
+    if (isActive && ir1500LostNextState)
+    {
         program->changeState(ir1500LostNextState);
         isActive = false;
     }
@@ -222,12 +254,14 @@ void State::ir1500LostEventHandler()
 void State::stateInit()
 {
     isActive = true;
-    if (timeOut > 0){
+    if (timeOut > 0)
+    {
         CallBackTimeManager::getInstance()->subscribe(this, timeOut);
     }
 }
 
-void State::unsubscribe() {
+void State::unsubscribe()
+{
     CallBackTimeManager::getInstance()->unsubscribe(this);
     SensorManager::getInstance()->unsubscribeFromAll(this);
 }
