@@ -43,6 +43,8 @@ public:
   virtual State * setIr1500FoundNextState(State *);
   virtual State * setIr1500LostNextState(State *);
   
+  virtual State * setCollisionNextState(State *);
+  
   virtual void timeElapsedEventHandler() override;
 
   virtual void puckAquiredEventHandler() override;

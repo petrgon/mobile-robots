@@ -123,6 +123,13 @@ State *State::setIr1500LostNextState(State *nextState)
     return this;
 }
 
+State *State::setCollisionNextState(State *nextState){
+    setLeftTouchTriggeredNextState(nextState);
+    setRightTouchTriggeredNextState(nextState);
+    setBothTouchTriggeredNextState(nextState);
+    return this;
+}
+
 void State::timeElapsedEventHandler()
 {
     if (isActive && timeElapsedNextState)
