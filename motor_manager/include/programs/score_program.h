@@ -5,6 +5,7 @@
 #include "../managers/program_manager.h"
 #include "catch_puck_program.h"
 #include "../states/search_left_state.h"
+#include "../states/search_right_state.h"
 #include "../states/move_forward_state.h"
 #include "../states/move_back_left_state.h"
 #include "../states/move_back_right_state.h"
@@ -12,6 +13,7 @@
 #include <atomic>
 
 #define SEARCHING_TIME 3000
+#define TURN_TIME 500
 #define MOVE_FORWARD_TIME 2000
 #define COLLISION_TIME 450
 
