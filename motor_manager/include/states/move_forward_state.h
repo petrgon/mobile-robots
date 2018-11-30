@@ -1,10 +1,10 @@
 #ifndef MOVE_FORWARD_STATE_H
 #define MOVE_FORWARD_STATE_H
 
-#include "state.h"
+#include "move_state.h"
 #include "../managers/motor_manager.h"
 
-class MoveForwardState : public State
+class MoveForwardState : public MoveState
 {
 public:
   MoveForwardState(Program *);
@@ -16,8 +16,6 @@ public:
 
   virtual MoveForwardState &operator=(const MoveForwardState &) = default;
   virtual MoveForwardState &operator=(MoveForwardState &&) = default;
-
-  virtual void stateInit() override;
 
 private:
   static const int SPEED = 100;

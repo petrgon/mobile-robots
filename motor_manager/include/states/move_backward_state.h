@@ -1,10 +1,10 @@
 #ifndef MOVE_BACKWARD_STATE_H
 #define MOVE_BACKWARD_STATE_H
 
-#include "state.h"
+#include "move_state.h"
 #include "../managers/motor_manager.h"
 
-class MoveBackwardState : public State
+class MoveBackwardState : public MoveState
 {
 public:
   MoveBackwardState(Program *);
@@ -16,8 +16,6 @@ public:
 
   virtual MoveBackwardState &operator=(const MoveBackwardState &) = default;
   virtual MoveBackwardState &operator=(MoveBackwardState &&) = default;
-
-  virtual void stateInit() override;
 
 private:
   static const int SPEED = -100;

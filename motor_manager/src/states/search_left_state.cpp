@@ -1,13 +1,8 @@
 #include "../../include/states/search_left_state.h"
 
-SearchLeftState::SearchLeftState(Program *program) : State(program) {}
+SearchLeftState::SearchLeftState(Program *program) : MoveState(program, SPEED_LEFT, SPEED_RIGHT) {}
 
-SearchLeftState::SearchLeftState(Program *program, int timeOut) : State(program, timeOut) {}
+SearchLeftState::SearchLeftState(Program *program, int timeOut)
+    : MoveState(program, SPEED_LEFT, SPEED_RIGHT, timeOut) {}
 
-SearchLeftState::~SearchLeftState(){}
-
-void SearchLeftState::stateInit() {
-    State::stateInit();
-    MotorManager::getInstance()->publishCoords(SPEED_LEFT, SPEED_RIGHT);
-}
-
+SearchLeftState::~SearchLeftState() {}

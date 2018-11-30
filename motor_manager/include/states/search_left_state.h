@@ -1,10 +1,10 @@
 #ifndef MOVE_SEARCH_LEFT_STATE_H
 #define MOVE_SEARCH_LEFT_STATE_H
 
-#include "state.h"
+#include "move_state.h"
 #include "../managers/motor_manager.h"
 
-class SearchLeftState : public State
+class SearchLeftState : public MoveState
 {
 public:
   SearchLeftState(Program *);
@@ -16,8 +16,6 @@ public:
 
   virtual SearchLeftState &operator=(const SearchLeftState &) = default;
   virtual SearchLeftState &operator=(SearchLeftState &&) = default;
-
-  virtual void stateInit() override;
 
 private:
   static const int SPEED_LEFT = -95;
