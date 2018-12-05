@@ -134,8 +134,8 @@ void State::timeElapsedEventHandler()
 {
     if (isActive && timeElapsedNextState)
     {
-        program->changeState(timeElapsedNextState);
         isActive = false;
+        program->changeState(timeElapsedNextState);
     }
 }
 
@@ -143,16 +143,16 @@ void State::puckAquiredEventHandler()
 {
     if (isActive && puckAquiredNextState)
     {
-        program->changeState(puckAquiredNextState);
         isActive = false;
+        program->changeState(puckAquiredNextState);
     }
 }
 void State::puckLostEventHandler()
 {
     if (isActive && puckLostNextState)
     {
-        program->changeState(puckLostNextState);
         isActive = false;
+        program->changeState(puckLostNextState);
     }
 }
 
@@ -160,16 +160,16 @@ void State::lightDetectedEventHandler()
 {
     if (isActive && lightDetectedNextState)
     {
-        program->changeState(lightDetectedNextState);
         isActive = false;
+        program->changeState(lightDetectedNextState);
     }
 }
 void State::lightLostEventHandler()
 {
     if (isActive && lightLostNextState)
     {
-        program->changeState(lightLostNextState);
         isActive = false;
+        program->changeState(lightLostNextState);
     }
 }
 
@@ -177,16 +177,16 @@ void State::leftTouchTriggeredEventHandler()
 {
     if (isActive && leftTouchTriggeredNextState)
     {
-        program->changeState(leftTouchTriggeredNextState);
         isActive = false;
+        program->changeState(leftTouchTriggeredNextState);
     }
 }
 void State::leftTouchFreedEventHandler()
 {
     if (isActive && leftTouchFreedNextState)
     {
-        program->changeState(leftTouchFreedNextState);
         isActive = false;
+        program->changeState(leftTouchFreedNextState);
     }
 }
 
@@ -194,16 +194,16 @@ void State::rightTouchTriggeredEventHandler()
 {
     if (isActive && rightTouchTriggeredNextState)
     {
-        program->changeState(rightTouchTriggeredNextState);
         isActive = false;
+        program->changeState(rightTouchTriggeredNextState);
     }
 }
 void State::rightTouchFreedEventHandler()
 {
     if (isActive && rightTouchFreedNextState)
     {
-        program->changeState(rightTouchFreedNextState);
         isActive = false;
+        program->changeState(rightTouchFreedNextState);
     }
 }
 
@@ -211,16 +211,16 @@ void State::bothTouchTriggeredEventHandler()
 {
     if (isActive && bothTouchTriggeredNextState)
     {
-        program->changeState(bothTouchTriggeredNextState);
         isActive = false;
+        program->changeState(bothTouchTriggeredNextState);
     }
 }
 void State::bothTouchFreedEventHandler()
 {
     if (isActive && bothTouchFreedNextState)
     {
-        program->changeState(bothTouchFreedNextState);
         isActive = false;
+        program->changeState(bothTouchFreedNextState);
     }
 }
 
@@ -228,16 +228,16 @@ void State::ir600FoundEventHandler()
 {
     if (isActive && ir600FoundNextState)
     {
-        program->changeState(ir600FoundNextState);
         isActive = false;
+        program->changeState(ir600FoundNextState);
     }
 }
 void State::ir600LostEventHandler()
 {
     if (isActive && ir600LostNextState)
     {
-        program->changeState(ir600LostNextState);
         isActive = false;
+        program->changeState(ir600LostNextState);
     }
 }
 
@@ -245,16 +245,16 @@ void State::ir1500FoundEventHandler()
 {
     if (isActive && ir1500FoundNextState)
     {
-        program->changeState(ir1500FoundNextState);
         isActive = false;
+        program->changeState(ir1500FoundNextState);
     }
 }
 void State::ir1500LostEventHandler()
 {
     if (isActive && ir1500LostNextState)
     {
-        program->changeState(ir1500LostNextState);
         isActive = false;
+        program->changeState(ir1500LostNextState);
     }
 }
 
