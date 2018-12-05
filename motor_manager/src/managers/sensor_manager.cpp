@@ -183,8 +183,7 @@ void SensorManager::resolveFrontSensors(TouchSensor &left, TouchSensor &right, S
     bool rightState = right.isPushed();
     if (prevLeftState != leftState && prevRightState != rightState && rightState == leftState) //both changed state
     {
-        ROS_INFO("Touch sensor (left): %d ", leftState);
-        ROS_INFO("Touch sensor (right): %d ", rightState);
+        ROS_INFO("Both Touch Sensors: %d, %d ", leftState, rightState);
         if (rightState)
             callEventHandlers(manager->bothTouchTriggeredEventHandlers, &SensorObserver::bothTouchTriggeredEventHandler);
         else
@@ -231,7 +230,7 @@ void SensorManager::resolveIRSensor(InfraRedSensor &sensor, SensorManager *manag
     auto state = sensor.checkSignal();
     if (prevState != state)
     {
-        ROS_INFO("IR sensor: %d ", state);
+        ROS_INFO("Infrared sensor: %d ", state);
         if (state == InfraRedSensor::NO_SIGNAL)
         {
             if (prevState == InfraRedSensor::SIGNAL_600)
@@ -239,7 +238,7 @@ void SensorManager::resolveIRSensor(InfraRedSensor &sensor, SensorManager *manag
             else if (prevState == InfraRedSensor::SIGNAL_1500)
                 callEventHandlers(manager->ir1500LostEventHandlers, &SensorObserver::ir1500LostEventHandler);
             else
-                ROS_ERROR("IR Sensor invalid previous value: %d ", prevState);
+                ROS_ERROR("Infrared Sensor invalid previous value: %d ", prevState);
         }
         else
         {
@@ -248,7 +247,7 @@ void SensorManager::resolveIRSensor(InfraRedSensor &sensor, SensorManager *manag
             else if (state == InfraRedSensor::SIGNAL_1500)
                 callEventHandlers(manager->ir1500FoundEventHandlers, &SensorObserver::ir1500FoundEventHandler);
             else
-                ROS_ERROR("IR Sensor invalid value: %d ", state);
+                ROS_ERROR("Infrared Sensor invalid value: %d ", state);
         }
     }
 }

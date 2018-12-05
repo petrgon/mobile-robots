@@ -83,8 +83,8 @@ void CallBackTimeManager::run(CallBackTimeManager *manager)
         }
         else
         {
-            auto until = top.subscribed + top.time;
-            manager->condVar.wait_until(lck, until, [manager] { return manager->shouldEnd; });
+            //auto until = top.subscribed + top.time;
+            //manager->condVar.wait_until(lck, 50, [manager] { return manager->shouldEnd; });
         }
         lck.unlock();
     }

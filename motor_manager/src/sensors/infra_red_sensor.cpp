@@ -22,17 +22,17 @@ u_int32_t InfraRedSensor::checkSignal()
             zeroCount++;
         auto elapsed = std::chrono::high_resolution_clock::now() - start;
         microseconds = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
-    } while (microseconds < 10000LL); //longest cycle is 3700 us
+    } while (microseconds < 62900LL); //longest cycle is 3700 us, second one is 1700, 62900 is Nejmensi Spolecny Nasobek
     float retVal = zeroCount / (float)(oneCount + zeroCount);
-    if (retVal != 0.0){
+    /*if (retVal != 0.0){
         ROS_INFO("IR Sensor value counted %f", retVal);
-    }
+    }*/
     if (retVal >= 0.17f && retVal <= 0.22f)
-        return SIGNAL_1500;
+        return previousSignal = SIGNAL_1500;
     else if (retVal >= 0.27f && retVal <= 0.32f)
-        return SIGNAL_600;
+        return previousSignal = SIGNAL_600;
     else
-        return NO_SIGNAL;
+        return previousSignal = NO_SIGNAL;
 }
 
 unsigned int InfraRedSensor::getPreviousSignal()

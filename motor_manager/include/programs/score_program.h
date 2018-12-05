@@ -29,9 +29,9 @@ public:
 private:
   int irFrequency;
 
-  static const int SEARCHING_TIME = 3000;
-  static const int TURN_TIME = 500;
-  static const int MOVE_FORWARD_TIME = 2000;
-  static const int COLLISION_TIME = 450;
+  static const int SEARCHING_TIME = 3800;
+  static const int TURN_TIME = 550;
+  static const int MOVE_FORWARD_TIME = 3000;
+  static const int COLLISION_TIME = 750;
 };
 #endif /*SCORE_PROGRAM_H*/

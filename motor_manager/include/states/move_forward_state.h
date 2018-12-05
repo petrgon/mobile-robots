@@ -18,6 +18,6 @@ public:
   virtual MoveForwardState &operator=(MoveForwardState &&) = default;
 
 private:
-  static const int SPEED = 100;
+  static const int SPEED = 110;
 };
 #endif /*MOVE_FORWARD_STATE_H*/
