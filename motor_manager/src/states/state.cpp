@@ -134,6 +134,7 @@ void State::timeElapsedEventHandler()
 {
     if (isActive && timeElapsedNextState)
     {
+        ROS_INFO("Changinch state: TIMEOUT");
         isActive = false;
         program->changeState(timeElapsedNextState);
     }
