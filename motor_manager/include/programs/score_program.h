@@ -12,11 +12,6 @@
 #include "../states/move_backward_state.h"
 #include <atomic>
 
-#define SEARCHING_TIME 3000
-#define TURN_TIME 500
-#define MOVE_FORWARD_TIME 2000
-#define COLLISION_TIME 450
-
 class ScoreProgram : public Program
 {
 public:
@@ -33,5 +28,10 @@ public:
 
 private:
   int irFrequency;
+
+  static const int SEARCHING_TIME = 3000;
+  static const int TURN_TIME = 500;
+  static const int MOVE_FORWARD_TIME = 2000;
+  static const int COLLISION_TIME = 450;
 };
 #endif /*SCORE_PROGRAM_H*/

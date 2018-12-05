@@ -12,15 +12,6 @@
 #include "../states/program_timeout_state.h"
 #include <atomic>
 
-#define SEARCHING_TIME 3000
-#define CURVE_TIME 3000
-#define ROTATION_TIME 500
-#define MOVE_FORWARD_TIME 4000
-#define COLLISION_TIME 450
-
-#define CURVE_LEFT_SPEED 100
-#define CURVE_RIGHT_SPEED 110
-
 class DirectSearchPuckProgram : public Program
 {
 public:
@@ -38,5 +29,14 @@ public:
 
 private:
   int irFrequency;
+
+  static const int SEARCHING_TIME = 3000;
+  static const int CURVE_TIME = 3000;
+  static const int ROTATION_TIME = 500;
+  static const int MOVE_FORWARD_TIME = 4000;
+  static const int COLLISION_TIME = 450;
+
+  static const int CURVE_LEFT_SPEED = 100;
+  static const int CURVE_RIGHT_SPEED = 110;
 };
 #endif /*DIRECT_SEARCH_PUCK_PROGRAM_H*/

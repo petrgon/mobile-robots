@@ -12,10 +12,6 @@
 #include "../states/move_backward_state.h"
 #include <atomic>
 
-#define SEARCHING_TIME 3000
-#define MOVE_FORWARD_TIME 2000
-#define COLLISION_TIME 450
-
 class CatchPuckProgram : public Program
 {
 public:
@@ -32,5 +28,10 @@ public:
 
 private:
   int irFrequency;
+
+  static const int SPEED = 100;
+  static const int SEARCHING_TIME = 3000;
+  static const int MOVE_FORWARD_TIME = 2000;
+  static const int COLLISION_TIME = 450;
 };
 #endif /*CATCH_PUCK_PROGRAM_H*/
