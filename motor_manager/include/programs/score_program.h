@@ -24,7 +24,7 @@ public:
   virtual ScoreProgram &operator=(const ScoreProgram &) = default;
   virtual ScoreProgram &operator=(ScoreProgram &&) = default;
 
-  virtual void puckLostEventHandler() override;
+  virtual void lightLostEventHandler() override;
 
 private:
   int irFrequency;

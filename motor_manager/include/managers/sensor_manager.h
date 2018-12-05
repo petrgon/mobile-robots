@@ -43,7 +43,7 @@ public:
 
   void subscribePuckAquiredEvent(SensorObserver *);
   void subscribePuckLostEvent(SensorObserver *);
-  
+
   void subscribeIR600FoundEvent(SensorObserver *);
   void subscribeIR600LostEvent(SensorObserver *);
 
@@ -52,7 +52,7 @@ public:
 
 private:
   SensorManager();
-  
+
   void start();
 
   static void resolveLightSensor(LightSensor &sensor, SensorManager *manager);
@@ -86,5 +86,15 @@ private:
   bool shouldEnd;
 
   static SensorManager *instance;
+
+  /*struct SensorStates
+  {
+    int left = 0;
+    int right = 0;
+    int puck = 0;
+    int light = 1;
+    int ir = 0;
+  } sensorStates;*/
+
 };
 #endif /*SENSOR_MANAGER_H*/
