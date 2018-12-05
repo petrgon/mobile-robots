@@ -2,6 +2,7 @@
 
 DirectSearchPuckProgram::DirectSearchPuckProgram(int irFrequency) : Program(), irFrequency(irFrequency)
 {
+    State *dummyStartingState = new MoveState(this, 0, 0, 0);
     State *searchLeft = new SearchLeftState(this, SEARCHING_TIME);
     State *turnRight = new SearchRightState(this, CURVE_TIME);
     State *moveForward = new MoveForwardState(this, MOVE_FORWARD_TIME);
@@ -10,6 +11,8 @@ DirectSearchPuckProgram::DirectSearchPuckProgram(int irFrequency) : Program(), i
     State *endProgram = new ProgramTimeoutState(this);
     State *moveBack = new MoveBackwardState(this, COLLISION_TIME);
     State *unexpectedCollision = new MoveBackwardState(this, COLLISION_TIME);
+
+    dummyStartingState->setTimeElapsedNextState(moveForward);
 
     moveForward->setCollisionNextState(moveBack)->setLightDetectedNextState(catchLight);
     moveForward->setTimeElapsedNextState(searchLeft);
@@ -27,7 +30,7 @@ DirectSearchPuckProgram::DirectSearchPuckProgram(int irFrequency) : Program(), i
     searchLeft->setLightDetectedNextState(catchLight)->setCollisionNextState(unexpectedCollision);
     searchLeft->setTimeElapsedNextState(endProgram);
 
-    stateConut = 8;
+    stateConut = 9;
     allStates = new State *[stateConut];
     allStates[0] = searchLeft;
     allStates[1] = turnRight;
@@ -37,9 +40,10 @@ DirectSearchPuckProgram::DirectSearchPuckProgram(int irFrequency) : Program(), i
     allStates[5] = endProgram;
     allStates[6] = moveBack;
     allStates[7] = unexpectedCollision;
+    allStates[8] = dummyStartingState;
 
     actualState = nullptr;
-    nextState = moveForward;
+    nextState = dummyStartingState;
 
     SensorManager::getInstance()->subscribePuckAquiredEvent(this);
 }
