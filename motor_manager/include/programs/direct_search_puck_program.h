@@ -35,7 +35,7 @@ private:
   static const int CURVE_TIME = 3000;
   static const int ROTATION_TIME = 500;
   static const int MOVE_FORWARD_TIME = 4000;
-  static const int COLLISION_TIME = 300;
+  static const int COLLISION_TIME = 200;
 
   static const int CURVE_LEFT_SPEED = 100;
   static const int CURVE_RIGHT_SPEED = 120;
