@@ -9,7 +9,7 @@ DirectSearchPuckProgram::DirectSearchPuckProgram(int irFrequency) : Program(), i
     State *catchLight = new MoveForwardState(this);
     State *leftCurve = new MoveState(this, CURVE_LEFT_SPEED, CURVE_RIGHT_SPEED, COLLISION_TIME);
     State *endProgram = new ProgramTimeoutState(this);
-    State *moveBack = new MoveBackwardState(this, COLLISION_TIME);
+    State *moveBack = new MoveBackLeftState(this, COLLISION_TIME);
     State *unexpectedCollision = new MoveBackwardState(this, COLLISION_TIME);
 
     dummyStartingState->setTimeElapsedNextState(moveForward);

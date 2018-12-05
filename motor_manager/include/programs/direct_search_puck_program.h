@@ -9,6 +9,7 @@
 #include "../states/search_right_state.h"
 #include "../states/move_forward_state.h"
 #include "../states/move_backward_state.h"
+#include "../states/move_back_left_state.h"
 #include "../states/program_timeout_state.h"
 #include <atomic>
 
@@ -37,6 +38,6 @@ private:
   static const int COLLISION_TIME = 450;
 
   static const int CURVE_LEFT_SPEED = 100;
-  static const int CURVE_RIGHT_SPEED = 110;
+  static const int CURVE_RIGHT_SPEED = 120;
 };
 #endif /*DIRECT_SEARCH_PUCK_PROGRAM_H*/
