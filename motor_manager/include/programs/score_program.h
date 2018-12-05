@@ -33,6 +33,6 @@ private:
   static const int SEARCHING_TIME = 4500;
   static const int TURN_TIME = 550;
   static const int MOVE_FORWARD_TIME = 1800;
-  static const int COLLISION_TIME = 750;
+  static const int COLLISION_TIME = 800;
 };
 #endif /*SCORE_PROGRAM_H*/
