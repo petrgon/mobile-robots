@@ -54,7 +54,7 @@ ScoreProgram::ScoreProgram(int irFrequency) : Program(), irFrequency(irFrequency
     actualState = nullptr;
     nextState = searchLeft;
 
-    SensorManager::getInstance()->subscribePuckLostEvent(this);
+    SensorManager::getInstance()->subscribeLightLostEvent(this);
 }
 
 ScoreProgram::~ScoreProgram()
