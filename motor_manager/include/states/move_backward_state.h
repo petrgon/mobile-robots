@@ -18,6 +18,6 @@ public:
   virtual MoveBackwardState &operator=(MoveBackwardState &&) = default;
 
 private:
-  static const int SPEED = -100;
+  static const int SPEED = -110;
 };
 #endif /*MOVE_BACKWARD_STATE_H*/

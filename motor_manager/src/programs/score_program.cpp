@@ -2,8 +2,8 @@
 
 ScoreProgram::ScoreProgram(int irFrequency) : Program(), irFrequency(irFrequency)
 {
-    State *searchLeft = new SearchLeftState(this, SEARCHING_TIME);
-    State *turnRight = new SearchRightState(this, TURN_TIME);
+    State *searchLeft = new MoveState(this, -110, 120, SEARCHING_TIME);
+    State *turnRight = new MoveState(this, 120, -110, TURN_TIME);
     State *moveForward = new MoveForwardState(this, MOVE_FORWARD_TIME);
     State *irDetected = new MoveForwardState(this);
     State *leftCollision = new MoveBackLeftState(this, COLLISION_TIME);

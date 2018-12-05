@@ -7,6 +7,7 @@
 #include "../states/search_left_state.h"
 #include "../states/search_right_state.h"
 #include "../states/move_forward_state.h"
+#include "../states/move_state.h"
 #include "../states/move_back_left_state.h"
 #include "../states/move_back_right_state.h"
 #include "../states/move_backward_state.h"
