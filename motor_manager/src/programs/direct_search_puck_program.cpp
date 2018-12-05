@@ -2,7 +2,7 @@
 
 DirectSearchPuckProgram::DirectSearchPuckProgram(int irFrequency) : Program(), irFrequency(irFrequency)
 {
-    State *dummyStartingState = new MoveState(this, 0, 0, 0);
+    State *dummyStartingState = new MoveState(this, 0, 0, 1);
     State *searchLeft = new SearchLeftState(this, SEARCHING_TIME);
     State *turnRight = new SearchRightState(this, CURVE_TIME);
     State *moveForward = new MoveForwardState(this, MOVE_FORWARD_TIME);
