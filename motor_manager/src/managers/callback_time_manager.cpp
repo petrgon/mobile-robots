@@ -73,6 +73,8 @@ void CallBackTimeManager::run(CallBackTimeManager *manager)
     {
         std::unique_lock<std::mutex> lck(manager->m);
         manager->condVar.wait(lck, [manager] { return !manager->callbackHandlers.empty(); });
+        if(manager->callbackHandlers.empty())
+            continue;
         auto top = manager->callbackHandlers.front();
         auto now = std::chrono::system_clock::now();
         if (top.subscribed + top.time <= now)
