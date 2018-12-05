@@ -30,7 +30,7 @@ private:
   int irFrequency;
 
   static const int SPEED = 100;
-  static const int SEARCHING_TIME = 3800;
+  static const int SEARCHING_TIME = 2800;
   static const int MOVE_FORWARD_TIME = 3000;
   static const int COLLISION_TIME = 850;
 };
