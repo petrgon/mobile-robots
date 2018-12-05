@@ -44,8 +44,10 @@ void CallBackTimeManager::subscribe(SensorObserver *observer, int64_t time)
 
 void CallBackTimeManager::unsubscribe(SensorObserver *observer)
 {
+    std::unique_lock<std::mutex> lck(m);
     callbackHandlers.remove_if([observer](const SubscribedCallBack & a) { return a.observer == observer; });
     ROS_INFO("CallbackTime unsubscribed %p", observer);
+    lck.unlock();
 }
 
 CallBackTimeManager::CallBackTimeManager() : thread(nullptr), shouldEnd(false)
