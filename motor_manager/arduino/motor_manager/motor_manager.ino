@@ -1,9 +1,9 @@
 #include <ros.h>
 #include <std_msgs/Int32MultiArray.h>
 
-#define enA 3
-#define in1 4
-#define in2 5
+#define enA 3 //left
+#define in1 4 //left
+#define in2 5 //left
 #define enB 9
 #define in3 6
 #define in4 7
@@ -50,26 +50,26 @@ void setup()
 
 void loop()
 {
-  if (coord.left < 0)
-  {
-    digitalWrite(in3, HIGH);
-    digitalWrite(in4, LOW);
-  }
-  else
+  if (coord.right > 0)
   {
     digitalWrite(in3, LOW);
     digitalWrite(in4, HIGH);
   }
-
-  if (coord.right < 0)
-  {
-    digitalWrite(in1, LOW);
-    digitalWrite(in2, HIGH);
-  }
   else
+  {
+    digitalWrite(in3, HIGH);
+    digitalWrite(in4, LOW);
+  }
+
+  if (coord.left > 0)
   {
     digitalWrite(in1, HIGH);
     digitalWrite(in2, LOW);
+  }
+  else
+  {
+    digitalWrite(in1, LOW);
+    digitalWrite(in2, HIGH);
   }
   analogWrite(enA, MIN(ABS(coord.left) * LEFT_WHEEL_CALIBRATION, MAX_VELOCITY));
   analogWrite(enB, MIN(ABS(coord.right) * RIGHT_WHEEL_CALIBRATION, MAX_VELOCITY));
