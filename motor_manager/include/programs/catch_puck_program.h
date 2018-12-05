@@ -30,8 +30,8 @@ private:
   int irFrequency;
 
   static const int SPEED = 100;
-  static const int SEARCHING_TIME = 2800;
-  static const int MOVE_FORWARD_TIME = 3000;
+  static const int SEARCHING_TIME = 3500;
+  static const int MOVE_FORWARD_TIME = 1800;
   static const int COLLISION_TIME = 850;
 };
 #endif /*CATCH_PUCK_PROGRAM_H*/

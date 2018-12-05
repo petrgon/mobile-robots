@@ -19,6 +19,6 @@ public:
 
 private:
   static const int SPEED_LEFT = 100;
-  static const int SPEED_RIGHT = -95;
+  static const int SPEED_RIGHT = -100;
 };
 #endif /*MOVE_SEARCH_RIGHT_STATE_H*/
