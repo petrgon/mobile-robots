@@ -27,6 +27,6 @@ void Program::changeState(State *nextState){
     this->nextState = nextState; 
 }
 
-string Program::getName(){
+std::string Program::getName(){
     return "PROGRAM_WITHOUT_NAME_PLEASE_OVERRIDE_\"string getName()\"_METHOD";
 }
