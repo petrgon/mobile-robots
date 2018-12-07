@@ -12,6 +12,7 @@
 #include "../states/move_back_left_state.h"
 #include "../states/program_timeout_state.h"
 #include <atomic>
+#include <string>
 
 class DirectSearchPuckProgram : public Program
 {
@@ -27,6 +28,8 @@ public:
 
   virtual void puckAquiredEventHandler() override;
   virtual void timeElapsedEventHandler() override;
+
+  virtual std::string getName() override;
 
 private:
   int irFrequency;

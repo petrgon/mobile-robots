@@ -60,3 +60,7 @@ void CatchPuckProgram::puckAquiredEventHandler()
 {
     ProgramManager::getInstance()->setProgram(new ScoreProgram(irFrequency));
 }
+
+std::string CatchPuckProgram::getName(){
+    return "Catch Puck Program";
+}

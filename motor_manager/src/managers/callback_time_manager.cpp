@@ -46,7 +46,7 @@ void CallBackTimeManager::unsubscribe(SensorObserver *observer)
 {
     std::unique_lock<std::mutex> lck(m);
     callbackHandlers.remove_if([observer](const SubscribedCallBack & a) { return a.observer == observer; });
-    ROS_INFO("CallbackTime unsubscribed %p", observer);
+    //ROS_INFO("CallbackTime unsubscribed %p", observer);
     lck.unlock();
 }
 

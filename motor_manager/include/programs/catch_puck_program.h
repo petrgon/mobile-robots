@@ -11,6 +11,7 @@
 #include "../states/move_back_right_state.h"
 #include "../states/move_backward_state.h"
 #include <atomic>
+#include <string>
 
 class CatchPuckProgram : public Program
 {
@@ -25,6 +26,8 @@ public:
   virtual CatchPuckProgram &operator=(CatchPuckProgram &&) = default;
 
   virtual void puckAquiredEventHandler() override;
+  
+  virtual std::string getName() override;
 
 private:
   int irFrequency;

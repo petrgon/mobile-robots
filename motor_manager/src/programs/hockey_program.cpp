@@ -140,3 +140,7 @@ void HockeyProgram::doAction(int leftWheelSpeed, int rightWheelSpeed,
         timeIsUp = true;
     }
 }
+
+std::string HockeyProgram::getName(){
+    return "Hockey Program";
+}

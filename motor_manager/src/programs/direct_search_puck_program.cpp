@@ -67,3 +67,7 @@ void DirectSearchPuckProgram::timeElapsedEventHandler()
 {
     ProgramManager::getInstance()->setProgram(new CatchPuckProgram(irFrequency));
 }
+
+std::string DirectSearchPuckProgram::getName(){
+    return "Direct Search Puck Program";
+}

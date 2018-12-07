@@ -66,3 +66,7 @@ void ScoreProgram::lightLostEventHandler()
 {
     ProgramManager::getInstance()->setProgram(new CatchPuckProgram(irFrequency));
 }
+
+std::string ScoreProgram::getName(){
+    return "Score Program";
+}

@@ -7,6 +7,7 @@
 #include "../managers/callback_time_manager.h"
 #include <vector>
 #include <atomic>
+#include <string>
 
 class HockeyProgram : public Program
 {
@@ -32,6 +33,8 @@ public:
 
   void bothTouchTriggeredEventHandler() override;
   void bothTouchFreedEventHandler() override;
+
+  virtual std::string getName() override;
 
 private:
   enum Actions {

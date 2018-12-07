@@ -3,6 +3,7 @@
 
 #include "../sensor_observer.h"
 #include <atomic>
+#include <string>
 
 class State;
 
@@ -20,6 +21,7 @@ public:
 
   virtual void run();
   virtual void changeState(State *nextState);
+  virtual std::string getName();
 
 protected:
   State *actualState;
