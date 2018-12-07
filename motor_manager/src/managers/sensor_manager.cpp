@@ -57,7 +57,7 @@ void SensorManager::unsubscribeFromAll(SensorObserver *observer)
     ir600LostEventHandlers.remove(observer);
     ir1500FoundEventHandlers.remove(observer);
     ir1500LostEventHandlers.remove(observer);
-    ROS_INFO("SensorManager unsubsribed %p", observer);
+    //ROS_INFO("SensorManager unsubsribed %p", observer);
 }
 
 void SensorManager::subscribePuckAquiredEvent(SensorObserver *observer)
@@ -167,7 +167,7 @@ void SensorManager::resolveLightSensor(LightSensor &sensor, SensorManager *manag
     unsigned short state = sensor.checkSignal();
     if (prevState != state)
     {
-        ROS_INFO("Light recieved: %d ", state);
+        ROS_INFO("Light recieved: %d ", !state);
         if (state == 1)
             callEventHandlers(manager->lightLostEventHandlers, &SensorObserver::lightLostEventHandler);
         else

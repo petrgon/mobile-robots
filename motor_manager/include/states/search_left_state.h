@@ -18,7 +18,7 @@ public:
   virtual SearchLeftState &operator=(SearchLeftState &&) = default;
 
 private:
-  static const int SPEED_LEFT = -90;
+  static const int SPEED_LEFT = -85;
   static const int SPEED_RIGHT = 95;
 };
 #endif /*MOVE_SEARCH_LEFT_STATE_H*/

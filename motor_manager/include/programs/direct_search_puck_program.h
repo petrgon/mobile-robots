@@ -32,12 +32,12 @@ private:
   int irFrequency;
 
   static const int SEARCHING_TIME = 3800;
-  static const int CURVE_TIME = 2200;
-  static const int ROTATION_TIME = 600;
-  static const int MOVE_FORWARD_TIME = 3000;
+  static const int CURVE_TIME = 2500;
+  static const int ROTATION_TIME = 500;
+  static const int MOVE_FORWARD_TIME = 2500;
   static const int COLLISION_TIME = 900;
 
-  static const int CURVE_LEFT_SPEED = 100;
-  static const int CURVE_RIGHT_SPEED = 150;
+  static const int CURVE_LEFT_SPEED = 95;
+  static const int CURVE_RIGHT_SPEED = 130;
 };
 #endif /*DIRECT_SEARCH_PUCK_PROGRAM_H*/
