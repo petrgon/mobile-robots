@@ -27,9 +27,10 @@ u_int32_t InfraRedSensor::checkSignal()
     /*if (retVal != 0.0){
         ROS_INFO("IR Sensor value counted %f", retVal);
     }*/
-    if (retVal >= 0.17f && retVal <= 0.22f)
+    if (retVal >= 0.15f && retVal <= 0.22f)
         return previousSignal = SIGNAL_1500;
-    else if (retVal >= 0.27f && retVal <= 0.32f)
+    else if (retVal >= 0.25f && retVal <= 0.34f)
+//else if (retVal >= 0.27f && retVal <= 0.32f) originaly
         return previousSignal = SIGNAL_600;
     else
         return previousSignal = NO_SIGNAL;
