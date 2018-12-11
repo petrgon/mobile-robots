@@ -27,7 +27,7 @@ public:
   virtual ScoreProgram &operator=(const ScoreProgram &) = default;
   virtual ScoreProgram &operator=(ScoreProgram &&) = default;
 
-  virtual void lightLostEventHandler() override;
+  virtual void puckLostEventHandler() override;
 
   virtual std::string getName() override;
 

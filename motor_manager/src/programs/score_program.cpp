@@ -73,7 +73,7 @@ ScoreProgram::ScoreProgram(int irFrequency) : Program(), irFrequency(irFrequency
     actualState = nullptr;
     nextState = searchLeft;
 
-    SensorManager::getInstance()->subscribeLightLostEvent(this);
+    SensorManager::getInstance()->subscribePuckLostEvent(this);
 }
 
 ScoreProgram::~ScoreProgram()
@@ -81,7 +81,7 @@ ScoreProgram::~ScoreProgram()
     SensorManager::getInstance()->unsubscribeFromAll(this);
 }
 
-void ScoreProgram::lightLostEventHandler()
+void ScoreProgram::puckLostEventHandler()
 {
     ProgramManager::getInstance()->setProgram(new CatchPuckProgram(irFrequency));
 }
