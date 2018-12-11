@@ -167,7 +167,7 @@ void SensorManager::resolveLightSensor(LightSensor &sensor, SensorManager *manag
     unsigned short state = sensor.checkSignal();
     if (prevState != state)
     {
-        ROS_INFO("Light recieved: %d ", !state);
+        ROS_INFO("\033[1;33mLight recieved: %d\033[0m ", !state);
         if (state == 1)
             callEventHandlers(manager->lightLostEventHandlers, &SensorObserver::lightLostEventHandler);
         else

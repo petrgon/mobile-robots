@@ -27,17 +27,17 @@ public:
   virtual ScoreProgram &operator=(const ScoreProgram &) = default;
   virtual ScoreProgram &operator=(ScoreProgram &&) = default;
 
-  virtual void puckLostEventHandler() override;
+  virtual void lightLostEventHandler() override;
 
   virtual std::string getName() override;
 
 private:
   int irFrequency;
 
-  static const int SEARCHING_TIME = 4500;
-  static const int TURN_TIME = 550;
+  static const int SEARCHING_TIME = 3600;
+  static const int TURN_TIME = 650;
   static const int MOVE_FORWARD_TIME = 1800;
-  static const int COLLISION_TIME = 800;
-  static const int MOVE_BACK_TIME = 200;
+  static const int COLLISION_TIME = 1100;
+  static const int MOVE_BACK_TIME = 300;
 };
 #endif /*SCORE_PROGRAM_H*/

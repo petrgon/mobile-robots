@@ -20,8 +20,8 @@ public:
   virtual void stateInit() override;
 
 private:
-  static const int SPEED_A = -85;
-  static const int SPEED_B = 95;
+  static const int SPEED_A = -120;
+  static const int SPEED_B = 0;
 
   bool speedALeft;
 };

@@ -2,41 +2,25 @@
 
 ScoreProgram::ScoreProgram(int irFrequency) : Program(), irFrequency(irFrequency)
 {
-    State *searchLeft = new MoveState(this, -110, 130, SEARCHING_TIME);
-    State *turnRight = new MoveState(this, 120, -110, TURN_TIME);
-    State *moveForward = new MoveState(this, 120, 120, MOVE_FORWARD_TIME);
+    State *searchLeft = new MoveState(this, -100, 120, SEARCHING_TIME);
+    State *turnRight = new MoveState(this, 110, -100, TURN_TIME);
+    State *moveForward = new MoveState(this, 115, 115, MOVE_FORWARD_TIME);
     State *irDetected = new MoveForwardState(this);
-    State *moveBackLeftColl = new MoveBackwardState(this, MOVE_BACK_TIME);
-    State *moveBackRightColl = new MoveBackwardState(this, MOVE_BACK_TIME);
-    State *moveBackBothColl = new MoveBackwardState(this, MOVE_BACK_TIME);
-    State *leftCollision = new SearchLeftState(this, COLLISION_TIME);
-    State *rightCollision = new SearchRightState(this, COLLISION_TIME);
+    State *leftCollision = new MoveState(this, 0, -120, COLLISION_TIME);
+    State *rightCollision = new MoveState(this, -120, 0, COLLISION_TIME);
     State *bothCollision = new RotateLeftRightState(this, COLLISION_TIME);
 
-    searchLeft->setBothTouchTriggeredNextState(moveBackBothColl)->setTimeElapsedNextState(moveForward);
-    searchLeft->setRightTouchTriggeredNextState(moveBackRightColl)->setLeftTouchTriggeredNextState(moveBackLeftColl);
+    searchLeft->setBothTouchTriggeredNextState(bothCollision)->setTimeElapsedNextState(moveForward);
+    searchLeft->setRightTouchTriggeredNextState(rightCollision)->setLeftTouchTriggeredNextState(leftCollision);
     
-    turnRight->setBothTouchTriggeredNextState(moveBackBothColl)->setTimeElapsedNextState(searchLeft);
-    turnRight->setRightTouchTriggeredNextState(moveBackRightColl)->setLeftTouchTriggeredNextState(moveBackLeftColl);
+    turnRight->setBothTouchTriggeredNextState(bothCollision)->setTimeElapsedNextState(searchLeft);
+    turnRight->setRightTouchTriggeredNextState(rightCollision)->setLeftTouchTriggeredNextState(leftCollision);
 
-    moveForward->setTimeElapsedNextState(searchLeft)->setBothTouchTriggeredNextState(moveBackBothColl);
-    moveForward->setRightTouchTriggeredNextState(moveBackRightColl)->setLeftTouchTriggeredNextState(moveBackLeftColl);
+    moveForward->setTimeElapsedNextState(searchLeft)->setBothTouchTriggeredNextState(bothCollision);
+    moveForward->setRightTouchTriggeredNextState(rightCollision)->setLeftTouchTriggeredNextState(leftCollision);
 
-    irDetected->setRightTouchTriggeredNextState(moveBackRightColl)->setLeftTouchTriggeredNextState(leftCollision);
-    irDetected->setBothTouchTriggeredNextState(moveBackBothColl);
-
-    moveBackLeftColl->setTimeElapsedNextState(leftCollision);
-    moveBackRightColl->setTimeElapsedNextState(rightCollision);
-    moveBackBothColl->setTimeElapsedNextState(bothCollision);
-    
-    leftCollision->setRightTouchTriggeredNextState(moveBackRightColl)->setLeftTouchTriggeredNextState(moveBackLeftColl);
-    leftCollision->setBothTouchTriggeredNextState(moveBackBothColl);
-    
-    rightCollision->setRightTouchTriggeredNextState(moveBackRightColl)->setLeftTouchTriggeredNextState(moveBackLeftColl);
-    rightCollision->setBothTouchTriggeredNextState(moveBackBothColl);
-    
-    bothCollision->setRightTouchTriggeredNextState(moveBackRightColl)->setLeftTouchTriggeredNextState(moveBackLeftColl);
-    bothCollision->setBothTouchTriggeredNextState(moveBackBothColl);
+    irDetected->setRightTouchTriggeredNextState(bothCollision)->setLeftTouchTriggeredNextState(leftCollision);
+    irDetected->setBothTouchTriggeredNextState(rightCollision);
     
     leftCollision->setTimeElapsedNextState(moveForward);
     rightCollision->setTimeElapsedNextState(moveForward);
@@ -48,6 +32,9 @@ ScoreProgram::ScoreProgram(int irFrequency) : Program(), irFrequency(irFrequency
         turnRight->setIr600FoundNextState(irDetected);
         moveForward->setIr600FoundNextState(irDetected);
         irDetected->setIr600LostNextState(turnRight);
+        leftCollision->setIr600FoundNextState(irDetected);
+        rightCollision->setIr600FoundNextState(irDetected);
+        bothCollision->setIr600FoundNextState(irDetected);
     }
     else
     {
@@ -55,9 +42,12 @@ ScoreProgram::ScoreProgram(int irFrequency) : Program(), irFrequency(irFrequency
         turnRight->setIr1500FoundNextState(irDetected);
         moveForward->setIr1500FoundNextState(irDetected);
         irDetected->setIr1500LostNextState(turnRight);
+        leftCollision->setIr1500FoundNextState(irDetected);
+        rightCollision->setIr1500FoundNextState(irDetected);
+        bothCollision->setIr1500FoundNextState(irDetected);
     }
 
-    stateConut = 10;
+    stateConut = 7;
     allStates = new State *[stateConut];
     allStates[0] = searchLeft;
     allStates[1] = moveForward;
@@ -66,14 +56,11 @@ ScoreProgram::ScoreProgram(int irFrequency) : Program(), irFrequency(irFrequency
     allStates[4] = rightCollision;
     allStates[5] = bothCollision;
     allStates[6] = turnRight;
-    allStates[7] = moveBackLeftColl;
-    allStates[8] = moveBackRightColl;
-    allStates[9] = moveBackBothColl;
 
     actualState = nullptr;
     nextState = searchLeft;
 
-    SensorManager::getInstance()->subscribePuckLostEvent(this);
+    SensorManager::getInstance()->subscribeLightLostEvent(this);
 }
 
 ScoreProgram::~ScoreProgram()
@@ -81,7 +68,7 @@ ScoreProgram::~ScoreProgram()
     SensorManager::getInstance()->unsubscribeFromAll(this);
 }
 
-void ScoreProgram::puckLostEventHandler()
+void ScoreProgram::lightLostEventHandler()
 {
     ProgramManager::getInstance()->setProgram(new CatchPuckProgram(irFrequency));
 }
