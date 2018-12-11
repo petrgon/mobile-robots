@@ -3,6 +3,6 @@
 MoveForwardState::MoveForwardState(Program *program) : MoveState(program, SPEED, SPEED) {}
 
 MoveForwardState::MoveForwardState(Program *program, int timeOut)
-    : MoveState(program, SPEED, SPEED, timeOut) {}
+    : MoveState(program, SPEED + 3, SPEED, timeOut) {} //TODO FIXME
 
 MoveForwardState::~MoveForwardState() {}

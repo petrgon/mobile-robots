@@ -40,7 +40,7 @@ private:
   static const int MOVE_FORWARD_TIME = 2500;
   static const int COLLISION_TIME = 900;
 
-  static const int CURVE_LEFT_SPEED = 95;
-  static const int CURVE_RIGHT_SPEED = 130;
+  static const int CURVE_LEFT_SPEED = 90;
+  static const int CURVE_RIGHT_SPEED = 135;
 };
 #endif /*DIRECT_SEARCH_PUCK_PROGRAM_H*/
