@@ -6,9 +6,10 @@ ScoreProgram::ScoreProgram(int irFrequency) : Program(), irFrequency(irFrequency
     State *turnRight = new MoveState(this, 120, -110, TURN_TIME);
     State *moveForward = new MoveState(this, 120, 120, MOVE_FORWARD_TIME);
     State *irDetected = new MoveForwardState(this);
+    State *moveBackLeft = new MoveState(this, -100, -120, MOVE_BACK_TIME);
+    State *moveBackRight = new MoveState(this, -100, -120, MOVE_BACK_TIME);
     State *leftCollision = new MoveState(this, -100, -120, COLLISION_TIME);
     State *rightCollision = new MoveState(this, -120, -100, COLLISION_TIME);
-    State *bothCollision = new MoveState(this, -120, -120, COLLISION_TIME);
 
     searchLeft->setBothTouchTriggeredNextState(bothCollision)->setTimeElapsedNextState(moveForward);
     searchLeft->setRightTouchTriggeredNextState(rightCollision)->setLeftTouchTriggeredNextState(leftCollision);
