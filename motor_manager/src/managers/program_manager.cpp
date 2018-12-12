@@ -56,7 +56,7 @@ void ProgramManager::setProgram(Program *program)
 }
 
 void ProgramManager::changeProgram(){
-    ROS_INFO("Changing running program to -> \033[1;31m%s\033[0m", nextProgram->getName().data());
+    ROS_INFO("Changing running program to -> \032[1;31m%s\033[0m", nextProgram->getName().data());
     delete runningProgram;
     runningProgram = nextProgram;
     nextProgram = nullptr;

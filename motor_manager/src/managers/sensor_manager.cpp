@@ -230,7 +230,7 @@ void SensorManager::resolveIRSensor(InfraRedSensor &sensor, SensorManager *manag
     auto state = sensor.checkSignal();
     if (prevState != state)
     {
-        ROS_INFO("Infrared sensor: %d ", state);
+        ROS_INFO("\033[1;31mInfrared sensor: %d\033[0m", state);
         if (state == InfraRedSensor::NO_SIGNAL)
         {
             if (prevState == InfraRedSensor::SIGNAL_600)

@@ -36,7 +36,7 @@ private:
 
   static const int SEARCHING_TIME = 3600;
   static const int TURN_TIME = 650;
-  static const int MOVE_FORWARD_TIME = 1800;
+  static const int MOVE_FORWARD_TIME = 1200;
   static const int COLLISION_TIME = 1100;
   static const int MOVE_BACK_TIME = 300;
 };

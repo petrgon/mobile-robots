@@ -35,7 +35,7 @@ private:
   int irFrequency;
 
   static const int SEARCHING_TIME = 3800;
-  static const int CURVE_TIME = 2500;
+  static const int CURVE_TIME = 2800;
   static const int ROTATION_TIME = 550;
   static const int MOVE_FORWARD_TIME = 3000;
   static const int COLLISION_TIME = 900;
