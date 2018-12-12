@@ -3,7 +3,7 @@
 CatchPuckProgram::CatchPuckProgram(int irFrequency) : Program(), irFrequency(irFrequency)
 {
     State *searchLeft = new SearchLeftState(this, SEARCHING_TIME);
-    State *searchRight = new SearchRightState(this, SEARCHING_TIME);
+    State *searchRight = new SearchRightState(this, SEARCHING_TIME - 300);
     State *moveForwardLeft = new MoveForwardState(this, MOVE_FORWARD_TIME);
     State *moveForwardRight = new MoveForwardState(this, MOVE_FORWARD_TIME);
     State *lightDetected = new MoveForwardState(this);
