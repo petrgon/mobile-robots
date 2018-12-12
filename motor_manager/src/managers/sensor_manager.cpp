@@ -231,24 +231,14 @@ void SensorManager::resolveIRSensor(InfraRedSensor &sensor, SensorManager *manag
     if (prevState != state)
     {
         ROS_INFO("\033[1;31mInfrared sensor: %d\033[0m", state);
-        if (state == InfraRedSensor::NO_SIGNAL)
-        {
-            if (prevState == InfraRedSensor::SIGNAL_600)
-                callEventHandlers(manager->ir600LostEventHandlers, &SensorObserver::ir600LostEventHandler);
-            else if (prevState == InfraRedSensor::SIGNAL_1500)
-                callEventHandlers(manager->ir1500LostEventHandlers, &SensorObserver::ir1500LostEventHandler);
-            else
-                ROS_ERROR("Infrared Sensor invalid previous value: %d ", prevState);
-        }
-        else
-        {
-            if (state == InfraRedSensor::SIGNAL_600)
-                callEventHandlers(manager->ir600FoundEventHandlers, &SensorObserver::ir600FoundEventHandler);
-            else if (state == InfraRedSensor::SIGNAL_1500)
-                callEventHandlers(manager->ir1500FoundEventHandlers, &SensorObserver::ir1500FoundEventHandler);
-            else
-                ROS_ERROR("Infrared Sensor invalid value: %d ", state);
-        }
+        if (prevState == InfraRedSensor::SIGNAL_600)
+            callEventHandlers(manager->ir600LostEventHandlers, &SensorObserver::ir600LostEventHandler);
+        else if (prevState == InfraRedSensor::SIGNAL_1500)
+            callEventHandlers(manager->ir1500LostEventHandlers, &SensorObserver::ir1500LostEventHandler);
+        if (state == InfraRedSensor::SIGNAL_600)
+            callEventHandlers(manager->ir600FoundEventHandlers, &SensorObserver::ir600FoundEventHandler);
+        else if (state == InfraRedSensor::SIGNAL_1500)
+            callEventHandlers(manager->ir1500FoundEventHandlers, &SensorObserver::ir1500FoundEventHandler);
     }
 }
 
