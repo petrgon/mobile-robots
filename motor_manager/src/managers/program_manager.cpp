@@ -62,6 +62,6 @@ void ProgramManager::changeProgram(){
     nextProgram = nullptr;
 }
 
-void Programmanager::end(){
+void ProgramManager::end(){
     shouldEnd = true;
 }
