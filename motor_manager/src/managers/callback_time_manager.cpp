@@ -7,6 +7,7 @@ CallBackTimeManager::~CallBackTimeManager()
     ROS_INFO("Joining CallBackTimeManager thread");
     shouldEnd = true;
     condVar.notify_all();
+    thread->join();
     delete thread;
     ROS_INFO("Thread CallBackTimeManager Joined");
 }
