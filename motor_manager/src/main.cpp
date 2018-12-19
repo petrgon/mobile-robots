@@ -37,7 +37,7 @@ int main(int argc, char **argv)
         program = new DirectSearchPuckProgram(params[0]);
         ROS_INFO("Program params (%d)", params[0]);
     }
-
+    programManager = ProgramManager::getInstance();
     programManager->setProgram(program);
 
     char starter;
