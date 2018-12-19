@@ -19,7 +19,7 @@ class ProgramManager
     static ProgramManager *getInstance();
     void start();
     void setProgram(Program *program);
-    void end()
+    void end();
 
   private:
     ProgramManager();
