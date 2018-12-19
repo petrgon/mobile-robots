@@ -18,6 +18,7 @@ class DirectSearchPuckProgram : public Program
 {
 public:
   DirectSearchPuckProgram(int irFrequency);
+  DirectSearchPuckProgram(int irFrequency, int leftSpeed, int rightSpeed, int time);
   DirectSearchPuckProgram(const DirectSearchPuckProgram &) = default;
   DirectSearchPuckProgram(DirectSearchPuckProgram &&) = default;
 

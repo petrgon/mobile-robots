@@ -53,6 +53,9 @@ DirectSearchPuckProgram::DirectSearchPuckProgram(int irFrequency) : Program(), i
     SensorManager::getInstance()->subscribePuckAquiredEvent(this);
 }
 
+DirectSearchPuckProgram(int irFrequency, int leftSpeed, int rightSpeed, int time)
+    : Program(), irFrequency(irFrequency) {}
+
 DirectSearchPuckProgram::~DirectSearchPuckProgram()
 {
     SensorManager::getInstance()->unsubscribeFromAll(this);
@@ -68,6 +71,7 @@ void DirectSearchPuckProgram::timeElapsedEventHandler()
     ProgramManager::getInstance()->setProgram(new CatchPuckProgram(irFrequency));
 }
 
-std::string DirectSearchPuckProgram::getName(){
+std::string DirectSearchPuckProgram::getName()
+{
     return "Direct Search Puck Program";
 }
