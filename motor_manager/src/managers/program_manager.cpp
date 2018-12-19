@@ -1,6 +1,6 @@
 #include "../../include/managers/program_manager.h"
 
-ProgramManager *ProgramManager::instance = ProgramManager::getInstance();
+ProgramManager *ProgramManager::instance = nullptr;
 
 ProgramManager::ProgramManager() : runningProgram(nullptr),
                                    callback_manager(CallBackTimeManager::getInstance()),
