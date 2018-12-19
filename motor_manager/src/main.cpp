@@ -18,7 +18,8 @@ int main(int argc, char **argv)
     setenv("WIRINGPI_GPIOMEM", "1", 1);
     wiringPiSetup();
     ROS_INFO("WiringPI initialized");
-
+    programManager = ProgramManager::getInstance();
+    
     int params[4];
     if (argc <= 1){
         ROS_INFO("Invalid number of params. Program needs 1 or 4 params.\n  INFRA_RED_FREQ, LEFT_SPEED, RIGHT_SPEED, FORWARD_TIME\nor\n  IFRA_RED_FREQ");
@@ -37,7 +38,6 @@ int main(int argc, char **argv)
         program = new DirectSearchPuckProgram(params[0]);
         ROS_INFO("Program params (%d)", params[0]);
     }
-    programManager = ProgramManager::getInstance();
     programManager->setProgram(program);
 
     char starter;
