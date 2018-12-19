@@ -11,6 +11,8 @@ ProgramManager::ProgramManager() : shouldEnd(false), runningProgram(nullptr),
 ProgramManager::~ProgramManager()
 {
     ROS_INFO("DESTRUCTOR CALLED");
+    delete runningProgram;
+    runningProgram = nullptr;
     if (callback_manager)
     {
         delete callback_manager; //keep order
@@ -26,8 +28,7 @@ ProgramManager::~ProgramManager()
         delete motor_manager;
         motor_manager = nullptr;
     }
-    delete runningProgram;
-    runningProgram = nullptr;
+    
     instance = nullptr;
     ROS_INFO("DESTRUCTOR FINISHED");
 }
