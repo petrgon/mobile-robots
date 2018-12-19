@@ -28,9 +28,8 @@ int main(int argc, char **argv)
     Program *program = new DirectSearchPuckProgram(ir_freq);
     programManager->setProgram(program);
 
-    char starter;
-    std::cin >> starter;
-    
+    std::getchar();
+
     programManager->start();
 
     delete (programManager);
