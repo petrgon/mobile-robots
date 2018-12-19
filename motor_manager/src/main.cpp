@@ -35,7 +35,6 @@ int main(int argc, char **argv)
 
     delete (programManager);
     programManager = nullptr;
-    sleep(2000);
     ros::shutdown();
     return 0;
 }
