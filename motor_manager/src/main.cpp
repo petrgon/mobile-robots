@@ -20,16 +20,23 @@ int main(int argc, char **argv)
     ROS_INFO("WiringPI initialized");
 
     int params[4];
-    if (argc <= 1)
+    if (argc <= 1){
         ROS_INFO("Invalid number of params. Program needs 1 or 4 params.\n  INFRA_RED_FREQ, LEFT_SPEED, RIGHT_SPEED, FORWARD_TIME\nor\n  IFRA_RED_FREQ");
+        ros::shutdown();
+        return 1;
+    }
     for (int i = 1; i < argc; i++)
         params[i - 1] = std::stoi(argv[i]);
     ROS_INFO("Looking for frequnce %d", params[0]);
     Program *program;
-    if(argc == 5)
+    if(argc == 5){
         program = new DirectSearchPuckProgram(params[0], params[1], params[2], params[3]);
-    else
+        ROS_INFO("Program params (%d, %d, %d, %d)", params[0], params[1], params[2], params[3]);
+    }
+    else{
         program = new DirectSearchPuckProgram(params[0]);
+        ROS_INFO("Program params (%d)", params[0]);
+    }
 
     programManager->setProgram(program);
 
