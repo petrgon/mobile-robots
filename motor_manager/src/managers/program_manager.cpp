@@ -10,7 +10,7 @@ ProgramManager::ProgramManager() : shouldEnd(false), runningProgram(nullptr),
 
 ProgramManager::~ProgramManager()
 {
-    ROS_DEBUG("DESTRUCTOR CALLED");
+    ROS_INFO("DESTRUCTOR CALLED");
     if (callback_manager)
     {
         delete callback_manager; //keep order
@@ -27,7 +27,9 @@ ProgramManager::~ProgramManager()
         motor_manager = nullptr;
     }
     delete runningProgram;
+    runningProgram = nullptr;
     instance = nullptr;
+    ROS_INFO("DESTRUCTOR FINISHED");
 }
 
 ProgramManager *ProgramManager::getInstance()
