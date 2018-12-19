@@ -6,6 +6,7 @@ MotorManager::~MotorManager()
 {
     publishCoords(0, 0);
     ros::spinOnce();
+    usleep(250);
     ROS_INFO("MotorManager Joined");
 }
 
