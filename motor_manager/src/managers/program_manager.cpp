@@ -10,6 +10,7 @@ ProgramManager::ProgramManager() : runningProgram(nullptr),
 
 ProgramManager::~ProgramManager()
 {
+    ROS_DEBUG("DESTRUCTOR CALLED");
     if (callback_manager)
     {
         delete callback_manager; //keep order

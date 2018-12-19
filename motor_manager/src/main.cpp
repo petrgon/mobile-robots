@@ -8,11 +8,9 @@ std::mutex m;
 
 void SIGINT_handler(int sig)
 {
-
     std::unique_lock<std::mutex> lck(m);
-    ProgramManager *tmp = programManager;
+    delete (programManager);
     programManager = nullptr;
-    delete (tmp);
     ros::shutdown();
     lck.unlock();
 }
@@ -37,9 +35,8 @@ int main(int argc, char **argv)
     programManager->start();
 
     std::unique_lock<std::mutex> lck(m);
-    ProgramManager *tmp = programManager;
+    delete (programManager);
     programManager = nullptr;
-    delete (tmp);
     lck.unlock();
     return 0;
 }
