@@ -53,7 +53,7 @@ DirectSearchPuckProgram::DirectSearchPuckProgram(int irFrequency) : Program(), i
     SensorManager::getInstance()->subscribePuckAquiredEvent(this);
 }
 
-DirectSearchPuckProgram(int irFrequency, int leftSpeed, int rightSpeed, int time)
+DirectSearchPuckProgram::DirectSearchPuckProgram(int irFrequency, int leftSpeed, int rightSpeed, int time)
     : Program(), irFrequency(irFrequency) {}
 
 DirectSearchPuckProgram::~DirectSearchPuckProgram()
