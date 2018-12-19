@@ -1,6 +1,6 @@
 #include "../../include/managers/program_manager.h"
 
-ProgramManager *ProgramManager::instance = nullptr;
+ProgramManager *ProgramManager::instance = ProgramManager::getInstance();
 
 ProgramManager::ProgramManager() : runningProgram(nullptr),
                                    callback_manager(CallBackTimeManager::getInstance()),
@@ -27,7 +27,6 @@ ProgramManager::~ProgramManager()
     }
     delete runningProgram;
     instance = nullptr;
-    ros::shutdown();
 }
 
 ProgramManager *ProgramManager::getInstance()

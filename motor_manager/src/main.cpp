@@ -3,9 +3,11 @@
 #include <signal.h>
 #include "../include/programs/direct_search_puck_program.h"
 
+ProgramManager * programManager = nullptr;
 void SIGINT_handler(int sig)
 {
-    delete (ProgramManager::getInstance());
+    delete (programManager);
+    programManager = nullptr;
     ros::shutdown();
 }
 
@@ -28,6 +30,6 @@ int main(int argc, char **argv)
     programManager->setProgram(program);
     programManager->start();
     delete programManager;  //deletes also program
-    
+    programManager = nullptr;
     return 0;
 }
