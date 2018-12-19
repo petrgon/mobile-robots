@@ -2,7 +2,7 @@
 
 ProgramManager *ProgramManager::instance = nullptr;
 
-ProgramManager::ProgramManager() : runningProgram(nullptr),
+ProgramManager::ProgramManager() : shouldEnd(false), runningProgram(nullptr),
                                    callback_manager(CallBackTimeManager::getInstance()),
                                    motor_manager(MotorManager::getInstance()),
                                    sensor_manager(SensorManager::getInstance()),
@@ -40,7 +40,7 @@ ProgramManager *ProgramManager::getInstance()
 void ProgramManager::start()
 {
     ROS_INFO("ProgramManager start called");
-    while (ros::ok())
+    while (ros::ok() && !shouldEnd)
     {
         if (nextProgram){
             changeProgram();
@@ -60,4 +60,8 @@ void ProgramManager::changeProgram(){
     delete runningProgram;
     runningProgram = nextProgram;
     nextProgram = nullptr;
+}
+
+void Programmanager::end(){
+    shouldEnd = true;
 }

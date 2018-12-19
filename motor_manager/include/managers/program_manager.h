@@ -19,6 +19,7 @@ class ProgramManager
     static ProgramManager *getInstance();
     void start();
     void setProgram(Program *program);
+    void end()
 
   private:
     ProgramManager();
@@ -26,6 +27,7 @@ class ProgramManager
 
     static ProgramManager *instance;
 
+    bool shouldEnd;
     Program *runningProgram;
     CallBackTimeManager *callback_manager ;
     MotorManager *motor_manager;
