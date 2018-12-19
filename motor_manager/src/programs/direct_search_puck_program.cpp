@@ -48,7 +48,7 @@ DirectSearchPuckProgram::DirectSearchPuckProgram(int irFrequency) : Program(), i
     allStates[8] = dummyStartingState;
 
     actualState = nullptr;
-    nextState = dummyStartingState;
+    nextState = moveForward;
 
     SensorManager::getInstance()->subscribePuckAquiredEvent(this);
 }

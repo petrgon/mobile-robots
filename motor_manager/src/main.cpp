@@ -27,6 +27,10 @@ int main(int argc, char **argv)
     programManager = ProgramManager::getInstance();
     Program *program = new DirectSearchPuckProgram(ir_freq);
     programManager->setProgram(program);
+
+    char starter;
+    std::cin >> starter;
+    
     programManager->start();
 
     delete (programManager);
