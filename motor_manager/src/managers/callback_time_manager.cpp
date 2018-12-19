@@ -6,9 +6,7 @@ CallBackTimeManager::~CallBackTimeManager()
 {
     ROS_INFO("Joining CallBackTimeManager thread");
     shouldEnd = true;
-    std::unique_lock<std::mutex> lck(m);
     condVar.notify_all();
-    thread->join();
     delete thread;
     lck.unlock();
     ROS_INFO("Thread CallBackTimeManager Joined");
@@ -78,7 +76,7 @@ void CallBackTimeManager::run(CallBackTimeManager *manager)
     {
         std::unique_lock<std::mutex> lck(manager->m);
         manager->condVar.wait(lck, [manager] { return !manager->callbackHandlers.empty() || manager->shouldEnd; });
-        if(manager->callbackHandlers.empty())
+        if(manager->callbackHandlers.empty() || manager->shouldEnd)
             continue;
         auto top = manager->callbackHandlers.front();
         auto now = std::chrono::system_clock::now();
