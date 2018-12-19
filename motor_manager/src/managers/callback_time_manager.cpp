@@ -8,7 +8,6 @@ CallBackTimeManager::~CallBackTimeManager()
     shouldEnd = true;
     condVar.notify_all();
     delete thread;
-    lck.unlock();
     ROS_INFO("Thread CallBackTimeManager Joined");
 }
 
