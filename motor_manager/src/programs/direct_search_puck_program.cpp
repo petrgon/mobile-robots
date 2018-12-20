@@ -50,7 +50,7 @@ DirectSearchPuckProgram::DirectSearchPuckProgram(int irFrequency, int leftSpeed,
     State *startingMove = new MoveState(this, leftSpeed, rightSpeed, time);
     
     State *lookRight = new SearchRightState(this, ROTATION_TIME);
-    State *catchLight = new MoveState(this, 150, 165);
+    State *catchLight = new MoveState(this, 165, 150);
     State *endProgram = new ProgramTimeoutState(this);
     State *unexpectedCollision = new MoveBackwardState(this, COLLISION_TIME);
 

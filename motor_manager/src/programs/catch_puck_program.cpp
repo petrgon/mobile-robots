@@ -6,7 +6,7 @@ CatchPuckProgram::CatchPuckProgram(int irFrequency) : Program(), irFrequency(irF
     State *searchRight = new SearchRightState(this, SEARCHING_TIME - 300);
     State *moveForwardLeft = new MoveForwardState(this, MOVE_FORWARD_TIME);
     State *moveForwardRight = new MoveForwardState(this, MOVE_FORWARD_TIME);
-    State *lightDetected = new MoveState(this, 150, 165);
+    State *lightDetected = new MoveState(this, 165, 150);
     State *leftCollision = new MoveBackLeftState(this, COLLISION_TIME);
     State *rightCollision = new MoveBackRightState(this, COLLISION_TIME);
     State *bothCollision = new MoveBackwardState(this, COLLISION_TIME);
