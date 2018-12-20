@@ -10,6 +10,7 @@
 #include "../states/move_back_left_state.h"
 #include "../states/move_back_right_state.h"
 #include "../states/move_backward_state.h"
+#include "../states/move_state.h"
 #include <atomic>
 #include <string>
 

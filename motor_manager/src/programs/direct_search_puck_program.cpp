@@ -2,8 +2,6 @@
 
 DirectSearchPuckProgram::DirectSearchPuckProgram(int irFrequency) : Program(), irFrequency(irFrequency)
 {
-    State *dummyStartingState = new MoveState(this, 0, 0, 300);
-    State *searchLeft = new SearchLeftState(this, SEARCHING_TIME);
     State *lookRight = new SearchRightState(this, ROTATION_TIME);
     State *turnRight = new MoveState(this, 150, 0, ROTATION_TIME);
     State *moveForward = new MoveForwardState(this, MOVE_FORWARD_TIME);
@@ -13,10 +11,8 @@ DirectSearchPuckProgram::DirectSearchPuckProgram(int irFrequency) : Program(), i
     State *moveBack = new MoveBackwardState(this, COLLISION_TIME);
     State *unexpectedCollision = new MoveBackwardState(this, COLLISION_TIME);
 
-    dummyStartingState->setTimeElapsedNextState(moveForward);
-
     moveForward->setCollisionNextState(moveBack)->setLightDetectedNextState(catchLight);
-    moveForward->setTimeElapsedNextState(searchLeft);
+    moveForward->setTimeElapsedNextState(endProgram);
 
     moveBack->setTimeElapsedNextState(turnRight);
 
@@ -27,25 +23,20 @@ DirectSearchPuckProgram::DirectSearchPuckProgram(int irFrequency) : Program(), i
 
     catchLight->setLightLostNextState(lookRight);
 
-    lookRight->setLightDetectedNextState(catchLight)->setTimeElapsedNextState(searchLeft);
+    lookRight->setLightDetectedNextState(catchLight)->setTimeElapsedNextState(endProgram);
     lookRight->setCollisionNextState(unexpectedCollision);
-
-    searchLeft->setLightDetectedNextState(catchLight)->setCollisionNextState(unexpectedCollision);
-    searchLeft->setTimeElapsedNextState(endProgram);
 
     unexpectedCollision->setTimeElapsedNextState(endProgram);
 
-    stateConut = 9;
+    stateConut = 7;
     allStates = new State *[stateConut];
-    allStates[0] = searchLeft;
+    allStates[0] = unexpectedCollision;
     allStates[1] = lookRight;
     allStates[2] = moveForward;
     allStates[3] = catchLight;
     allStates[4] = leftCurve;
     allStates[5] = endProgram;
     allStates[6] = moveBack;
-    allStates[7] = unexpectedCollision;
-    allStates[8] = dummyStartingState;
 
     actualState = nullptr;
     nextState = moveForward;
@@ -56,54 +47,33 @@ DirectSearchPuckProgram::DirectSearchPuckProgram(int irFrequency) : Program(), i
 DirectSearchPuckProgram::DirectSearchPuckProgram(int irFrequency, int leftSpeed, int rightSpeed, int time)
     : Program(), irFrequency(irFrequency) {
         
-    State *moveForward = new MoveState(this, leftSpeed, rightSpeed, time);
+    State *startingMove = new MoveState(this, leftSpeed, rightSpeed, time);
     
-    State *dummyStartingState = new MoveState(this, 0, 0, 300);
-    State *searchLeft = new SearchLeftState(this, SEARCHING_TIME);
     State *lookRight = new SearchRightState(this, ROTATION_TIME);
-    State *turnRight = new MoveState(this, 150, 0, ROTATION_TIME);
-    State *catchLight = new MoveForwardState(this);
-    State *leftCurve = new MoveState(this, CURVE_LEFT_SPEED, CURVE_RIGHT_SPEED, CURVE_TIME);
+    State *catchLight = new MoveState(this, 150, 165);
     State *endProgram = new ProgramTimeoutState(this);
-    State *moveBack = new MoveBackwardState(this, COLLISION_TIME);
     State *unexpectedCollision = new MoveBackwardState(this, COLLISION_TIME);
 
-    dummyStartingState->setTimeElapsedNextState(moveForward);
-
-    moveForward->setCollisionNextState(moveBack)->setLightDetectedNextState(catchLight);
-    moveForward->setTimeElapsedNextState(searchLeft);
-
-    moveBack->setTimeElapsedNextState(turnRight);
-
-    turnRight->setTimeElapsedNextState(leftCurve);
-
-    leftCurve->setTimeElapsedNextState(lookRight)->setLightDetectedNextState(catchLight);
-    leftCurve->setCollisionNextState(unexpectedCollision);
+    startingMove->setCollisionNextState(unexpectedCollision)->setLightDetectedNextState(catchLight);
+    startingMove->setTimeElapsedNextState(endProgram);
 
     catchLight->setLightLostNextState(lookRight);
 
-    lookRight->setLightDetectedNextState(catchLight)->setTimeElapsedNextState(searchLeft);
+    lookRight->setLightDetectedNextState(catchLight)->setTimeElapsedNextState(endProgram);
     lookRight->setCollisionNextState(unexpectedCollision);
-
-    searchLeft->setLightDetectedNextState(catchLight)->setCollisionNextState(unexpectedCollision);
-    searchLeft->setTimeElapsedNextState(endProgram);
 
     unexpectedCollision->setTimeElapsedNextState(endProgram);
 
-    stateConut = 9;
+    stateConut = 5;
     allStates = new State *[stateConut];
-    allStates[0] = searchLeft;
-    allStates[1] = lookRight;
-    allStates[2] = moveForward;
-    allStates[3] = catchLight;
-    allStates[4] = leftCurve;
-    allStates[5] = endProgram;
-    allStates[6] = moveBack;
-    allStates[7] = unexpectedCollision;
-    allStates[8] = dummyStartingState;
+    allStates[0] = lookRight;
+    allStates[1] = startingMove;
+    allStates[2] = catchLight;
+    allStates[3] = endProgram;
+    allStates[4] = unexpectedCollision;
 
     actualState = nullptr;
-    nextState = moveForward;
+    nextState = startingMove;
 
     SensorManager::getInstance()->subscribePuckAquiredEvent(this);
 }
