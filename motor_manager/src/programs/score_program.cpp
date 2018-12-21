@@ -2,7 +2,7 @@
 
 ScoreProgram::ScoreProgram(int irFrequency) : Program(), irFrequency(irFrequency)
 {
-    State *searchLeft = new MoveState(this, -100, 120, SEARCHING_TIME);
+    State *searchLeft = new MoveState(this, -100, 110, SEARCHING_TIME);
     State *turnRight = new MoveState(this, 110, -100, TURN_TIME);
     State *moveForward = new MoveState(this, 115, 115, MOVE_FORWARD_TIME);
     State *irDetected = new MoveForwardState(this);
