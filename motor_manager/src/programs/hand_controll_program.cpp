@@ -72,7 +72,7 @@ int HandControllProgram::createServerFd(const char *hostName, int port)
 
 void HandControllProgram::serveClient(int fd)
 {
-    char buffer[100];
+    char buffer[2];
     int l;
 
     while (1)
@@ -84,6 +84,9 @@ void HandControllProgram::serveClient(int fd)
         } else if (l < 0){
             ROS_INFO("Conccetion error number: %d", l);
             break;
+        } else if (l < 2){
+            ROS_INFO("Recieved uncomplete message: %s", buffer);
+            continue;
         }
 
         processInput(buffer, l);
@@ -92,12 +95,10 @@ void HandControllProgram::serveClient(int fd)
 }
 
 void HandControllProgram::processInput(char * buffer, int length){
-    int leftPercent, rightPercent;
+    int8_t leftPercent, rightPercent;
 
-    std::size_t indx;
-
-    leftPercent = std::stoi(buffer, &indx);
-    rightPercent = std::stoi(buffer + indx);
+    leftPercent = (int8_t) buffer[0];
+    rightPercent = (int8_t) buffer[1];
 
     int leftSpeed = (double) leftPercent / 100.0 * MAX_SPEED;
     int rightSpeed = (double) rightPercent / 100.0 * MAX_SPEED;
