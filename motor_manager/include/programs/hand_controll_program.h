@@ -37,7 +37,7 @@ class HandControllProgram : public Program
 
     int srvFd;
     static const int PORT = 6072;
-    static const char * IP_ADDRESS = "localhost";
+    static constexpr const char * IP_ADDRESS = "localhost";
     static const int MAX_SPEED = 240;
     
 };
