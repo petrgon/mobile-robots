@@ -2,7 +2,7 @@
 
 HandControllProgram::HandControllProgram() : Program()
 {
-    srvFd = createServerFd(IP_ADDRESS, PORT); // TODO change IP and port
+    srvFd = createServerFd(IP_ADDRESS, PORT);
     if (srvFd == -1)
     {
         ROS_INFO("Enable to create server.");
