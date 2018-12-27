@@ -26,6 +26,7 @@ void HandControllProgram::run()
         struct sockaddr sa;
         socklen_t saSize = sizeof(sa);
         int cliFd = accept(srvFd, &sa, &saSize);
+        ROS_INFO("Client accepter, ID= %d ", cliFd);
         serveClient(cliFd);
     }
 }
