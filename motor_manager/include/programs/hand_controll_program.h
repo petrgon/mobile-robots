@@ -36,8 +36,8 @@ class HandControllProgram : public Program
     void processInput(char *, int);
 
     int srvFd;
-    static const int PORT = 6072;
-    static constexpr const char * IP_ADDRESS = "localhost";
+    static const int PORT = 60702;
+    static constexpr const char * IP_ADDRESS = "INADDR_ANY";
     static const int MAX_SPEED = 240;
     
 };

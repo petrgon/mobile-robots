@@ -7,6 +7,7 @@ HandControllProgram::HandControllProgram() : Program()
     {
         ROS_INFO("\033[1;31mEnable to create server.\033[0m");
     }
+    ROS_INFO("Server created with IP=%s, PORT=%d", IP_ADDRESS, PORT);
 }
 
 HandControllProgram::~HandControllProgram()
@@ -27,8 +28,10 @@ void HandControllProgram::run()
         struct sockaddr sa;
         socklen_t saSize = sizeof(sa);
         int cliFd = accept(srvFd, &sa, &saSize);
-        ROS_INFO("Client accepter, ID= %d ", cliFd);
-        serveClient(cliFd);
+	if (cliFd >= 0){
+            ROS_INFO("Client accepter, ID= %d ", cliFd);
+            serveClient(cliFd);
+        }
     }
 }
 
