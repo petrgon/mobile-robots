@@ -5,7 +5,7 @@ HandControllProgram::HandControllProgram() : Program()
     srvFd = createServerFd(IP_ADDRESS, PORT);
     if (srvFd == -1)
     {
-        ROS_INFO("Enable to create server.");
+        ROS_INFO("\033[1;31mEnable to create server.\033[0m");
     }
 }
 
@@ -21,6 +21,7 @@ std::string HandControllProgram::getName()
 
 void HandControllProgram::run()
 {
+    ROS_INFO("Running hand controll program");
     while (1)
     {
         struct sockaddr sa;
@@ -40,21 +41,21 @@ int HandControllProgram::createServerFd(const char *hostName, int port)
     snprintf(portStr, sizeof(portStr), "%d", port);
     if (getaddrinfo(hostName, portStr, NULL, &ai) != 0)
     {
-        ROS_INFO("getaddrinfo failed");
+        ROS_INFO("\033[1;31mgetaddrinfo failed\033[0m");
         return -1;
     }
 
     fd = socket(ai->ai_family, SOCK_STREAM, 0);
     if (fd == -1)
     {
-        ROS_INFO("socket failed");
+        ROS_INFO("\033[1;31msocket failed\033[0m");
         freeaddrinfo(ai);
         return -1;
     }
 
     if (bind(fd, ai->ai_addr, ai->ai_addrlen) != 0)
     {
-        ROS_INFO("bind failed");
+        ROS_INFO("\033[1;31mbind failed\033[0m");
         freeaddrinfo(ai);
         close(fd);
         return -1;
@@ -62,7 +63,7 @@ int HandControllProgram::createServerFd(const char *hostName, int port)
 
     if (listen(fd, 10) != 0)
     {
-        ROS_INFO("bind failed");
+        ROS_INFO("\033[1;31mbind failed\033[0m");
         freeaddrinfo(ai);
         close(fd);
         return -1;
