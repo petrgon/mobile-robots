@@ -2,6 +2,7 @@
 
 #include <signal.h>
 #include "../include/programs/direct_search_puck_program.h"
+#include "../include/programs/hand_controll_program.h"
 
 ProgramManager *programManager = nullptr;
 
@@ -20,7 +21,7 @@ int main(int argc, char **argv)
     ROS_INFO("WiringPI initialized");
     programManager = ProgramManager::getInstance();
     
-    int params[4];
+    /*int params[4];
     if (argc <= 1){
         ROS_INFO("Invalid number of params. Program needs 1 or 4 params.\n  INFRA_RED_FREQ, LEFT_SPEED, RIGHT_SPEED, FORWARD_TIME\nor\n  IFRA_RED_FREQ");
         ros::shutdown();
@@ -37,11 +38,12 @@ int main(int argc, char **argv)
     else{
         program = new DirectSearchPuckProgram(params[0]);
         ROS_INFO("Program params (%d)", params[0]);
-    }
+    }*/
+    Program * program = new HandControllProgram();
     programManager->setProgram(program);
 
-    char starter;
-    std::cin >> starter;
+    /*char starter;
+    std::cin >> starter;*/
 
     programManager->start();
 
