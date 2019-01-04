@@ -2,7 +2,7 @@
 
 HandControllProgram::HandControllProgram() : Program()
 {
-    srvFd = createServerFd(IP_ADDRESS, PORT);
+    srvFd = createServerFd("0.0.0.0", PORT);
     if (srvFd == -1)
     {
         ROS_INFO("\033[1;31mEnable to create server.\033[0m");
@@ -31,6 +31,8 @@ void HandControllProgram::run()
 	if (cliFd >= 0){
             ROS_INFO("Client accepter, ID= %d ", cliFd);
             serveClient(cliFd);
+        } else {
+	    close(cliFd);
         }
     }
 }
