@@ -40,7 +40,8 @@ or
 where <LEFT_SPEED> <RIGHT_SPEED> <FORWARD_TIME> are params for initializing *direct_search* program which tries to reach the puck directly and if it isn't successful then it switchs to *random_search* program.
 
 Next table shows usable values for params. Letters is robot starting position and number is puck starting position.
-|  |left | right | time | 
+
+| |left | right | time | 
 |:----|:----:|:-----:|:------:|
 | a1 | 154 | 235 | 2050 | 
 | a2 | 167 | 235 | 1750 | 
