@@ -1,16 +1,58 @@
-# mobile_robots
-Project for Mobile_Robots
+# Mobile Robots - Team 2
+Project for Mobile_Robots. This repository contains robot source code for course Mobile Robots at NCTU.
+
+## Problem reports
+If you need any help please create a new issue here on github.
 
 ## Repository structure
-Each one catkin package is in its own package-master branch. For each package-master branche exists developing branch with suffix *\_dev*.
+Branch *robot_master* contains commits for Robot Contest.
+  This branch contains tags for each checkpoint. All checkpoint can be achieved by running the last code version (*robot_contest* tag).
+Branch *hand_controll* contains code for Cool Robot Show.
+Branch *master* contains this readme file.
 
-## HW and its Configuration
-This chapter describes used hardware for project and its configuration.
-
-### Raspberry PI 3
-Raspberry PI is running Ubuntu MATE. Computer name and login name are *rpi3-2* the password is *rpi*. RPI is configured to automatically connect to wifi named *rpi3-2* with password *tatranky111*. Because the wifi is provided by Windows 10 hotspot, RPI can't use static IP and must requests DHCP server. Network adress is *192.168.137.0/24*.
+## Log In to Raspberry PI 3
+Raspberry PI is running Ubuntu MATE. Computer name and login name are *rpi3-2* the password is *rpi*. RPI is configured to automatically connect to wifi named *rpi3-2* with password *tatranky111*. Because the wifi was provide by Windows 10 hotspot, RPI could not use static IP and must requests DHCP server. Network adress was default *192.168.137.0/24*.
 
 [Backup of RPI3 from 29/09/2018](https://1drv.ms/f/s!AvqSf0K9YS3I8R9ceqbFbVfGaDds "One Drive") with updated OS and installed necessary stuffs.
+
+## Compiling the Source
+On RPI3 you need to run this command:
+- cd catkin_ws/; catkin_make
+ 
+If there is some compiling problem with missing dependencies you can first try to recompile CMakeLists.txt by:
+- cd catkin_ws/;
+- touch src/mobile-robots/motor_manager/CMakeLists.txt
+- catkin_make
+
+## Running the source
+At first you need to start:
+- roscore &
+- cd catkin_ws/ ; source devel/setup.bash
+- rosrun rosserial_python serial_node.py /dev/ttyACM0 &
+
+From fourth checkpoint (where the robot needs to find gate) program require the parameters. You need to run next command where *<INFRA_RED_FREQ>* is value *600* or *1500* depends on which gate needs to find:
+- rosrun robot_core robot_run <INFRA_RED_FREQ>
+ 
+For final contest we added more parameters but you can still run program with only one parametr as in fourt checkpoint
+- rosrun robot_core robot_run <INFRA_RED_FREQ>
+or
+- rosrun robot_core robot_run <INFRA_RED_FREQ> <LEFT_SPEED> <RIGHT_SPEED> <FORWARD_TIME>
+where <LEFT_SPEED> <RIGHT_SPEED> <FORWARD_TIME> are params for initializing *direct_search* program which tries to reach the puck directly and if it isn't successful then it switchs to *random_search* program.
+
+Next table shows usable values for params. Letters is robot starting position and number is puck starting position.
+|  |left | right | time | 
+|:----|:----:|:-----:|:------:|
+| a1 | 154 | 235 | 2050 | 
+| a2 | 167 | 235 | 1750 | 
+| a3 | 235 | 214 | 1800 | 
+| b1 | 187 | 230 | 1550 | 
+| b2 | 235 | 214 | 1200 | 
+| b3 | 235 | 214 | 1350 | 
+| c1 | 221 | 235 | 1750 | 
+| c2 | 235 | 214 | 1400 | 
+| c3 | 235 | 214 | 1200 | 
+
+
 
 ## FAQ
 ### Unable to use apt-get on RPI3
