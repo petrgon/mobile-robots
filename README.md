@@ -11,46 +11,51 @@ Branch *hand_controll* contains code for Cool Robot Show.
 
 Branch *master* contains this readme file.
 
-## Log In to Raspberry PI 3
-Raspberry PI is running Ubuntu MATE. Computer name and login name are *rpi3-2* the password is *rpi*. RPI is configured to automatically connect to wifi named *rpi3-2* with password *tatranky111*. Because the wifi was provide by Windows 10 hotspot, RPI could not use static IP and must requests DHCP server. Network adress was default *192.168.137.0/24*.
+## How to use this repo
+Next chapters describes how to connect to RPI, how to compile the code and how tu run the program.
 
-## Compiling the Source
+### Requirements
+Raspberry PI is running Ubuntu MATE. It needs to have installed ROS and WiringPI.
+
+### Log In to Raspberry PI 3
+Computer name and login name are *rpi3-2* the password is *rpi*. RPI is configured to automatically connect to wifi named *rpi3-2* with password *tatranky111*. Because the wifi have been provided by Windows 10 hotspot, RPI doesn't have configured static IP and uses DHCP. Network adress was default *192.168.137.0/24*.
+
+### Compiling the Source
+Repo is in directory *~/catkin_ws/src/mobile_robots*
+
 On RPI3 you need to run this command:
 ```bash
-cd catkin_ws/; catkin_make
+cd ~/catkin_ws/; catkin_make
 ```
  
 If there is some compiling problem with missing dependencies you can first try to recompile CMakeLists.txt by:
 ```bash
-cd catkin_ws/;
-touch src/mobile-robots/motor_manager/CMakeLists.txt
-catkin_make
+cd ~/catkin_ws/; touch src/mobile-robots/motor_manager/CMakeLists.txt; catkin_make
 ```
 
-## Running the Program
+### Running the Program
 At first you need to start:
 ```bash
-roscore &
-cd catkin_ws/ ; source devel/setup.bash
-rosrun rosserial_python serial_node.py /dev/ttyACM0 &
+roscore &; cd ~/catkin_ws/; source devel/setup.bash; rosrun rosserial_python serial_node.py /dev/ttyACM0 &
 ```
 
-From fourth checkpoint (where the robot needs to find gate) program require the parameters. You need to run next command where *<INFRA_RED_FREQ>* is value *600* or *1500* depends on which gate needs to find:
+From fourth checkpoint (where the robot needs to find gate) program require the parameters. You need to run next command:
 ```bash
 rosrun robot_core robot_run <INFRA_RED_FREQ>
 ```
+where *<INFRA_RED_FREQ>* is value *600* or *1500* depends on which gate needs to find.
  
 For final contest we added more parameters but you can still run program with only one parametr as in fourt checkpoint
 ```bash
-- rosrun robot_core robot_run <INFRA_RED_FREQ>
+rosrun robot_core robot_run <INFRA_RED_FREQ>
 ```
 or
 ```bash
-- rosrun robot_core robot_run <INFRA_RED_FREQ> <LEFT_SPEED> <RIGHT_SPEED> <FORWARD_TIME>
+rosrun robot_core robot_run <INFRA_RED_FREQ> <LEFT_SPEED> <RIGHT_SPEED> <FORWARD_TIME>
 ```
 where <LEFT_SPEED> <RIGHT_SPEED> <FORWARD_TIME> are params for initializing *direct_search* program which tries to reach the puck directly and if it isn't successful then it switchs to *random_search* program.
 
-Next table shows usable values for params. Letters is robot starting position and number is puck starting position.
+Next table shows usable values for params. Letters is robot's starting position and number is puck starting position.
 
 | |left | right | time | 
 |:----|:----:|:-----:|:------:|
@@ -77,7 +82,7 @@ It is possible that auto update is running. You can check it by *ps -e | grep  u
 
 ### Usage of application: screen
 * For starting new screen session type *screen*
-* For detaching screen use key combination ctrl+a+d
+* For detaching screen use key combination *ctrl+a+d*
 * For attaching dettached screen use command *screen -r*
 
 ### How to enable remote GUI application
